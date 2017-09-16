@@ -33,7 +33,7 @@ While Botkit Studio is *not required* to build a bot using Botkit, we highly rec
 
 [Remix this project on Glitch](https://glitch.com/~botkit-slack)
 
-[Deploy to Heroku](https://heroku.com/deploy?template=https://github.com/howdyai/botkit-starter-slack/master)
+[Deploy to Heroku](https://heroku.com/deploy?template=https://github.com/AbortionAccessHackathon/slack-hotline/master)
 
 Clone this repository using Git:
 
