@@ -4,3 +4,6 @@ components/routes/_*
 .env
 *~
 package-lock.json
+.data
+.\#*
+\#.*

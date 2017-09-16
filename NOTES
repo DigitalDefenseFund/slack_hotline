@@ -1,0 +1,85 @@
+0. Go to: https://nycaah-hotline.slack.com/home
+   * from menu go to 'Configure Apps'
+     https://nycaah-hotline.slack.com/apps/manage
+   * Click 'Build' leads you to....
+1. Go to https://api.slack.com/apps
+2. click 'create new app'
+3. app name is 'aah-<yournick>', workspace is: nycaah-hotline
+4. Go to the 'Basic Information' section under Settings on the left
+   and scroll down to app credentials, and get client id and client secret and verificationToken
+
+-------
+on your computer:
+1. git clone git@github.com:AbortionAccessHackathon/slack-hotline.git
+2. cd slack-hotline
+3. `npm install`
+4. run `cp .env.example .env` and open `.env` file. Then, enter your client id, secret, and verificationToken (all from the Basic information) and PORT=3000 (or whatever you want)
+5. NOTE: you do NOT have to set up botkit studio or any of the variables related.  Ignore all the nagware.
+
+--------
+Next: Ngrok
+https://api.slack.com/tutorials/tunneling-with-ngrok
+
+--------
+* once you get your https ngrok url, go to your Slack bot config
+  (https://api.slack.com/apps)
+
+Oauth & Permissions section
+
+  (https://github.com/howdyai/botkit/blob/master/docs/slack-events-api.md)
+
+  Go to Scope section:
+  * Add 'Add commands to...'
+  * Access user's public channels
+  * Access information about user's private channels
+  * Post to specific channels in slack
+  * Access content in user's private channels
+  * Access information about user's public channels
+
+* Click 'Save Changes'
+
+* Scroll up and go to 'Install app in Workspace'
+* Choose 'post to #general'
+* Click authorize
+* NOTE: production run will need redirect urls or whatever to install into a separate slack channel where it's not the 'dev' environment
+
+* Go to Redirect URLs section (still in Oauth and Permissions)
+  - add the ngrok url PLUS "/oauth"
+  - Click "Save URLs"
+  - then go to your ngrok url's homepage and click the 'connect to slack button'
+  NOTE: this is for adding a TEAM to your bot -- slack doesn't actually need this step (at least in dev)
+
+* NEXT: Click under Features, "Event Subscriptions"
+  * click Enable Events
+  * Request URL should be the ngrok base PLUS "slack/receive"
+  * channel_archive,
+    channel_deleted,
+    channel_created,
+    channel_unarchive (when patient re-starts conversation)
+    message.channels
+    member_joined_channel
+    member_left_channel
+    
+  * Save Changes!
+
+-----------creating a command------------------
+* click on 'Slash commands'
+* make the 'request url' your ngrok base url PLUS "/slack/receive"
+* CHECK the box 'escape users and channels in your app'
+
+------------add a redirect URL (for )-----------------
+
+------ adding a bot user -----------------
+* under Features, click "Bot Users"
+  * add a bot with a display name
+  * check ON for 'Always Show My Bot as Online'
+  * Save Changes
+
+ERRORS:
+* error: Could not load team while processing webhook:  Error: could not find team T7441Q1S7
+  * (see above with redirect urls)
+
+
+Configuring slackbot:
+https://github.com/howdyai/botkit/blob/master/docs/readme-slack.md#use-the-slack-button
+
