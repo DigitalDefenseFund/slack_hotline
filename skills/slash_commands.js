@@ -1,7 +1,5 @@
 // const VERIFY_TOKEN = process.env.verificationToken
 
-module.exports= function(controller){
-
   controller.on('slash_command', function (bot, message) {
     // Validate Slack verify token
     // if (message.token !== VERIFY_TOKEN) {
