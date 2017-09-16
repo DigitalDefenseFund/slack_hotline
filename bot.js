@@ -103,7 +103,13 @@ controller.storage.teams.get = function(team_id, cb) {
   teamGetter(team_id, function(err, team) {
     if (err) {
       console.log('no team YET!!!')
-      cb(null, {'name': 'blah'})
+      var teamStub = {'id': team_id,
+                      'randomInfo': parseInt(Math.random()*100)
+                     }
+      controller.saveTeam(teamStub, function(saveErr, savedTeam){
+        console.log('saved the team', savedTeam);
+      })
+      cb(null, teamStub)
     } else {
       cb(err, team)
     }
