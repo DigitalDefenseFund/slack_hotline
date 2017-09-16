@@ -97,33 +97,6 @@ var controller = Botkit.slackbot(bot_options);
 
 controller.startTicking();
 
-var teamGetter = controller.storage.teams.get;
-controller.storage.teams.get = function(team_id, cb) {
-  console.log('getting team!', team_id);
-  teamGetter(team_id, function(err, team) {
-    if (err) {
-      console.log('no team YET!!!')
-      var teamStub = {'id': team_id,
-                      'randomInfo': parseInt(Math.random()*100)
-                     }
-      controller.saveTeam(teamStub, function(saveErr, savedTeam){
-        console.log('saved the team', savedTeam);
-      })
-      cb(null, teamStub)
-    } else {
-      cb(err, team)
-    }
-  });
-}
-/*
-  controller.api.team.info({}, function(err, response) {
-    console.log('team.info!!!', err, response)
-    controller.saveTeam(response.team, function() {
-      console.log('Saved the team information!!', response)
-    })
-  })
-}
-*/
 // Set up an Express-powered webserver to expose oauth and webhook endpoints
 var webserver = require(__dirname + '/components/express_webserver.js')(controller);
 
