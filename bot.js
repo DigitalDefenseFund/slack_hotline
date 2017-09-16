@@ -71,13 +71,10 @@ var bot_options = {
     //scopes: ['bot'],
     scopes: [
       'incoming-webhook',
+      'bot',
       'team:read',
       'users:read',
       'channels:read',
-      'im:read',
-      'im:write',
-      'groups:read',
-      'chat:write:bot'
     ],
     //studio_token: process.env.studio_token,
     studio_command_uri: process.env.studio_command_uri
