@@ -68,8 +68,18 @@ var bot_options = {
     clientId: process.env.clientId,
     clientSecret: process.env.clientSecret,
     // debug: true,
-    scopes: ['bot'],
-    studio_token: process.env.studio_token,
+    //scopes: ['bot'],
+    scopes: [
+      'incoming-webhook',
+      'team:read',
+      'users:read',
+      'channels:read',
+      'im:read',
+      'im:write',
+      'groups:read',
+      'chat:write:bot'
+    ],
+    //studio_token: process.env.studio_token,
     studio_command_uri: process.env.studio_command_uri
 };
 
@@ -87,6 +97,27 @@ var controller = Botkit.slackbot(bot_options);
 
 controller.startTicking();
 
+var teamGetter = controller.storage.teams.get;
+controller.storage.teams.get = function(team_id, cb) {
+  console.log('getting team!', team_id);
+  teamGetter(team_id, function(err, team) {
+    if (err) {
+      console.log('no team YET!!!')
+      cb(null, {'name': 'blah'})
+    } else {
+      cb(err, team)
+    }
+  });
+}
+/*
+  controller.api.team.info({}, function(err, response) {
+    console.log('team.info!!!', err, response)
+    controller.saveTeam(response.team, function() {
+      console.log('Saved the team information!!', response)
+    })
+  })
+}
+*/
 // Set up an Express-powered webserver to expose oauth and webhook endpoints
 var webserver = require(__dirname + '/components/express_webserver.js')(controller);
 
@@ -136,13 +167,7 @@ if (process.env.studio_token) {
             debug('Botkit Studio: ', err);
         });
     });
-} else {
-    console.log('~~~~~~~~~~');
-    console.log('NOTE: Botkit Studio functionality has not been enabled');
-    console.log('To enable, pass in a studio_token parameter with a token from https://studio.botkit.ai/');
 }
-
-
 
 
 function usage_tip() {
