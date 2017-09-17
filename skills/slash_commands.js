@@ -246,16 +246,13 @@ function flag(controller, bot, message) {
 }
 
 function success(controller, bot, message){
-
 	var label;
 	if(!label){
 		label = 'successful'
 	}
+	bot.replyPublic(message,'You have successfully closed this conversation.')
 
 	setChannelProperty(controller, message, 'success', label, function(err, chan){
-
-		console.log(chan)
-		bot.replyPublic('You have successfully archived this channel.')
 
 		bot.api.channels.archive({token:bot.config.bot.app_token, channel: chan.id}, function(err, response){
 			console.log(err, response)
