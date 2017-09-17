@@ -1,11 +1,18 @@
 const VERIFY_TOKEN = process.env.verificationToken
 
+function addZero(i) {
+    if (i < 10) {
+        i = "0" + i;
+    }
+    return i;
+}
 
 function friendlyDate(date) {
   return (staticSpaces(date.getMonth() + 1, 2, true) + "/"
-         + date.getDate() + " "
-         + staticSpaces(date.getHours(), 2, true) + ':'
-         + date.getMinutes());
+         + staticSpaces(date.getDate(), 2) + " " 
+         + staticSpaces(addZero(date.getHours()), 2, true) + ':'
+         + addZero(date.getMinutes())
+         );
 }
 
 function staticSpaces(string, targetLength, atBeginning) {
@@ -110,7 +117,9 @@ function open_cases(controller, bot, message) {
             inactive = (!channel.lastTime || (new Date() - channel.lastTime) > (60*60*24*1000*7)), // no activity for a week
             flagged = !!(channel.store && channel.store.label)
                   // console.log(knownChannelDict[channel.id])
-        if (!channel.is_archived ) {
+                  // console.log("channel",channel)
+                  // console.log("channel archive",channel.is_archived)
+        if (!channel.api.is_archived ) {
         // if ((new_channel || unanswered || flagged || inactive) && !channel.is_archived ) {
           channel_list.push(channel);
         }
@@ -119,15 +128,22 @@ function open_cases(controller, bot, message) {
 
     if (channel_list.length > 0) {
       var formatted_list = channel_list.map(function(chan){
-        return (staticSpaces("<#"+chan.id+">", 30)
-               + staticSpaces((chan.lastFrom || ''), 10)
-               + staticSpaces(chan.lastTime ? friendlyDate(chan.lastTime) : '', 13)
-               + (chan.label || '' )
+        console.log(chan.store)
+        if (chan.store && chan.store.assignment) {
+          var assignee = "<@" + chan.store.assignment+ ">"
+        } else {
+          var assignee = ""
+        }
+        return (staticSpaces((chan.lastFrom || ''), 11)
+               + staticSpaces(chan.lastTime ? friendlyDate(chan.lastTime) : '', 15)
+               + staticSpaces((chan.label || '' ),20)
+               + staticSpaces((assignee),20)
+               + "<#"+chan.id+">"
                );
       }),
-      final_message = ("Open Cases:\n"
-                       + "__Channel_________________Last Message_______Flag\n"
-                       + formatted_list.join("\n"));
+      final_message = ('```' +"Open Cases:\n"
+                       + staticSpaces('Last Message', 25) + staticSpaces("Flag",20) + staticSpaces("Assignee",20) + 'Channel\n'
+                       + formatted_list.join("\n") + '```');
     } else {
       var final_message = "There are no open cases right now.";
     }
@@ -155,7 +171,7 @@ function next_case(controller, bot, message) {
   getTeamChannelsData(controller, bot, message, function(channels) {
     channels.sort(function(a,b) {return ((b.lastTime || 0) - (a.lastTime || 0)) })
     var needsAssign = channels.filter(function(ch) {
-      console.log('channel for assignment?', ch)
+      // console.log('channel for assignment?', ch)
       return (!(ch.store && ch.store.assigned) && /^sk-/.test(ch.api.name))
     });
     if (needsAssign.length) {
@@ -222,18 +238,18 @@ function getFlags(controller, bot, message, cb) {
 
 function logOut(controller, bot, message){
 	let user = message.user_id
-	console.log(user)
+	// console.log(user)
 	var userChannels = []
 	bot.api.channels.list({token:bot.config.token}, function(err,response){
 		response.channels.forEach((item) => {
 			if(item.members.includes(user)){
 				userChannels.push(item.id)
-				console.log("channels: "+ userChannels)
+				// console.log("channels: "+ userChannels)
 			}
 		 })
 		 userChannels.forEach((channel)=> {
 			 bot.api.channels.leave({token:bot.config.bot.app_token, channel: channel, user: user}, function(err,response){
-				 console.log(err, response)
+				 // console.log(err, response)
 			 })
 		 })
 		 bot.replyPublic(message, 'You have logged out! Thank you so much for volunteering your time - you are so appreciated!')
@@ -268,7 +284,7 @@ function success(controller, bot, message){
 	setChannelProperty(controller, message, 'success', label, function(err, chan){
 
 		bot.api.channels.archive({token:bot.config.bot.app_token, channel: chan.id}, function(err, response){
-			console.log(err, response)
+			// console.log(err, response)
 		})
 	})
 }
