@@ -2,7 +2,7 @@ const VERIFY_TOKEN = process.env.verificationToken
 
 function friendlyDate(date) {
   return (staticSpaces(date.getMonth() + 1, 2, true) + "/"
-         + date.getDate() + " " 
+         + date.getDate() + " "
          + staticSpaces(date.getHours(), 2, true) + ':'
          + date.getMinutes());
 }
@@ -210,11 +210,40 @@ function logOut(controller, bot, message){
 	})
 }
 
+
+function flag(controller, bot, message) {
+  // console.log('FLAG', message)
+  var label = message.text.replace(/.*>/,'').trim()
+  if (!label) {
+    label = 'needs attention'
+  }
+  if (message.command == '/unflag') {
+    label = null
+  }
+  setChannelProperty(
+    controller, message,
+    'label', label,
+    function(err, chan) {
+      bot.replyPublic(message, message.command.slice(1) + 'ged')
+    })
+}
+
 function success(controller, bot, message){
-	bot.api.channels.archive({token:bot.config.bot.app_token, channel: message.channel_id}, function(err, response){
-		console.log(err, response)
+
+	var label;
+	if(!label){
+		label = 'successful'
+	}
+
+	setChannelProperty(controller, message, 'success', label, function(err, chan){
+
+		console.log(chan)
+		bot.replyPublic('You have successfully archived this channel.')
+
+		bot.api.channels.archive({token:bot.config.bot.app_token, channel: chan.id}, function(err, response){
+			console.log(err, response)
+		})
 	})
-	bot.replyPublic('You have successfully archived this channel.')
 }
 
 module.exports= function(controller){
@@ -235,7 +264,7 @@ module.exports= function(controller){
       case '/unflag':
         flag(controller, bot, message)
         break
-      case '/flags':
+      case '/getflags':
         getFlags(controller, bot, message)
         break
       case '/success':
