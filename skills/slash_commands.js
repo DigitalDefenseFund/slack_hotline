@@ -10,24 +10,27 @@ function get_channel_history(channel, bot, cb){
 }
 
 function open_spaces(controller, bot, message){
-	// channels that only have 1 user in it AND
-	// 	- patient was the last to respond (unread or read)
-	// 	- no activity for X amt of time
 	bot.api.channels.list({},function(err,response) {
 		var channel_list = [];
 		for (var i = 0, l = response.channels.length; i < l; i++) {
 			var channel = response.channels[i];
-		  if (!channel.is_private && !channel.is_archived && !channel.is_general) {
-		  	if (/^sk-/.test(channel.name)){
+	  	if (/^sk-/.test(channel.name)){
+				var new_channel = channel.num_members == 1, // channels that only have 1 member in them are brand new - that member is the one integrated with Smooch.
+						unanswered = false, // patient was the last to respond
+						inactive = false, // no activity for X amt of time
+						marked = false; // tbd
+		  	if ((new_channel || unanswered || marked || inactive) && !channel.is_archived ) {
 		  		channel_list.push(channel.id);
 		  	}
 		  }
 		}
-		var formatted_list = channel_list.map(function(cid){
-			return "<#"+cid+">";
-		});
-		bot.replyPublic(message, "Open Cases:\n" + formatted_list.join("\n"));
-	  // num_members: 2,
+		if (channel_list.length > 0) {
+			var formatted_list = channel_list.map(function(cid){ return "<#"+cid+">"; }),
+					final_message = "Open Cases:\n" + formatted_list.join("\n");
+		} else {
+			var final_message = "There are no open cases right now.";
+		}
+		bot.replyPublic(message, final_message);
 	});
 }
 
