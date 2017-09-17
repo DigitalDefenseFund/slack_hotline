@@ -75,6 +75,7 @@ var bot_options = {
       'team:read',
       'users:read',
       'channels:read',
+      'channels:write',
       'channels:history',
     ],
     //studio_token: process.env.studio_token,
