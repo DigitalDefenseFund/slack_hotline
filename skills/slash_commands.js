@@ -1,5 +1,6 @@
 const VERIFY_TOKEN = process.env.verificationToken
 
+
 function friendlyDate(date) {
   return (staticSpaces(date.getMonth() + 1, 2, true) + "/"
          + date.getDate() + " "
@@ -135,7 +136,23 @@ function open_cases(controller, bot, message) {
   });
 }
 
+function setCaseAssignment(controller, message, channel, volunteer, cb) {
+  setChannelProperty(controller, message, 'assignment', volunteer, function(err, chan) {
+    cb(err, chan)
+  }, (channel && channel.id))
+}
 
+function assign_case(controller, bot, message) {
+  var volunteer = (message.text.match(/\<\@(\w+)/) || [message.user_id]).pop()
+  setCaseAssignment(controller, message, null, volunteer, function(err, chan) {
+    if (chan) {
+      bot.replyPublic(message, '<@'+volunteer+'> assigned to <#'+chan.id+'>')
+    }
+  });
+}
+
+function next_case(controller, bot, message) {
+}
 
 function flag(controller, bot, message) {
   // console.log('FLAG', message)
@@ -154,8 +171,8 @@ function flag(controller, bot, message) {
     })
 }
 
-function setChannelProperty(controller, message, property, value, cb) {
-  var channel_id = (message.text.match(/\<\#(\w+)/) || [message.channel_id]).pop()
+function setChannelProperty(controller, message, property, value, cb, channel_id) {
+  channel_id = channel_id || (message.text.match(/\<\#(\w+)/) || [message.channel_id]).pop()
   controller.storage.channels.get(channel_id, function(getErr, channel) {
     if (getErr || !channel) {
       channel = {'id': channel_id,
@@ -259,6 +276,12 @@ module.exports= function(controller){
         break
       case '/opencases':
         open_cases(controller, bot, message);
+        break;
+      case '/nextcase':
+        next_case(controller, bot, message);
+        break;
+      case '/assign':
+        assign_case(controller, bot, message);
         break;
       case '/flag':
       case '/unflag':
