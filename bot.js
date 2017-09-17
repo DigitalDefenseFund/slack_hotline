@@ -75,6 +75,7 @@ var bot_options = {
       'team:read',
       'users:read',
       'channels:read',
+      'channels:history',
     ],
     //studio_token: process.env.studio_token,
     studio_command_uri: process.env.studio_command_uri
