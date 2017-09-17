@@ -9,7 +9,7 @@ function get_channel_history(channel, bot, cb){
 	});
 }
 
-function open_spaces(controller, bot, message){
+function open_cases(controller, bot, message){
 	bot.api.channels.list({},function(err,response) {
 		var channel_list = [];
 		for (var i = 0, l = response.channels.length; i < l; i++) {
@@ -46,7 +46,7 @@ module.exports= function(controller){
         bot.replyPublic(message, 'hello there')
         break
       case '/opencases':
-      	open_spaces(controller, bot, message);
+      	open_cases(controller, bot, message);
         break;
       default:
         bot.replyPublic(message, 'Sorry, I\'m not sure what that command is')
