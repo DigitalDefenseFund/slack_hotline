@@ -175,8 +175,15 @@ function logOut(controller, bot, message){
 				 console.log(err, response)
 			 })
 		 })
-		 bot.replyPublic(message, 'logged out!')
+		 bot.replyPublic(message, 'You have logged out! Thank you so much for volunteering your time - you are so appreciated!')
 	})
+}
+
+function success(controller, bot, message){
+	bot.api.channels.archive({token:bot.config.bot.app_token, channel: message.channel_id}, function(err, repsonse){
+		console.log(err, response)
+	})
+	bot.replyPublic('You have successfully archived this channel.')
 }
 
 module.exports= function(controller){
@@ -199,6 +206,9 @@ module.exports= function(controller){
         break
       case '/flags':
         getFlags(controller, bot, message)
+        break
+      case '/success':
+        success(controller, bot, message)
         break
 			case '/logout':
 				logOut(controller, bot, message)
