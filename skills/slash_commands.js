@@ -10,7 +10,9 @@ function get_channel_history(channel, bot, cb) {
 }
 
 function open_cases(controller, bot, message) {
-	bot.api.channels.list({},function(err,response) {
+  bot.api.channels.list({},function(err,response) {
+    console.log(message)
+    getFlags(controller, bot, message, function(flagErr, flagChannels) {
 		var channel_list = [];
 		for (var i = 0, l = response.channels.length; i < l; i++) {
 			var channel = response.channels[i];
@@ -31,7 +33,8 @@ function open_cases(controller, bot, message) {
 			var final_message = "There are no open cases right now.";
 		}
 		bot.replyPublic(message, final_message);
-	});
+    });
+  });
 }
 
 function flag(controller, bot, message) {
@@ -45,7 +48,9 @@ function flag(controller, bot, message) {
   console.log('BOT', bot)
   controller.storage.channels.get(channel_id, function(err, channel) {
     if (err || !channel) {
-      channel = {id: channel_id}
+      channel = {'id': channel_id,
+                 'team_id': message.team_id
+                }
     }
     if (message.command == '/unflag') {
       delete channel.label
@@ -59,9 +64,15 @@ function flag(controller, bot, message) {
   })
 }
 
-function getFlags(controller, bot, message) {
+function getFlags(controller, bot, message, cb) {
   controller.storage.channels.all(function(err, channels) {
-    bot.replyPublic(message, JSON.stringify(channels))
+    if (!err && channels) {
+      channels = channels.filter(function(c) {
+        // must be in same team
+        return (c.team_id == message.team_id)
+      })
+    }
+    cb(err, channels)
   })
 }
 
