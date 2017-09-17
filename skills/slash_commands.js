@@ -1,8 +1,19 @@
 const VERIFY_TOKEN = process.env.verificationToken
 
+function friendlyDate(date) {
+  return ((date.getMonth() + 1) + "/"
+         + date.getDate() + " " 
+         + date.getHours() + ':' 
+         + date.getMinutes());
+}
+
 function get_channel_history(channel, bot, cb) {
   // https://github.com/howdyai/botkit/issues/840 : overwriting bot_token with app_token
-  bot.api.channels.history({token: bot.config.bot.app_token,channel:channel.id, count:6,unreads:true}, cb);
+  bot.api.channels.history({token: bot.config.bot.app_token,
+                            channel:channel.id,
+                            count:12,
+                            unreads:true},
+                            cb);
 }
 
 function channelSummary(channel, history, flags) {
@@ -17,9 +28,9 @@ function channelSummary(channel, history, flags) {
   if (flags && flags.label) {
     summary.label = flags.label
   }
-  if (history) {
-    for (var i=0,l=history.length; i<l; i++) {
-      var h = history[i];
+  if (history && history.messages) {
+    for (var i=0,l=history.messages.length; i<l; i++) {
+      var h = history.messages[i];
       if (h.subtype === 'bot_message') {
         if (/replied/.test(h.username)) {
           summary.lastFrom = 'volunteer'
@@ -49,7 +60,7 @@ function open_cases(controller, bot, message) {
     /opencases flag
    */
   bot.api.channels.list({},function(err,response) {
-    console.log(message)
+    // console.log(message)
     getFlags(controller, bot, message, function(flagErr, knownChannelDict) {
       var numChannels = response.channels.length;
       var historiesTodo = numChannels;
@@ -63,8 +74,8 @@ function open_cases(controller, bot, message) {
           // Here we have marshalled all the histories, and now we can
           // show the status for each
           if (historiesTodo <= 0) {
-            console.log('ALL HISTORIES', histories)
-            console.log('ALL FLAGS', knownChannelDict)
+            // console.log('ALL HISTORIES', histories)
+            // console.log('ALL FLAGS', knownChannelDict)
     var channel_list = [];
     for (var i = 0; i < numChannels; i++) {
       var channel = response.channels[i];
@@ -74,15 +85,24 @@ function open_cases(controller, bot, message) {
             unanswered = (summary.lastFrom && summary.lastFrom == 'patient'), // patient was the last to respond
             inactive = (!summary.lastTime || (new Date() - summary.lastTime) > (60*60*24*1000)), // TODO: LISA no activity for X amt of time
             flagged = !!(knownChannelDict[channel.id] && knownChannelDict[channel.id].label)
-                  console.log(knownChannelDict[channel.id])
-        if ((new_channel || unanswered || flagged || inactive) && !channel.is_archived ) {
+                  // console.log(knownChannelDict[channel.id])
+        if (!channel.is_archived ) {
+        // if ((new_channel || unanswered || flagged || inactive) && !channel.is_archived ) {
           channel_list.push(summary);
         }
       }
     }
     if (channel_list.length > 0) {
       var formatted_list = channel_list.map(function(chan){
-        return "<#"+chan.id+">    " + (chan.label || '');
+        var chanTime = ''
+        if (chan.lastTime) {
+          chanTime = friendlyDate(chan.lastTime)
+        }
+        return ("<#"+chan.id+">    " 
+               + chanTime
+               + (chan.lastFrom ? chan.lastFrom.slice(0,3) : '')
+               + (chan.label || '' )
+               );
       }),
           final_message = "Open Cases:\n" + formatted_list.join("\n");
     } else {
@@ -97,14 +117,14 @@ function open_cases(controller, bot, message) {
 }
 
 function flag(controller, bot, message) {
-  console.log('FLAG', message)
+  // console.log('FLAG', message)
   var channel_id = (message.text.match(/\<\#(\w+)/) || [message.channel_id]).pop()
   var label = message.text.replace(/.*>/,'').trim()
   if (!label) {
     label = 'needs attention'
   }
-  console.log('FLAG DATA', channel_id, label)
-  console.log('BOT', bot)
+  // console.log('FLAG DATA', channel_id, label)
+  // console.log('BOT', bot)
   controller.storage.channels.get(channel_id, function(err, channel) {
     if (err || !channel) {
       channel = {'id': channel_id,
@@ -117,7 +137,7 @@ function flag(controller, bot, message) {
       channel.label = label
     }
     controller.storage.channels.save(channel, function(err, d){
-      console.log('saved', err, d, channel)
+      // console.log('saved', err, d, channel)
       bot.replyPublic(message, message.command.slice(1) + 'ged')
     })
   })
@@ -129,7 +149,7 @@ function getFlags(controller, bot, message, cb) {
     if (!err && channels) {
       channels.map(function(c) {
         // must be in same team
-        console.log('channel', c)
+        // console.log('channel', c)
         if (c.team_id == message.team_id) {
           channelDict[c.id] = c
         }
@@ -150,10 +170,10 @@ module.exports= function(controller){
       case '/hello':
         bot.replyPublic(message, 'hello there')
         break
-      case '/opencases':
+      case '/cases':
         open_cases(controller, bot, message);
         break;
-      case '/flag':
+      case '/mark':
       case '/unflag':
         flag(controller, bot, message)
         break
