@@ -284,7 +284,7 @@ module.exports= function(controller){
       case '/hello':
         bot.replyPublic(message, 'hello there')
         break
-      case '/opencases':
+      case '/cases':
         open_cases(controller, bot, message);
         break;
       case '/nextcase':
