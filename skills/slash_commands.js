@@ -2,8 +2,8 @@ const VERIFY_TOKEN = process.env.verificationToken
 
 function friendlyDate(date) {
   return ((date.getMonth() + 1) + "/"
-         + date.getDate() + " " 
-         + date.getHours() + ':' 
+         + date.getDate() + " "
+         + date.getHours() + ':'
          + date.getMinutes());
 }
 
@@ -98,7 +98,7 @@ function open_cases(controller, bot, message) {
         if (chan.lastTime) {
           chanTime = friendlyDate(chan.lastTime)
         }
-        return ("<#"+chan.id+">    " 
+        return ("<#"+chan.id+">    "
                + chanTime
                + (chan.lastFrom ? chan.lastFrom.slice(0,3) : '')
                + (chan.label || '' )
@@ -160,19 +160,18 @@ function getFlags(controller, bot, message, cb) {
 }
 
 function logOut(controller, bot, message){
-	let user = bot.config.bot.user_id;
+	let user = message.user_id
 	console.log(user)
 	var userChannels = []
 	bot.api.channels.list({token:bot.config.token}, function(err,response){
 		response.channels.forEach((item) => {
 			if(item.members.includes(user)){
 				userChannels.push(item.id)
-				console.log("channels": userChannels)
+				console.log("channels: "+ userChannels)
 			}
 		 })
-		 console.log("my channels: " + userChannels)
 		 userChannels.forEach((channel)=> {
-			 bot.api.channels.kick({token:bot.config.bot.app_token, channel: channel, user: user}, function(err,response){
+			 bot.api.channels.leave({token:bot.config.bot.app_token, channel: channel, user: user}, function(err,response){
 				 console.log(err, response)
 			 })
 		 })
