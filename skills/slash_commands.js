@@ -3,7 +3,7 @@ const VERIFY_TOKEN = process.env.verificationToken
 
 function friendlyDate(date) {
   return (staticSpaces(date.getMonth() + 1, 2, true) + "/"
-         + date.getDate() + " " 
+         + date.getDate() + " "
          + staticSpaces(date.getHours(), 2, true) + ':'
          + date.getMinutes());
 }
@@ -236,7 +236,40 @@ function logOut(controller, bot, message){
 				 console.log(err, response)
 			 })
 		 })
-		 bot.replyPublic(message, 'logged out!')
+		 bot.replyPublic(message, 'You have logged out! Thank you so much for volunteering your time - you are so appreciated!')
+	})
+}
+
+
+function flag(controller, bot, message) {
+  // console.log('FLAG', message)
+  var label = message.text.replace(/.*>/,'').trim()
+  if (!label) {
+    label = 'needs attention'
+  }
+  if (message.command == '/unflag') {
+    label = null
+  }
+  setChannelProperty(
+    controller, message,
+    'label', label,
+    function(err, chan) {
+      bot.replyPublic(message, message.command.slice(1) + 'ged')
+    })
+}
+
+function success(controller, bot, message){
+	var label;
+	if(!label){
+		label = 'successful'
+	}
+	bot.replyPublic(message,'You have successfully closed this conversation.')
+
+	setChannelProperty(controller, message, 'success', label, function(err, chan){
+
+		bot.api.channels.archive({token:bot.config.bot.app_token, channel: chan.id}, function(err, response){
+			console.log(err, response)
+		})
 	})
 }
 
@@ -264,8 +297,11 @@ module.exports= function(controller){
       case '/unflag':
         flag(controller, bot, message)
         break
-      case '/flags':
+      case '/getflags':
         getFlags(controller, bot, message)
+        break
+      case '/success':
+        success(controller, bot, message)
         break
 			case '/logout':
 				logOut(controller, bot, message)
