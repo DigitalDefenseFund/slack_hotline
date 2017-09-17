@@ -1,10 +1,18 @@
 const VERIFY_TOKEN = process.env.verificationToken
 
+function addZero(i) {
+    if (i < 10) {
+        i = "0" + i;
+    }
+    return i;
+}
+
 function friendlyDate(date) {
   return (staticSpaces(date.getMonth() + 1, 2, true) + "/"
-         + date.getDate() + " " 
-         + staticSpaces(date.getHours(), 2, true) + ':'
-         + date.getMinutes());
+         + staticSpaces(date.getDate(), 2) + " " 
+         + staticSpaces(addZero(date.getHours()), 2, true) + ':'
+         + addZero(date.getMinutes())
+         );
 }
 
 function staticSpaces(string, targetLength, atBeginning) {
@@ -110,7 +118,9 @@ function open_cases(controller, bot, message) {
             inactive = (!channel.lastTime || (new Date() - channel.lastTime) > (60*60*24*1000)), // TODO: LISA no activity for X amt of time
             flagged = !!(channel.store && channel.store.label)
                   // console.log(knownChannelDict[channel.id])
-        if (!channel.is_archived ) {
+                  console.log("channel",channel)
+                  console.log("channel archive",channel.is_archived)
+        if (!channel.api.is_archived ) {
         // if ((new_channel || unanswered || flagged || inactive) && !channel.is_archived ) {
           channel_list.push(channel);
         }
@@ -119,15 +129,15 @@ function open_cases(controller, bot, message) {
 
     if (channel_list.length > 0) {
       var formatted_list = channel_list.map(function(chan){
-        return (staticSpaces("<#"+chan.id+">", 30)
-               + staticSpaces((chan.lastFrom || ''), 10)
-               + staticSpaces(chan.lastTime ? friendlyDate(chan.lastTime) : '', 13)
-               + (chan.label || '' )
+        return (staticSpaces((chan.lastFrom || ''), 11)
+               + staticSpaces(chan.lastTime ? friendlyDate(chan.lastTime) : '', 15)
+               + staticSpaces((chan.label || '' ),20)
+               + "<#"+chan.id+">"
                );
       }),
-      final_message = ("Open Cases:\n"
-                       + "__Channel_________________Last Message_______Flag\n"
-                       + formatted_list.join("\n"));
+      final_message = ('```' +"Open Cases:\n"
+                       + staticSpaces('Last Message', 25) + staticSpaces("Flag",20) + 'Channel\n'
+                       + formatted_list.join("\n") + '```');
     } else {
       var final_message = "There are no open cases right now.";
     }
@@ -221,7 +231,7 @@ module.exports= function(controller){
       case '/hello':
         bot.replyPublic(message, 'hello there')
         break
-      case '/opencases':
+      case '/beccacases':
         open_cases(controller, bot, message);
         break;
       case '/flag':
