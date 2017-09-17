@@ -180,7 +180,7 @@ function logOut(controller, bot, message){
 }
 
 function success(controller, bot, message){
-	bot.api.channels.archive({token:bot.config.bot.app_token, channel: message.channel_id}, function(err, repsonse){
+	bot.api.channels.archive({token:bot.config.bot.app_token, channel: message.channel_id}, function(err, response){
 		console.log(err, response)
 	})
 	bot.replyPublic('You have successfully archived this channel.')
