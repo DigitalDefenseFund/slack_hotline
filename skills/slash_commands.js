@@ -58,8 +58,7 @@ function getTeamChannelsData(controller, bot, message, cb) {
   bot.api.channels.list({},function(err,response) {
     // console.log(message)
     getFlags(controller, bot, message, function(flagErr, knownChannelDict) {
-      var numChannels = response.channels.length;
-      var historiesTodo = numChannels;
+      var historiesTodo = response.channels.length;
       var histories = {}
       response.channels.map(function(ch) {
         get_channel_history(ch, bot, function(historyErr, chHistory) {
@@ -108,7 +107,7 @@ function open_cases(controller, bot, message) {
       if (/^sk-/.test(channel.api.name)){
         var new_channel = channel.api.num_members == 1, // channels that only have 1 member in them are brand new - that member is the one integrated with Smooch.
             unanswered = (channel.lastFrom && channel.lastFrom == 'patient'), // patient was the last to respond
-            inactive = (!channel.lastTime || (new Date() - channel.lastTime) > (60*60*24*1000)), // TODO: LISA no activity for X amt of time
+            inactive = (!channel.lastTime || (new Date() - channel.lastTime) > (60*60*24*1000*7)), // no activity for a week
             flagged = !!(channel.store && channel.store.label)
                   // console.log(knownChannelDict[channel.id])
         if (!channel.is_archived ) {
@@ -142,9 +141,9 @@ function setCaseAssignment(controller, message, channel, volunteer, cb) {
   }, (channel && channel.id))
 }
 
-function assign_case(controller, bot, message) {
+function assign_case(controller, bot, message, channel) {
   var volunteer = (message.text.match(/\<\@(\w+)/) || [message.user_id]).pop()
-  setCaseAssignment(controller, message, null, volunteer, function(err, chan) {
+  setCaseAssignment(controller, message, channel || null, volunteer, function(err, chan) {
     if (chan) {
       bot.replyPublic(message, '<@'+volunteer+'> assigned to <#'+chan.id+'>')
     }
@@ -152,6 +151,20 @@ function assign_case(controller, bot, message) {
 }
 
 function next_case(controller, bot, message) {
+  var volunteer = (message.text.match(/\<\@(\w+)/) || [message.user_id]).pop()
+  getTeamChannelsData(controller, bot, message, function(channels) {
+    channels.sort(function(a,b) {return ((b.lastTime || 0) - (a.lastTime || 0)) })
+    var needsAssign = channels.filter(function(ch) {
+      console.log('channel for assignment?', ch)
+      return (!(ch.store && ch.store.assigned) && /^sk-/.test(ch.api.name))
+    });
+    if (needsAssign.length) {
+      assign_case(controller, bot, message, needsAssign[0])
+    } else {
+      bot.replyPublic(message, 'No current cases need assignment');
+    }
+  })
+
 }
 
 function flag(controller, bot, message) {
