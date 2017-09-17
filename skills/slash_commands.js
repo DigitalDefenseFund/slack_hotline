@@ -1,8 +1,8 @@
 const VERIFY_TOKEN = process.env.verificationToken
 
 function get_channel_history(channel, bot, cb) {
-	// https://github.com/howdyai/botkit/issues/840 : overwriting bot_token with app_token
-	bot.api.channels.history({token: bot.config.bot.app_token,channel:channel.id, count:3,unreads:true}, cb);
+  // https://github.com/howdyai/botkit/issues/840 : overwriting bot_token with app_token
+  bot.api.channels.history({token: bot.config.bot.app_token,channel:channel.id, count:3,unreads:true}, cb);
 }
 
 function open_cases(controller, bot, message) {
@@ -33,29 +33,29 @@ function open_cases(controller, bot, message) {
           if (historiesTodo <= 0) {
             console.log('ALL HISTORIES', histories)
             console.log('ALL FLAGS', knownChannelDict)
-		var channel_list = [];
-		for (var i = 0; i < numChannels; i++) {
-			var channel = response.channels[i];
-	  	if (/^sk-/.test(channel.name)){
-				var new_channel = channel.num_members == 1, // channels that only have 1 member in them are brand new - that member is the one integrated with Smooch.
-						unanswered = false, // patient was the last to respond
-						inactive = false, // no activity for X amt of time
-						flagged = !!(knownChannelDict[channel.id] && knownChannelDict[channel.id].label)
+    var channel_list = [];
+    for (var i = 0; i < numChannels; i++) {
+      var channel = response.channels[i];
+      if (/^sk-/.test(channel.name)){
+        var new_channel = channel.num_members == 1, // channels that only have 1 member in them are brand new - that member is the one integrated with Smooch.
+            unanswered = false, // patient was the last to respond
+            inactive = false, // no activity for X amt of time
+            flagged = !!(knownChannelDict[channel.id] && knownChannelDict[channel.id].label)
                   console.log(knownChannelDict[channel.id])
-		    if ((new_channel || unanswered || flagged || inactive) && !channel.is_archived ) {
-		  		channel_list.push(channel.id);
-		    }
-		  }
-		}
-		if (channel_list.length > 0) {
-			var formatted_list = channel_list.map(function(cid){
+        if ((new_channel || unanswered || flagged || inactive) && !channel.is_archived ) {
+          channel_list.push(channel.id);
+        }
+      }
+    }
+    if (channel_list.length > 0) {
+      var formatted_list = channel_list.map(function(cid){
                           return "<#"+cid+">    " + ((knownChannelDict[cid] || {}).label || '');
                         }),
-					final_message = "Open Cases:\n" + formatted_list.join("\n");
-		} else {
-			var final_message = "There are no open cases right now.";
-		}
-		bot.replyPublic(message, final_message);
+          final_message = "Open Cases:\n" + formatted_list.join("\n");
+    } else {
+      var final_message = "There are no open cases right now.";
+    }
+    bot.replyPublic(message, final_message);
           }
         })
       })
@@ -118,7 +118,7 @@ module.exports= function(controller){
         bot.replyPublic(message, 'hello there')
         break
       case '/opencases':
-      	open_cases(controller, bot, message);
+        open_cases(controller, bot, message);
         break;
       case '/flag':
       case '/unflag':
