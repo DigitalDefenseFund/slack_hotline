@@ -19,12 +19,14 @@ function open_spaces(controller, bot, message){
 			var channel = response.channels[i];
 		  if (!channel.is_private && !channel.is_archived && !channel.is_general) {
 		  	if (/^sk-/.test(channel.name)){
-		  		channel_list.push(channel.name);
+		  		channel_list.push(channel.id);
 		  	}
 		  }
 		}
-		bot.replyPublic(message, channel_list.join(', '));
-		// bot.replyPublic(message, 'here are cases');
+		var formatted_list = channel_list.map(function(cid){
+			return "<#"+cid+">";
+		});
+		bot.replyPublic(message, "Open Cases:\n" + formatted_list.join("\n"));
 	  // num_members: 2,
 	});
 }
