@@ -32,6 +32,7 @@ function open_cases(controller, bot, message) {
 		}
 		bot.replyPublic(message, final_message);
 	});
+}
 
 function flag(controller, bot, message) {
   console.log('FLAG', message)
