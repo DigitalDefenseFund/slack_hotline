@@ -2,37 +2,63 @@ const VERIFY_TOKEN = process.env.verificationToken
 
 function get_channel_history(channel, bot, cb) {
 	// https://github.com/howdyai/botkit/issues/840 : overwriting bot_token with app_token
-	bot.api.channels.history({token: bot.config.bot.app_token,channel:channel.id, count:3,unreads:true},function(err,response){
-		// console.log("history", response);
-		console.log("history", JSON.stringify(response));
-		cb(err, response);
-	});
+	bot.api.channels.history({token: bot.config.bot.app_token,channel:channel.id, count:3,unreads:true}, cb);
 }
 
 function open_cases(controller, bot, message) {
+  /* Should display something like this!
+    CHANNEL              LAST_MESSAGE (sorted) FLAG
+    #sk-foo-bar          vol 16:01 9/17 (new)  needs attention
+    #sk-happy-bear       pat 12:56 9/16
+    #sk-hopeful-panda    vol  9:00 9/17        minor
+
+    Options on /opencases:
+    /opencases new (just new ones)
+    /opencases flag
+   */
   bot.api.channels.list({},function(err,response) {
     console.log(message)
-    getFlags(controller, bot, message, function(flagErr, flagChannels) {
+    getFlags(controller, bot, message, function(flagErr, knownChannelDict) {
+      var numChannels = response.channels.length;
+      var historiesTodo = numChannels;
+      var histories = {}
+      response.channels.map(function(ch) {
+        get_channel_history(ch, bot, function(historyErr, chHistory) {
+          if (!historyErr) {
+            histories[ch.id] = chHistory;
+          }
+          --historiesTodo;
+          // Here we have marshalled all the histories, and now we can
+          // show the status for each
+          if (historiesTodo <= 0) {
+            console.log('ALL HISTORIES', histories)
+            console.log('ALL FLAGS', knownChannelDict)
 		var channel_list = [];
-		for (var i = 0, l = response.channels.length; i < l; i++) {
+		for (var i = 0; i < numChannels; i++) {
 			var channel = response.channels[i];
 	  	if (/^sk-/.test(channel.name)){
 				var new_channel = channel.num_members == 1, // channels that only have 1 member in them are brand new - that member is the one integrated with Smooch.
 						unanswered = false, // patient was the last to respond
 						inactive = false, // no activity for X amt of time
-						marked = false; // tbd
-		  	if ((new_channel || unanswered || marked || inactive) && !channel.is_archived ) {
+						flagged = !!(knownChannelDict[channel.id] && knownChannelDict[channel.id].label)
+                  console.log(knownChannelDict[channel.id])
+		    if ((new_channel || unanswered || flagged || inactive) && !channel.is_archived ) {
 		  		channel_list.push(channel.id);
-		  	}
+		    }
 		  }
 		}
 		if (channel_list.length > 0) {
-			var formatted_list = channel_list.map(function(cid){ return "<#"+cid+">"; }),
+			var formatted_list = channel_list.map(function(cid){
+                          return "<#"+cid+">    " + ((knownChannelDict[cid] || {}).label || '');
+                        }),
 					final_message = "Open Cases:\n" + formatted_list.join("\n");
 		} else {
 			var final_message = "There are no open cases right now.";
 		}
 		bot.replyPublic(message, final_message);
+          }
+        })
+      })
     });
   });
 }
@@ -58,7 +84,7 @@ function flag(controller, bot, message) {
       channel.label = label
     }
     controller.storage.channels.save(channel, function(err, d){
-      console.log('saved', err, d)
+      console.log('saved', err, d, channel)
       bot.replyPublic(message, message.command.slice(1) + 'ged')
     })
   })
@@ -66,13 +92,17 @@ function flag(controller, bot, message) {
 
 function getFlags(controller, bot, message, cb) {
   controller.storage.channels.all(function(err, channels) {
+    var channelDict = {}
     if (!err && channels) {
-      channels = channels.filter(function(c) {
+      channels.map(function(c) {
         // must be in same team
-        return (c.team_id == message.team_id)
+        console.log('channel', c)
+        if (c.team_id == message.team_id) {
+          channelDict[c.id] = c
+        }
       })
     }
-    cb(err, channels)
+    cb(err, channelDict)
   })
 }
 
