@@ -64,6 +64,7 @@ Oauth & Permissions section
 
 -----------creating a command------------------
 * click on 'Slash commands'
+* add the list of all the commands listed at the bottom of `./skills/slash_commands.js`
 * make the 'request url' your ngrok base url PLUS "/slack/receive"
 * CHECK the box 'escape users and channels in your app'
 
