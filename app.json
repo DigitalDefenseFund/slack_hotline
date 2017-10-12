@@ -1,5 +1,5 @@
 {
-  "name": "Slack Hotline Volunteer Manager",
+  "name": "Slack Volunteer Manager",
   "description": "a slack bot that manages volunteers handling channels across shifts",
   "repository": "https://github.com/AbortionAccessHackathon/slack-hotline",
   "keywords": ["node", "bots", "slack","botkit"],
