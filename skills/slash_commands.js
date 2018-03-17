@@ -221,19 +221,31 @@ function setChannelProperty(controller, message, property, value, cb, channel_id
 }
 
 function getFlags(controller, bot, message, cb) {
-  controller.storage.channels.all(function(err, channels) {
+  var sendbackTeamChannels = function(err, channels) {
     var channelDict = {}
     if (!err && channels) {
       channels.map(function(c) {
-        // must be in same team
-        // console.log('channel', c)
+        // This conditional may seem redundant for .find() cases
+        // but see AUDIT note below
         if (c.team_id == message.team_id) {
           channelDict[c.id] = c
         }
       })
     }
     cb(err, channelDict)
-  })
+  }
+  var storageChannels = controller.storage.channels
+  if (storageChannels.find) {
+    // not all storage backends have find()
+    // e.g. Mongodb has it, but redis does not
+    storageChannels.find({team_id: message.team_id}, sendbackTeamChannels)
+  } else {
+    // AUDIT NOTE: This channels.all gets all channels across
+    // all instances -- not just the team instance
+    // however you'll see we filter on message.team_id matching above
+    // so nothing leaks (efficiency may be another question).
+    storageChannels.all(sendbackTeamChannels)
+  }
 }
 
 function logOut(controller, bot, message){
