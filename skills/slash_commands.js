@@ -20,6 +20,66 @@ function staticSpaces(string, targetLength, atBeginning) {
   return (atBeginning ? (lead + string) : (string + lead) );
 }
 
+function tableFormat(channelList) {
+  var formattedList = channelList.map(function(chan) {
+    // console.log(chan.store)
+    if (chan.store && chan.store.assignment) {
+      var assignee = "<@" + chan.store.assignment+ ">"
+    } else {
+      var assignee = ""
+    }
+    return (staticSpaces((chan.lastFrom || ''), 11)
+            + staticSpaces(chan.lastTime ? friendlyDate(chan.lastTime) : '', 15)
+            + staticSpaces((chan.label || '' ),20)
+            + staticSpaces((assignee),20)
+            + "<#"+chan.id+">"
+           );
+  })
+  var finalMessage = ('```' +"Open Cases:\n"
+                      + staticSpaces('Last Message', 25) + staticSpaces("Flag",20) + staticSpaces("Assignee",20) + 'Channel\n'
+                      + formattedList.join("\n") + '```');
+  return finalMessage
+}
+
+function attachmentFormat(channelList) {
+  var formattedList = channelList.map(function(chan) {
+    // colors:
+    // 1. assigned [green] #00f566
+    // 2. patient last spoke [yellow] #f5c400
+    // 3. needs attention [orange] #f35a00
+    // 4. unassigned & patient last spoke [red] #f50056
+    var color = '#00f566' // green
+    if (chan.lastFrom === 'patient') {
+      color = '#f5c400' //yellow
+    }
+    if (chan.label === 'needs attention') {
+      color = '#f35a00' //orange
+    }
+    var assignee = ''
+    if (chan.store && chan.store.assignment) {
+      assignee = "<@" + chan.store.assignment+ ">"
+    } else {
+      color = '#f50056'
+    }
+    return {
+      fields: [
+        { title: (chan.lastFrom || '') + ' ' + (chan.lastTime ? friendlyDate(chan.lastTime) : ''),
+          value: (assignee + (chan.label ? ' flag: ' + chan.label : '') || 'unassigned'),
+          short: true
+        }, {
+          title: "Channel",
+          value: "<#"+chan.id+">",
+          short: true
+        }
+      ],
+      color: color
+    }
+  })
+  return {
+    attachments: formattedList
+  }
+}
+
 function get_channel_history(channel, bot, cb) {
   // https://github.com/howdyai/botkit/issues/840 : overwriting bot_token with app_token
   bot.api.channels.history({token: bot.config.bot.app_token,
@@ -96,7 +156,7 @@ function getTeamChannelsData(controller, bot, message, cb) {
 }
 
 
-function open_cases(controller, bot, message) {
+function open_cases(controller, bot, message, formatter) {
   /* Should display something like this!
     CHANNEL              LAST_MESSAGE (sorted) FLAG
     #sk-foo-bar          vol 16:01 9/17 (new)  needs attention
@@ -108,7 +168,7 @@ function open_cases(controller, bot, message) {
     /opencases flag
    */
   getTeamChannelsData(controller, bot, message, function(channelList) {
-    var channel_list = [];
+    var channelList = [];
     for (var i = 0; i < channelList.length; i++) {
       var channel = channelList[i];
       if (/^sk-/.test(channel.api.name)){
@@ -121,33 +181,15 @@ function open_cases(controller, bot, message) {
                   // console.log("channel archive",channel.is_archived)
         if (!channel.api.is_archived ) {
         // if ((new_channel || unanswered || flagged || inactive) && !channel.is_archived ) {
-          channel_list.push(channel);
+          channelList.push(channel);
         }
       }
     }
-
-    if (channel_list.length > 0) {
-      var formatted_list = channel_list.map(function(chan){
-        console.log(chan.store)
-        if (chan.store && chan.store.assignment) {
-          var assignee = "<@" + chan.store.assignment+ ">"
-        } else {
-          var assignee = ""
-        }
-        return (staticSpaces((chan.lastFrom || ''), 11)
-               + staticSpaces(chan.lastTime ? friendlyDate(chan.lastTime) : '', 15)
-               + staticSpaces((chan.label || '' ),20)
-               + staticSpaces((assignee),20)
-               + "<#"+chan.id+">"
-               );
-      }),
-      final_message = ('```' +"Open Cases:\n"
-                       + staticSpaces('Last Message', 25) + staticSpaces("Flag",20) + staticSpaces("Assignee",20) + 'Channel\n'
-                       + formatted_list.join("\n") + '```');
-    } else {
-      var final_message = "There are no open cases right now.";
+    var finalMessage = "There are no open cases right now."
+    if (channelList.length > 0) {
+      finalMessage = formatter(channelList)
     }
-    bot.replyPublic(message, final_message);
+    bot.replyPublic(message, finalMessage)
   });
 }
 
@@ -314,7 +356,11 @@ module.exports= function(controller){
         break
       case '/cases':
         // list all the cases
-        open_cases(controller, bot, message);
+        open_cases(controller, bot, message, tableFormat);
+        break;
+      case '/cases_pretty':
+        // list all the cases
+        open_cases(controller, bot, message, attachmentFormat);
         break;
       case '/nextcase':
         // assign yourself the next case
