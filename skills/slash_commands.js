@@ -216,7 +216,7 @@ function next_case(controller, bot, message) {
     channels.sort(function(a,b) {return ((b.lastTime || 0) - (a.lastTime || 0)) })
     var needsAssign = channels.filter(function(ch) {
       // console.log('channel for assignment?', ch)
-      return (!(ch.store && ch.store.assigned) && /^sk-/.test(ch.api.name))
+      return (!(ch.store && ch.store.assigned) && !channel.api.is_archived && /^sk-/.test(ch.api.name))
     });
     if (needsAssign.length) {
       assign_case(controller, bot, message, needsAssign[0])
