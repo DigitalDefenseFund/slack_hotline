@@ -382,7 +382,9 @@ module.exports= function(controller){
         break
       case '/getflags':
         // list all the flags
-        getFlags(controller, bot, message)
+        getFlags(controller, bot, message, function(err, channelDict) {
+          bot.replyPublic(message, String(channelDict))
+        })
         break
       case '/success':
         // mark a channel as success (and closed)
