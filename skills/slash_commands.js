@@ -172,6 +172,7 @@ function open_cases(controller, bot, message, formatter) {
     for (var i = 0; i < channelList.length; i++) {
       var channel = channelList[i];
       if (/^sk-/.test(channel.api.name)){
+        console.log('api name', channel.api.name, channel.api.is_archived)
         var new_channel = channel.api.num_members == 1, // channels that only have 1 member in them are brand new - that member is the one integrated with Smooch.
             unanswered = (channel.lastFrom && channel.lastFrom == 'patient'), // patient was the last to respond
             inactive = (!channel.lastTime || (new Date() - channel.lastTime) > (60*60*24*1000*7)), // no activity for a week
