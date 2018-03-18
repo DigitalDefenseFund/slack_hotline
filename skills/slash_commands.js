@@ -169,7 +169,7 @@ function open_cases(controller, bot, message, formatter) {
    */
   console.log('opencases', message.team_id)
   getTeamChannelsData(controller, bot, message, function(channelList) {
-    var channelList = [];
+    var openChanneList = [];
     for (var i = 0; i < channelList.length; i++) {
       var channel = channelList[i];
       if (/^sk-/.test(channel.api.name)){
@@ -183,13 +183,13 @@ function open_cases(controller, bot, message, formatter) {
                   // console.log("channel archive",channel.is_archived)
         if (!channel.api.is_archived ) {
         // if ((new_channel || unanswered || flagged || inactive) && !channel.is_archived ) {
-          channelList.push(channel);
+          openChanneList.push(channel);
         }
       }
     }
     var finalMessage = "There are no open cases right now."
-    if (channelList.length > 0) {
-      finalMessage = formatter(channelList)
+    if (openChannelList.length > 0) {
+      finalMessage = formatter(openChannelList)
     }
     bot.replyPublic(message, finalMessage)
   });
