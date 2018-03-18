@@ -167,6 +167,7 @@ function open_cases(controller, bot, message, formatter) {
     /opencases new (just new ones)
     /opencases flag
    */
+  console.log('opencases', message.team_id)
   getTeamChannelsData(controller, bot, message, function(channelList) {
     var channelList = [];
     for (var i = 0; i < channelList.length; i++) {
