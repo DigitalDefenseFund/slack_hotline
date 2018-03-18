@@ -63,8 +63,11 @@ function attachmentFormat(channelList) {
     }
     return {
       fields: [
-        { title: (chan.lastFrom || '') + ' ' + (chan.lastTime ? friendlyDate(chan.lastTime) : ''),
-          value: (assignee + (chan.label ? ' flag: ' + chan.label : '') || 'unassigned'),
+        { title: ((chan.lastFrom || '')
+                  + ' ' + (chan.lastTime ? friendlyDate(chan.lastTime) : '')
+                  + (chan.label ? ' (' + chan.label + ')' : '')
+                 ),
+          value: (assignee || 'unassigned'),
           short: true
         }, {
           title: "Channel",
