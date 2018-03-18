@@ -170,13 +170,13 @@ function open_cases(controller, bot, message, formatter) {
     /opencases new (just new ones)
     /opencases flag
    */
-  console.log('opencases', message.team_id)
+  // console.log('opencases', message.team_id)
   getTeamChannelsData(controller, bot, message, function(channelList) {
     var openChannelList = [];
     for (var i = 0; i < channelList.length; i++) {
       var channel = channelList[i];
       if (/^sk-/.test(channel.api.name)){
-        console.log('api name', channel.api.name, channel.api.is_archived)
+        // console.log('api name', channel.api.name, channel.api.is_archived)
         var new_channel = channel.api.num_members == 1, // channels that only have 1 member in them are brand new - that member is the one integrated with Smooch.
             unanswered = (channel.lastFrom && channel.lastFrom == 'patient'), // patient was the last to respond
             inactive = (!channel.lastTime || (new Date() - channel.lastTime) > (60*60*24*1000*7)), // no activity for a week
@@ -383,7 +383,8 @@ module.exports= function(controller){
       case '/getflags':
         // list all the flags
         getFlags(controller, bot, message, function(err, channelDict) {
-          bot.replyPublic(message, String(channelDict))
+          // TODO: this doesn't do anything yet, but isn't broken, at least
+          bot.replyPrivate(message, String(channelDict))
         })
         break
       case '/success':
