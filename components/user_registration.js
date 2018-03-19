@@ -4,7 +4,7 @@ module.exports = function(controller) {
 
     /* Handle event caused by a user logging in with oauth */
     controller.on('oauth:success', function(payload) {
-      console.log('inside oauth:success', payload)
+
         debug('Got a successful login!', payload);
         if (!payload.identity.team_id) {
             debug('Error: received an oauth response without a team id', payload);
@@ -31,11 +31,10 @@ module.exports = function(controller) {
                 createdBy: payload.identity.user_id,
                 app_token: payload.access_token,
             };
-          console.log('team data', new_team, team)
+
             var testbot = controller.spawn(team.bot);
 
             testbot.api.auth.test({}, function(err, bot_auth) {
-              console.log('auth', err)
                 if (err) {
                     debug('Error: could not authenticate bot user', err);
                 } else {
@@ -46,9 +45,8 @@ module.exports = function(controller) {
                     testbot.team_info = team;
 
                     // Replace this with your own database!
-                  console.log('about to save team')
+
                     controller.storage.teams.save(team, function(err, id) {
-                      console.log('saved team?', err, id)
                         if (err) {
                             debug('Error: could not save team record:', err);
                         } else {
