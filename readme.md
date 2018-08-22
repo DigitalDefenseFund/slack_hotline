@@ -11,7 +11,9 @@ Pigeon is a case management Slack app that allows volunteers to manage a text/ch
 * Twilio > Smooch > Slack integration opening up a two way conversation between a client and a volunteer
   * Here's an [implementation guide for setting up those integrations]()
 * Custom slackbot built off the [Botkit Starter Slack](https://github.com/howdyai/botkit-starter-slack)
-  * Our custom Slack commands are in 
+  * Our custom Slack commands are in skills/slash_commands.js at the bottom of that file.
+
+<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vQ_aW1YF75JLHjFQUJ_NHANT37NyNmeywmbNjeHH7ap1LTYL1dHA_vtYIVyRCmbygFf-okZzyvsjEAs/embed?start=false&loop=false&delayms=3000" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
 
 ### For users
 * Each text conversation opens up a new slack channel
