@@ -83,6 +83,25 @@ function attachmentFormat(channelList) {
   }
 }
 
+function flagFormatting(flagCounts) {
+  var formattedList = '';
+
+  for (var flag in flagCounts) {
+    formattedList += (staticSpaces(flag, 25) + staticSpaces(flagCounts[flag], 20));
+  }
+
+  flagList.map(function(flag) {
+    return (
+              staticSpaces((flag.label || ''), 25)
+              + staticSpaces((flag.count || '' ),20)
+           );
+  })
+  var finalMessage = ('```' +"Open Cases:\n"
+                      + staticSpaces('Flag', 25) + staticSpaces("Count",20) +
+                      + formattedList.join("\n") + '```');
+  return finalMessage
+}
+
 function get_channel_history(channel, bot, cb) {
   // https://github.com/howdyai/botkit/issues/840 : overwriting bot_token with app_token
   bot.api.channels.history({token: bot.config.bot.app_token,
@@ -275,19 +294,33 @@ function setChannelProperty(controller, message, property, value, cb, channel_id
 function getFlags(controller, bot, message, cb) {
   var sendbackTeamChannels = function(err, channels) {
     //console.log("CHANNELS", channels)
-    var channelDict = {}
-    var str = [];
+    //var channelDict = {};
+    var flagDict =  new Proxy({}, {
+                      get: function(object, property) {
+                        return object.hasOwnProperty(property) ? object[property] : 0;
+                      }
+                    });
+    //var str = [];
     if (!err && channels) {
       channels.map(function(c) {
         // This conditional may seem redundant for .find() cases
         // but see AUDIT note below
         if (c.team_id == message.team_id && c.label) {
-          channelDict[c.id] = c;
-          str.push(c.label);
+          //channelDict[c.id] = c;
+          flagDict[c.label] += 1;
+          //str.push({label: c.label, });
         }
       })
     }
-    cb(err, str);
+    
+    var finalMessage = '``` All Flags:\n';
+    var labels = Object.keys(flagDict);
+    labels.map(function(flag) {
+      finalMessage += flag + ":  " + flagDict[flag] + "\n";
+    });
+    finalMessage += '```';
+
+    cb(err, finalMessage);
   }
   var storageChannels = controller.storage.channels
   //console.log('STORAGE CHANNELS', storageChannels);
