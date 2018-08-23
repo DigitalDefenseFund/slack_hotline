@@ -283,22 +283,6 @@ function getFlags(controller, bot, message, cb) {
       })
     }
     
-    // works
-    // var finalMessage = '``` All Flags:\n';
-    // var labels = Object.keys(flagDict);
-    // labels.map(function(flag) {
-    //   finalMessage += flag + ":  " + flagDict[flag] + "\n";
-    // });
-    // finalMessage += '```';
-
-    // works
-    // var finalMessage = flagFormattingTest(flagDict);
-
-    // works!
-    // var finalMessage = flagFormattingTest2(flagDict);
-
-    // sorta.... works! Doesn't error out at least but
-    // formatting/display is still wip
     var finalMessage = flagFormatting(flagDict);
 
     cb(err, finalMessage);
@@ -318,27 +302,6 @@ function getFlags(controller, bot, message, cb) {
   }
 }
 
-// This works -- calling a helper method works
-function flagFormattingTest(flagDict) {
-  var finalMessage = '``` All Flags:\n';
-  var labels = Object.keys(flagDict);
-  labels.map(function(flag) {
-    finalMessage += flag + ":  " + flagDict[flag] + "\n";
-  });
-  finalMessage += '```';
-  return finalMessage;
-}
-
-// This works -- calling a helper method works
-function flagFormattingTest2(flagDict) {
-  var finalMessage = '``` All Flags:\n';
-  for (var flag in flagDict) {
-    finalMessage += flag + ":  " + flagDict[flag] + "\n";
-  }
-  finalMessage += '```';
-  return finalMessage;
-}
-
 function flagFormatting(flagCounts) {
   var formattedList = '';
 
@@ -348,7 +311,7 @@ function flagFormatting(flagCounts) {
   }
 
   var finalMessage = ('```' +"Open Cases:\n"
-                      + staticSpaces('Flag', 25) + staticSpaces("Count",20) +
+                      + staticSpaces('Flag', 25) + staticSpaces("Count",20) + "\n"
                       + formattedList + '```');
   return finalMessage
 }
