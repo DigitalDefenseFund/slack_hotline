@@ -28,7 +28,13 @@ Try it out by joining our [sandbox pigeon slack here](want-to-link-to-CSF-hotlin
 
 ## How to Develop Locally
 
-The jdp-hotline-test slack is pointed at an ngrok generated URL which routes to port 3000, where our local app instance is running. If you are not part of the jdp-hotline-test slack, please request an invite by filing an issue and tagging @DDF-dev.
+In order to develop locally without creating a Slack app from scratch, you'll need to request access for a few things:
+* Access to jdp-hotline-test.slack.com
+* Access to jdp-wilson-test app
+* Ngrok account (for using a subdomain locally)
+Please request access to these items by opening an issue and tagging @DDF-dev.
+
+In order to develop locally, you'll need to run a local instance of the app and use ngrok to point a public URL to your local port. The jdp-hotline-test slack is set up to point to the ngrok generated URL. Below are steps to get started:
 
 Clone the app and install dependencies with npm
 ```
@@ -41,16 +47,14 @@ Copy the sample .env file into your own .env
 ```
 cp .env.example .env`
 ```
-Then, enter your client id, secret, and verificationToken (all from the Basic information in Slack). Also specify a port; PORT=3000 (or whatever you want).
-
-NOTE: you do NOT have to set up botkit studio or any of the variables related.  Ignore all the nagware.
+Then, enter the client id, secret, and verificationToken from the (all from the Basic information in the test Slack).
 
 Boot up the app!
 ```
 npm run start
 ```
 
-Now, we need to be able to hit our local app from Slack commands. This requires us to have a public url rather than localhost... enter Ngrok.
+Now, we need to be able to hit our local app from Slack commands. This requires us to have a public url rather than localhost. Enter Ngrok.
 
 To get set up with ngrok, follow the instructions in this tutorial.
 https://api.slack.com/tutorials/tunneling-with-ngrok
