@@ -158,8 +158,8 @@ function getTeamChannelsData(controller, bot, message, cb) {
           // Here we have marshalled all the histories, and now we can
           // show the status for each
           if (historiesTodo <= 0) {
-            console.log('ALL HISTORIES', histories)
-            console.log('ALL FLAGS', knownChannelDict)
+            // console.log('ALL HISTORIES', histories)
+            // console.log('ALL FLAGS', knownChannelDict)
             var returnValue = response.channels.map(function(ch){
               var history = histories[ch.id]
               var store = knownChannelDict[ch.id]
@@ -250,7 +250,6 @@ function next_case(controller, bot, message) {
 }
 
 function flag(controller, bot, message) {
-  console.log('FLAG', message)
   var label = message.text.replace(/.*>/,'').trim()
   if (!label) {
     label = 'needs attention'
@@ -267,10 +266,6 @@ function flag(controller, bot, message) {
 }
 
 function setChannelProperty(controller, message, property, value, cb, channel_id) {
-  // We're passing in a channel_id explicitly or grabbing it from the message
-  // I get passing in vs having a default.... but why regex vs channel_id ?
-  console.log("In setChannelProperty");
-  console.log("Passed in channel_id:  " + channel_id);
   channel_id = channel_id || (message.text.match(/\<\#(\w+)/) || [message.channel_id]).pop()
   controller.storage.channels.get(channel_id, function(getErr, channel) {
     if (getErr || !channel) {
@@ -283,9 +278,7 @@ function setChannelProperty(controller, message, property, value, cb, channel_id
     } else {
       channel[property] = value
     }
-    console.log(property, value, channel[property]);
     controller.storage.channels.save(channel, function(storeErr, d){
-      console.log('saved', storeErr, d, channel)
       cb(storeErr, channel)
     })
   })
@@ -293,22 +286,17 @@ function setChannelProperty(controller, message, property, value, cb, channel_id
 
 function getFlags(controller, bot, message, cb) {
   var sendbackTeamChannels = function(err, channels) {
-    //console.log("CHANNELS", channels)
-    //var channelDict = {};
     var flagDict =  new Proxy({}, {
                       get: function(object, property) {
                         return object.hasOwnProperty(property) ? object[property] : 0;
                       }
                     });
-    //var str = [];
     if (!err && channels) {
       channels.map(function(c) {
         // This conditional may seem redundant for .find() cases
         // but see AUDIT note below
         if (c.team_id == message.team_id && c.label) {
-          //channelDict[c.id] = c;
           flagDict[c.label] += 1;
-          //str.push({label: c.label, });
         }
       })
     }
@@ -323,7 +311,7 @@ function getFlags(controller, bot, message, cb) {
     cb(err, finalMessage);
   }
   var storageChannels = controller.storage.channels
-  //console.log('STORAGE CHANNELS', storageChannels);
+
   if (storageChannels.find) {
     // not all storage backends have find()
     // e.g. Mongodb has it, but redis does not
@@ -425,14 +413,6 @@ module.exports= function(controller){
       case '/getflags':
         // list all the flags
         getFlags(controller, bot, message, function(err, flags) {
-          // TODO: this doesn't do anything yet, but isn't broken, at least
-          console.log("In the getflags callback");
-          // var flagsFromChannelDict = [];
-          // channelDict.forEach(function(channel) {
-          //   if (channel['label']) {
-          //     flagsFromChannelDict.push(channel['label']);
-          //   }
-          // });
           bot.replyPrivate(message, flags)
         })
         break
