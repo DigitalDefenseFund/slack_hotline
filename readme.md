@@ -1,11 +1,10 @@
 # Pigeon
-
-Todo
-* insert build badges for tests!
-* links to sandbox go here
+Insert test build badge here. (Will be addressed in this task - https://trello.com/c/yptFCLY3)
 
 ## How it Works
 Pigeon is a case management Slack app that allows volunteers to manage a text/chat hotline. Clients text a hotline number, Pigeon opens up a case and a conversation with the client via a chat channel.
+
+Try it out by joining our [sandbox pigeon slack here](want-to-link-to-CSF-hotline-slack).
 
 ### Tech
 * Twilio > Smooch > Slack integration opening up a two way conversation between a client and a volunteer
@@ -28,6 +27,8 @@ Pigeon is a case management Slack app that allows volunteers to manage a text/ch
   * `/logout` - unassigns all cases for that user (ends their volunteer shift)
 
 ## How to Develop Locally
+
+The jdp-hotline-test slack is pointed at an ngrok generated URL which routes to port 3000, where our local app instance is running. If you are not part of the jdp-hotline-test slack, please request an invite by filing an issue and tagging @DDF-dev.
 
 Clone the app and install dependencies with npm
 ```
@@ -54,12 +55,20 @@ Now, we need to be able to hit our local app from Slack commands. This requires 
 To get set up with ngrok, follow the instructions in this tutorial.
 https://api.slack.com/tutorials/tunneling-with-ngrok
 
-You'll want to use port 3000 for http (or whatever you specified in .env)
+Use the subdomain pigeon-testing when running ngrok to get the domain that the Slack app is configured to point to.
 ```
-ngrok http 3000
+ngrok http -subdomain=pigeon-testing 3000
 ```
+Note -- in order to have access to this domain, you will need to be added to our ngrok account. Please open an issue and tag @DDF-dev to request access :)
 
-Once you get your https ngrok url, go to your [Slack bot config](https://api.slack.com/apps). You'll need to update the url in a few places...
+## Staging App / Sandbox environment
+
+* Pigeon app is deployed to https://staging-pigeon.herokuapp.com/
+* Slack app is pigeon
+
+## Slack App configuration
+If you ever need to configure the Slack app side of things to update what URL the app points at, visit [Slack bot config](https://api.slack.com/apps) to update the URL in the following places...
+
 * Oauth & Permissions > Redirect URLs section
   * Add the ngrok url PLUS "/oauth"
   * Click "Save URLs"
@@ -76,5 +85,6 @@ Once you get your https ngrok url, go to your [Slack bot config](https://api.sla
   * make the 'request url' your ngrok base url PLUS "/slack/receive"
   * CHECK the box 'escape users and channels in your app'
 
-
+## Questions? Comments?
+Contact us by opening an issue! Alternatively, send us an email at pigeon@digitaldefensefund.org
 
