@@ -83,25 +83,6 @@ function attachmentFormat(channelList) {
   }
 }
 
-function flagFormatting(flagCounts) {
-  var formattedList = '';
-
-  for (var flag in flagCounts) {
-    formattedList += (staticSpaces(flag, 25) + staticSpaces(flagCounts[flag], 20));
-  }
-
-  flagList.map(function(flag) {
-    return (
-              staticSpaces((flag.label || ''), 25)
-              + staticSpaces((flag.count || '' ),20)
-           );
-  })
-  var finalMessage = ('```' +"Open Cases:\n"
-                      + staticSpaces('Flag', 25) + staticSpaces("Count",20) +
-                      + formattedList.join("\n") + '```');
-  return finalMessage
-}
-
 function get_channel_history(channel, bot, cb) {
   // https://github.com/howdyai/botkit/issues/840 : overwriting bot_token with app_token
   bot.api.channels.history({token: bot.config.bot.app_token,
@@ -286,6 +267,7 @@ function setChannelProperty(controller, message, property, value, cb, channel_id
 
 function getFlags(controller, bot, message, cb) {
   var sendbackTeamChannels = function(err, channels) {
+    // This allows us to set the default count for a given flag to 0
     var flagDict =  new Proxy({}, {
                       get: function(object, property) {
                         return object.hasOwnProperty(property) ? object[property] : 0;
@@ -301,12 +283,23 @@ function getFlags(controller, bot, message, cb) {
       })
     }
     
-    var finalMessage = '``` All Flags:\n';
-    var labels = Object.keys(flagDict);
-    labels.map(function(flag) {
-      finalMessage += flag + ":  " + flagDict[flag] + "\n";
-    });
-    finalMessage += '```';
+    // works
+    // var finalMessage = '``` All Flags:\n';
+    // var labels = Object.keys(flagDict);
+    // labels.map(function(flag) {
+    //   finalMessage += flag + ":  " + flagDict[flag] + "\n";
+    // });
+    // finalMessage += '```';
+
+    // works
+    // var finalMessage = flagFormattingTest(flagDict);
+
+    // works!
+    // var finalMessage = flagFormattingTest2(flagDict);
+
+    // sorta.... works! Doesn't error out at least but
+    // formatting/display is still wip
+    var finalMessage = flagFormatting(flagDict);
 
     cb(err, finalMessage);
   }
@@ -323,6 +316,41 @@ function getFlags(controller, bot, message, cb) {
     // so nothing leaks (efficiency may be another question).
     storageChannels.all(sendbackTeamChannels)
   }
+}
+
+// This works -- calling a helper method works
+function flagFormattingTest(flagDict) {
+  var finalMessage = '``` All Flags:\n';
+  var labels = Object.keys(flagDict);
+  labels.map(function(flag) {
+    finalMessage += flag + ":  " + flagDict[flag] + "\n";
+  });
+  finalMessage += '```';
+  return finalMessage;
+}
+
+// This works -- calling a helper method works
+function flagFormattingTest2(flagDict) {
+  var finalMessage = '``` All Flags:\n';
+  for (var flag in flagDict) {
+    finalMessage += flag + ":  " + flagDict[flag] + "\n";
+  }
+  finalMessage += '```';
+  return finalMessage;
+}
+
+function flagFormatting(flagCounts) {
+  var formattedList = '';
+
+  for (var flag in flagCounts) {
+    formattedList += (staticSpaces(flag, 25) + staticSpaces(flagCounts[flag], 20));
+    formattedList += "\n";
+  }
+
+  var finalMessage = ('```' +"Open Cases:\n"
+                      + staticSpaces('Flag', 25) + staticSpaces("Count",20) +
+                      + formattedList + '```');
+  return finalMessage
 }
 
 function logOut(controller, bot, message){
