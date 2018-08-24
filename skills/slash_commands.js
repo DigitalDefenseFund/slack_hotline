@@ -401,3 +401,10 @@ module.exports= function(controller){
   })
 
 }; //module.export
+
+// TODO -- delete this function
+// added as sanity check for test setup
+function addOne(num) {
+  return num + 1;
+}
+module.exports = addOne;

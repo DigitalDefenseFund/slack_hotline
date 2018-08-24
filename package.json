@@ -4,7 +4,8 @@
   "description": "A slack bot for handling channels delegated to volunteer",
   "main": "bot.js",
   "scripts": {
-    "start": "node bot.js"
+    "start": "node bot.js",
+    "test": "jest"
   },
   "dependencies": {
     "body-parser": "^1.15.2",
