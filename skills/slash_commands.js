@@ -22,7 +22,6 @@ function staticSpaces(string, targetLength, atBeginning) {
 
 function tableFormat(channelList) {
   var formattedList = channelList.map(function(chan) {
-    // console.log(chan.store)
     if (chan.store && chan.store.assignment) {
       var assignee = "<@" + chan.store.assignment+ ">"
     } else {
@@ -126,7 +125,6 @@ function channelSummary(channel, history, flags) {
 
 function getTeamChannelsData(controller, bot, message, cb) {
   bot.api.channels.list({},function(err,response) {
-    // console.log(message)
     getFlags(controller, bot, message, function(flagErr, knownChannelDict) {
       var historiesTodo = response.channels.length;
       var histories = {}
@@ -139,8 +137,6 @@ function getTeamChannelsData(controller, bot, message, cb) {
           // Here we have marshalled all the histories, and now we can
           // show the status for each
           if (historiesTodo <= 0) {
-            // console.log('ALL HISTORIES', histories)
-            // console.log('ALL FLAGS', knownChannelDict)
             var returnValue = response.channels.map(function(ch){
               var history = histories[ch.id]
               var store = knownChannelDict[ch.id]
@@ -170,20 +166,15 @@ function open_cases(controller, bot, message, formatter) {
     /opencases new (just new ones)
     /opencases flag
    */
-  // console.log('opencases', message.team_id)
   getTeamChannelsData(controller, bot, message, function(channelList) {
     var openChannelList = [];
     for (var i = 0; i < channelList.length; i++) {
       var channel = channelList[i];
       if (/^sk-/.test(channel.api.name)){
-        // console.log('api name', channel.api.name, channel.api.is_archived)
         var new_channel = channel.api.num_members == 1, // channels that only have 1 member in them are brand new - that member is the one integrated with Smooch.
             unanswered = (channel.lastFrom && channel.lastFrom == 'patient'), // patient was the last to respond
             inactive = (!channel.lastTime || (new Date() - channel.lastTime) > (60*60*24*1000*7)), // no activity for a week
             flagged = !!(channel.store && channel.store.label)
-                  // console.log(knownChannelDict[channel.id])
-                  // console.log("channel",channel)
-                  // console.log("channel archive",channel.is_archived)
         if (!channel.api.is_archived ) {
         // if ((new_channel || unanswered || flagged || inactive) && !channel.is_archived ) {
           openChannelList.push(channel);
@@ -218,7 +209,6 @@ function next_case(controller, bot, message) {
   getTeamChannelsData(controller, bot, message, function(channels) {
     channels.sort(function(a,b) {return ((b.lastTime || 0) - (a.lastTime || 0)) })
     var needsAssign = channels.filter(function(ch) {
-      // console.log('channel for assignment?', ch)
       return (!(ch.store && ch.store.assigned) && !ch.api.is_archived && /^sk-/.test(ch.api.name))
     });
     if (needsAssign.length) {
