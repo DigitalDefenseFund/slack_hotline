@@ -230,22 +230,6 @@ function next_case(controller, bot, message) {
 
 }
 
-function flag(controller, bot, message) {
-  var label = message.text.replace(/.*>/,'').trim()
-  if (!label) {
-    label = 'needs attention'
-  }
-  if (message.command == '/unflag') {
-    label = null
-  }
-  setChannelProperty(
-    controller, message,
-    'label', label,
-    function(err, chan) {
-      bot.replyPublic(message, message.command.slice(1) + 'ged')
-    })
-}
-
 function setChannelProperty(controller, message, property, value, cb, channel_id) {
   channel_id = channel_id || (message.text.match(/\<\#(\w+)/) || [message.channel_id]).pop()
   controller.storage.channels.get(channel_id, function(getErr, channel) {
@@ -303,28 +287,25 @@ function getFlags(controller, bot, message, cb) {
 }
 
 function flagFormatting(flagCounts) {
-  var formattedList = '';
+  var formattedList = '```' +"All Flags:\n";
 
   for (var flag in flagCounts) {
-    formattedList += (staticSpaces(flag, 25) + staticSpaces(flagCounts[flag], 20));
+    formattedList += flag;
     formattedList += "\n";
   }
 
-  var finalMessage = ('```' +"Open Cases:\n"
-                      + staticSpaces('Flag', 25) + staticSpaces("Count",20) + "\n"
-                      + formattedList + '```');
-  return finalMessage
+  formattedList += '```';
+  return formattedList
 }
 
 function logOut(controller, bot, message){
 	let user = message.user_id
-	// console.log(user)
+
 	var userChannels = []
 	bot.api.channels.list({token:bot.config.token}, function(err,response){
 		response.channels.forEach((item) => {
 			if(item.members.includes(user)){
 				userChannels.push(item.id)
-				// console.log("channels: "+ userChannels)
 			}
 		 })
 		 userChannels.forEach((channel)=> {
@@ -338,8 +319,8 @@ function logOut(controller, bot, message){
 
 
 function flag(controller, bot, message) {
-  // console.log('FLAG', message)
-  var label = message.text.replace(/.*>/,'').trim()
+  let label = message.text.replace(/.*>/,'').trim()
+
   if (!label) {
     label = 'needs attention'
   }
