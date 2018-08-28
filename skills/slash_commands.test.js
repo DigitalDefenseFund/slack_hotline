@@ -1,42 +1,33 @@
-const Botmock = require('botkit-mock');
 const slashCommands = require('./slash_commands');
 
 describe("slask_commands",()=>{
-  afterEach(function () {
-    this.controller.shutdown();
-  });
-  
-  beforeEach(function () {
-    this.userInfo = {
-      slackId: 'user123',
-      channel: 'channel123',
-    };
-    
-    this.controller = Botmock({
-      stats_optout: true,
-      debug: false,
-    });
-    
-    this.bot = this.controller.spawn({
-      type: 'slack',
-    });
-    
-    slashCommands(this.controller);
-  });
-
-  it("calls hello when the hello command is passed in", function() {
-    var message = {
-      text: "Some text",
-      command: "/hello"
-    }
-
-    debugger;
-
-    return this.bot.usersInput(this.buildSequence(messages)).then((message) => {
-      return assert.equal(
-        message.text,
-        "hello there"
-      );
+  const mockBot = {
+    replyPublic: jest.fn(function(){
+      return 'hello there'
     })
-  });
+  }
+  const mockMessage = {
+    command: "/hello"
+  }
+  const mockController = {
+    // on 'slash_command', it does the thing
+    // on 'literally_anything_else', it doesn't trigger the callback?
+    on: jest.fn(function(event_arg) {
+      if (event_arg === 'slack_command') {
+        return mockBot, mockMessage
+      } else {
+        return 'was not triggered'
+      }
+    }),
+    testing: jest.fn(function(){
+      return "hiya cats"
+    })
+  }
+
+  const botSpy = jest.spyOn(mockBot, 'replyPublic')
+  
+  it("returns hello when command is /hello",()=>{
+    mockController.on('slack_command');
+    expect(botSpy).toHaveBeenCalled
+  })
 });
