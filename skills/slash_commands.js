@@ -349,12 +349,15 @@ function success(controller, bot, message){
 }
 
 module.exports= function(controller){
-
+  console.log("MAIN METHOD");
+  console.log("CONTROLLER", controller);
   controller.on('slash_command', function (bot, message) {
+    console.log("BOT", bot);
     // Validate Slack verify token
     if (message.token !== VERIFY_TOKEN) {
       return bot.res.send(401, 'Unauthorized')
     }
+    console.log('MESSAGE', message)
     switch (message.command) {
       case '/hello':
         bot.replyPublic(message, 'hello there')

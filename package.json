@@ -5,11 +5,13 @@
   "main": "bot.js",
   "scripts": {
     "start": "node bot.js",
-    "test": "jest"
+    "jest-test": "jest",
+    "test": "find ./tests -name '*mochaSpec.js' | xargs mocha -t 2000 -R spec"
   },
   "dependencies": {
     "body-parser": "^1.15.2",
     "botkit": "^0.6",
+    "botkit-mock": "^0.1.11",
     "botkit-storage-mongo": "^1.0.6",
     "botkit-storage-redis": "^1.0.6",
     "dashbot": "^9.9.2",
@@ -21,7 +23,8 @@
     "wordfilter": "^0.2.6"
   },
   "devDependencies": {
-    "jest": "^23.5.0"
+    "jest": "^23.5.0",
+    "mocha": "^5.2.0"
   },
   "repository": {
     "type": "git",
