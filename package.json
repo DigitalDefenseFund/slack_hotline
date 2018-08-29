@@ -5,8 +5,7 @@
   "main": "bot.js",
   "scripts": {
     "start": "node bot.js",
-    "jest-test": "jest",
-    "test": "find ./tests -name '*mochaSpec.js' | xargs mocha -t 2000 -R spec"
+    "test": "jest"
   },
   "dependencies": {
     "body-parser": "^1.15.2",
@@ -23,8 +22,7 @@
     "wordfilter": "^0.2.6"
   },
   "devDependencies": {
-    "jest": "^23.5.0",
-    "mocha": "^5.2.0"
+    "jest": "^23.5.0"
   },
   "repository": {
     "type": "git",
