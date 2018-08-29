@@ -372,55 +372,59 @@ function success(controller, bot, message){
 	})
 }
 
+function handleSlash(controller, bot, message) {
+  // Validate Slack verify token
+  if (message.token !== VERIFY_TOKEN) {
+    return bot.res.send(401, 'Unauthorized')
+  }
+  switch (message.command) {
+    case '/hello':
+      bot.replyPublic(message, 'hello there')
+      break
+    case '/cases':
+      // list all the cases
+      open_cases(controller, bot, message, tableFormat);
+      break;
+    case '/cases_pretty':
+      // list all the cases
+      open_cases(controller, bot, message, attachmentFormat);
+      break;
+    case '/nextcase':
+      // assign yourself the next case
+      next_case(controller, bot, message);
+      break;
+    case '/assign':
+      // assign a volunteer to a particular channel
+      assign_case(controller, bot, message);
+      break;
+    case '/flag':
+    case '/unflag':
+      // flag or unflag a particular channel (defaults to channel that you are in)
+      flag(controller, bot, message)
+      break
+    case '/getflags':
+      // list all the flags
+      getFlags(controller, bot, message, function(err, flags) {
+        bot.replyPrivate(message, flags)
+      })
+      break
+    case '/success':
+      // mark a channel as success (and closed)
+      success(controller, bot, message)
+      break
+    case '/logout':
+      // logs out and will make your cases available to other volunteers to pick up
+      logOut(controller, bot, message)
+      break
+    default:
+      bot.replyPublic(message, 'Sorry, I\'m not sure what that command is')
+  }
+}
+
 module.exports= function(controller){
 
-  controller.on('slash_command', function (bot, message) {
-    // Validate Slack verify token
-    if (message.token !== VERIFY_TOKEN) {
-      return bot.res.send(401, 'Unauthorized')
-    }
-    switch (message.command) {
-      case '/hello':
-        bot.replyPublic(message, 'hello there')
-        break
-      case '/cases':
-        // list all the cases
-        open_cases(controller, bot, message, tableFormat);
-        break;
-      case '/cases_pretty':
-        // list all the cases
-        open_cases(controller, bot, message, attachmentFormat);
-        break;
-      case '/nextcase':
-        // assign yourself the next case
-        next_case(controller, bot, message);
-        break;
-      case '/assign':
-        // assign a volunteer to a particular channel
-        assign_case(controller, bot, message);
-        break;
-      case '/flag':
-      case '/unflag':
-        // flag or unflag a particular channel (defaults to channel that you are in)
-        flag(controller, bot, message)
-        break
-      case '/getflags':
-        // list all the flags
-        getFlags(controller, bot, message, function(err, flags) {
-          bot.replyPrivate(message, flags)
-        })
-        break
-      case '/success':
-        // mark a channel as success (and closed)
-        success(controller, bot, message)
-        break
-      case '/logout':
-        // logs out and will make your cases available to other volunteers to pick up
-        logOut(controller, bot, message)
-        break
-      default:
-        bot.replyPublic(message, 'Sorry, I\'m not sure what that command is')
-    }
+  controller.on('slash_command', function(bot, message) {
+    handleSlash(controller, bot, message)
   })
 
 }; //module.export
