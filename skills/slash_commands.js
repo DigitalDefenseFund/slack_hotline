@@ -22,7 +22,6 @@ function staticSpaces(string, targetLength, atBeginning) {
 
 function tableFormat(channelList) {
   var formattedList = channelList.map(function(chan) {
-    // console.log(chan.store)
     if (chan.store && chan.store.assignment) {
       var assignee = "<@" + chan.store.assignment+ ">"
     } else {
@@ -126,8 +125,7 @@ function channelSummary(channel, history, flags) {
 
 function getTeamChannelsData(controller, bot, message, cb) {
   bot.api.channels.list({},function(err,response) {
-    // console.log(message)
-    getFlags(controller, bot, message, function(flagErr, knownChannelDict) {
+    getChannelsWithFlags(controller, bot, message, function(flagErr, knownChannelDict) {
       var historiesTodo = response.channels.length;
       var histories = {}
       response.channels.map(function(ch) {
@@ -139,8 +137,6 @@ function getTeamChannelsData(controller, bot, message, cb) {
           // Here we have marshalled all the histories, and now we can
           // show the status for each
           if (historiesTodo <= 0) {
-            // console.log('ALL HISTORIES', histories)
-            // console.log('ALL FLAGS', knownChannelDict)
             var returnValue = response.channels.map(function(ch){
               var history = histories[ch.id]
               var store = knownChannelDict[ch.id]
@@ -170,20 +166,15 @@ function open_cases(controller, bot, message, formatter) {
     /opencases new (just new ones)
     /opencases flag
    */
-  // console.log('opencases', message.team_id)
   getTeamChannelsData(controller, bot, message, function(channelList) {
     var openChannelList = [];
     for (var i = 0; i < channelList.length; i++) {
       var channel = channelList[i];
       if (/^sk-/.test(channel.api.name)){
-        // console.log('api name', channel.api.name, channel.api.is_archived)
         var new_channel = channel.api.num_members == 1, // channels that only have 1 member in them are brand new - that member is the one integrated with Smooch.
             unanswered = (channel.lastFrom && channel.lastFrom == 'patient'), // patient was the last to respond
             inactive = (!channel.lastTime || (new Date() - channel.lastTime) > (60*60*24*1000*7)), // no activity for a week
             flagged = !!(channel.store && channel.store.label)
-                  // console.log(knownChannelDict[channel.id])
-                  // console.log("channel",channel)
-                  // console.log("channel archive",channel.is_archived)
         if (!channel.api.is_archived ) {
         // if ((new_channel || unanswered || flagged || inactive) && !channel.is_archived ) {
           openChannelList.push(channel);
@@ -218,7 +209,6 @@ function next_case(controller, bot, message) {
   getTeamChannelsData(controller, bot, message, function(channels) {
     channels.sort(function(a,b) {return ((b.lastTime || 0) - (a.lastTime || 0)) })
     var needsAssign = channels.filter(function(ch) {
-      // console.log('channel for assignment?', ch)
       return (!(ch.store && ch.store.assigned) && !ch.api.is_archived && /^sk-/.test(ch.api.name))
     });
     if (needsAssign.length) {
@@ -228,23 +218,6 @@ function next_case(controller, bot, message) {
     }
   })
 
-}
-
-function flag(controller, bot, message) {
-  // console.log('FLAG', message)
-  var label = message.text.replace(/.*>/,'').trim()
-  if (!label) {
-    label = 'needs attention'
-  }
-  if (message.command == '/unflag') {
-    label = null
-  }
-  setChannelProperty(
-    controller, message,
-    'label', label,
-    function(err, chan) {
-      bot.replyPublic(message, message.command.slice(1) + 'ged')
-    })
 }
 
 function setChannelProperty(controller, message, property, value, cb, channel_id) {
@@ -261,27 +234,30 @@ function setChannelProperty(controller, message, property, value, cb, channel_id
       channel[property] = value
     }
     controller.storage.channels.save(channel, function(storeErr, d){
-      // console.log('saved', err, d, channel)
       cb(storeErr, channel)
     })
   })
 }
 
-function getFlags(controller, bot, message, cb) {
+function getChannelsWithFlags(controller, bot, message, cb) {
   var sendbackTeamChannels = function(err, channels) {
+    // This allows us to set the default count for a given flag to 0
     var channelDict = {}
+
     if (!err && channels) {
       channels.map(function(c) {
         // This conditional may seem redundant for .find() cases
         // but see AUDIT note below
-        if (c.team_id == message.team_id) {
-          channelDict[c.id] = c
+        if (c.team_id == message.team_id && c.label) {
+          channelDict[c.id] = c;
         }
       })
     }
-    cb(err, channelDict)
+
+    cb(err, channelDict);
   }
   var storageChannels = controller.storage.channels
+
   if (storageChannels.find) {
     // not all storage backends have find()
     // e.g. Mongodb has it, but redis does not
@@ -295,15 +271,63 @@ function getFlags(controller, bot, message, cb) {
   }
 }
 
+function getFlags(controller, bot, message, cb) {
+  var sendbackTeamChannels = function(err, channels) {
+    // This allows us to set the default count for a given flag to 0
+    var flagDict =  new Proxy({}, {
+                      get: function(object, property) {
+                        return object.hasOwnProperty(property) ? object[property] : 0;
+                      }
+                    });
+    if (!err && channels) {
+      channels.map(function(c) {
+        // This conditional may seem redundant for .find() cases
+        // but see AUDIT note below
+        if (c.team_id == message.team_id && c.label) {
+          flagDict[c.label] += 1;
+        }
+      })
+    }
+    
+    var finalMessage = flagFormatting(flagDict);
+
+    cb(err, finalMessage);
+  }
+  var storageChannels = controller.storage.channels
+
+  if (storageChannels.find) {
+    // not all storage backends have find()
+    // e.g. Mongodb has it, but redis does not
+    storageChannels.find({team_id: message.team_id}, sendbackTeamChannels)
+  } else {
+    // AUDIT NOTE: This channels.all gets all channels across
+    // all instances -- not just the team instance
+    // however you'll see we filter on message.team_id matching above
+    // so nothing leaks (efficiency may be another question).
+    storageChannels.all(sendbackTeamChannels)
+  }
+}
+
+function flagFormatting(flagCounts) {
+  var formattedList = '```' +"All Flags:\n";
+
+  for (var flag in flagCounts) {
+    formattedList += flag;
+    formattedList += "\n";
+  }
+
+  formattedList += '```';
+  return formattedList
+}
+
 function logOut(controller, bot, message){
 	let user = message.user_id
-	// console.log(user)
+
 	var userChannels = []
 	bot.api.channels.list({token:bot.config.token}, function(err,response){
 		response.channels.forEach((item) => {
 			if(item.members.includes(user)){
 				userChannels.push(item.id)
-				// console.log("channels: "+ userChannels)
 			}
 		 })
 		 userChannels.forEach((channel)=> {
@@ -317,8 +341,8 @@ function logOut(controller, bot, message){
 
 
 function flag(controller, bot, message) {
-  // console.log('FLAG', message)
-  var label = message.text.replace(/.*>/,'').trim()
+  let label = message.text.replace(/.*>/,'').trim()
+
   if (!label) {
     label = 'needs attention'
   }
@@ -382,9 +406,8 @@ module.exports= function(controller){
         break
       case '/getflags':
         // list all the flags
-        getFlags(controller, bot, message, function(err, channelDict) {
-          // TODO: this doesn't do anything yet, but isn't broken, at least
-          bot.replyPrivate(message, String(channelDict))
+        getFlags(controller, bot, message, function(err, flags) {
+          bot.replyPrivate(message, flags)
         })
         break
       case '/success':
