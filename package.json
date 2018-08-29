@@ -22,12 +22,12 @@
   "devDependencies": {},
   "repository": {
     "type": "git",
-    "url": "https://github.com/AbortionAccessHackathon/slack-hotline.git"
+    "url": "https://github.com/CyberSecurityFund/slack-hotline.git"
   },
   "bugs": {
-    "url": "https://github.com/AbortionAccessHackathon/slack-hotline/issues"
+    "url": "https://github.com/CyberSecurityFund/slack-hotline/issues"
   },
-  "homepage": "https://github.com/AbortionAccessHackathon/slack-hotline",
+  "homepage": "https://github.com/CyberSecurityFund/slack-hotline",
   "keywords": [
     "bots",
     "chatbots",
