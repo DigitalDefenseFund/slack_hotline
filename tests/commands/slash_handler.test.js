@@ -20,6 +20,9 @@ const assign = require('../../commands/assign')
 jest.mock('../../commands/next_case')
 const nextCase = require('../../commands/next_case')
 
+jest.mock('../../commands/cases')
+const cases = require('../../commands/cases')
+
 describe("slash_commands",()=>{
   let mockController = {}
   let mockBot = {
@@ -139,6 +142,32 @@ describe("slash_commands",()=>{
     it("calls next_case with controller, bot, and message",()=>{
       slashCommands.mainHandler(mockController, mockBot, mockMessage)
       expect(nextCaseSpy).toHaveBeenCalledWith(mockController, mockBot, mockMessage)
+    })
+  })
+
+  describe("/cases",()=>{
+    let mockMessage = {
+      command: "/cases"
+    }
+
+    let casesSpy = jest.spyOn(cases, "call")
+
+    it("calls next_case with controller, bot, and message",()=>{
+      slashCommands.mainHandler(mockController, mockBot, mockMessage)
+      expect(casesSpy).toHaveBeenCalledWith(mockController, mockBot, mockMessage, 'normal')
+    })
+  })
+
+  describe("/cases_pretty",()=>{
+    let mockMessage = {
+      command: "/cases_pretty"
+    }
+
+    let casesSpy = jest.spyOn(cases, "call")
+
+    it("calls next_case with controller, bot, and message",()=>{
+      slashCommands.mainHandler(mockController, mockBot, mockMessage)
+      expect(casesSpy).toHaveBeenCalledWith(mockController, mockBot, mockMessage, 'pretty')
     })
   })
 })
