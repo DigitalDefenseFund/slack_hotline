@@ -1,5 +1,6 @@
 const success = require('./success')
 const getFlags = require('./get_flags')
+const logOut = require('./logout')
 
 const VERIFY_TOKEN = process.env.verificationToken
 
@@ -274,26 +275,6 @@ function getChannelsWithFlags(controller, bot, message, cb) {
   }
 }
 
-function logOut(controller, bot, message){
-  let user = message.user_id
-
-  var userChannels = []
-  bot.api.channels.list({token:bot.config.token}, function(err,response){
-    response.channels.forEach((item) => {
-      if(item.members.includes(user)){
-        userChannels.push(item.id)
-      }
-     })
-     userChannels.forEach((channel)=> {
-       bot.api.channels.leave({token:bot.config.bot.app_token, channel: channel, user: user}, function(err,response){
-         // console.log(err, response)
-       })
-     })
-     bot.replyPublic(message, 'You have logged out! Thank you so much for volunteering your time - you are so appreciated!')
-  })
-}
-
-
 function flag(controller, bot, message) {
   let label = message.text.replace(/.*>/,'').trim()
 
@@ -356,7 +337,7 @@ publicMethods.mainHandler = function(controller, bot, message) {
       break
     case '/logout':
       // logs out and will make your cases available to other volunteers to pick up
-      logOut(controller, bot, message)
+      logOut.call(controller, bot, message)
       break
     default:
       bot.replyPublic(message, 'Sorry, I\'m not sure what that command is')

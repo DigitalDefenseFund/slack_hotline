@@ -8,6 +8,9 @@ const success = require('../../commands/success')
 jest.mock('../../commands/get_flags')
 const getFlags = require('../../commands/get_flags')
 
+jest.mock('../../commands/logout')
+const logOut = require('../../commands/logout')
+
 describe("slash_commands",()=>{
   let mockController = {}
   let mockBot = {
@@ -49,6 +52,19 @@ describe("slash_commands",()=>{
     it("calls success with controller, bot, and message",()=>{
       slashCommands.mainHandler(mockController, mockBot, mockMessage)
       expect(successSpy).toHaveBeenCalledWith(mockController, mockBot, mockMessage)
+    })
+  })
+
+  describe("/logout",()=>{
+    let mockMessage = {
+      command: "/logout"
+    }
+
+    let logoutSpy = jest.spyOn(logOut, "call")
+
+    it("calls logout with controller, bot, and message",()=>{
+      slashCommands.mainHandler(mockController, mockBot, mockMessage)
+      expect(logoutSpy).toHaveBeenCalledWith(mockController, mockBot, mockMessage)
     })
   })
 
