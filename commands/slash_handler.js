@@ -1,6 +1,7 @@
 const success = require('./success')
 const getFlags = require('./get_flags')
 const logOut = require('./logout')
+const flag = require('./flag')
 
 const VERIFY_TOKEN = process.env.verificationToken
 
@@ -275,29 +276,13 @@ function getChannelsWithFlags(controller, bot, message, cb) {
   }
 }
 
-function flag(controller, bot, message) {
-  let label = message.text.replace(/.*>/,'').trim()
-
-  if (!label) {
-    label = 'needs attention'
-  }
-  if (message.command == '/unflag') {
-    label = null
-  }
-  setChannelProperty(
-    controller, message,
-    'label', label,
-    function(err, chan) {
-      bot.replyPublic(message, message.command.slice(1) + 'ged')
-    })
-}
-
 let publicMethods = module.exports = {}
 
 publicMethods.mainHandler = function(controller, bot, message) {
-  // Not sure how this isn't tripping up the tests
   // Validate Slack verify token
   if (message.token !== VERIFY_TOKEN) {
+    // Not sure how this isn't tripping up the tests
+    // Lol maybe this works because they're both undefined?
     return bot.res.send(401, 'Unauthorized')
   }
   switch (message.command) {
@@ -323,7 +308,7 @@ publicMethods.mainHandler = function(controller, bot, message) {
     case '/flag':
     case '/unflag':
       // flag or unflag a particular channel (defaults to channel that you are in)
-      flag(controller, bot, message)
+      flag.call(controller, bot, message)
       break
     case '/getflags':
       // list all the flags

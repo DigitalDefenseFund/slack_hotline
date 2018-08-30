@@ -11,6 +11,9 @@ const getFlags = require('../../commands/get_flags')
 jest.mock('../../commands/logout')
 const logOut = require('../../commands/logout')
 
+jest.mock('../../commands/flag')
+const flag = require('../../commands/flag')
+
 describe("slash_commands",()=>{
   let mockController = {}
   let mockBot = {
@@ -75,9 +78,35 @@ describe("slash_commands",()=>{
 
     let flagSpy = jest.spyOn(getFlags, "call")
 
-    it("calls success with controller, bot, and message",()=>{
+    it("calls getFlags with controller, bot, message, and callback",()=>{
       slashCommands.mainHandler(mockController, mockBot, mockMessage)
       expect(flagSpy).toHaveBeenCalledWith(mockController, mockBot, mockMessage, expect.any(Function))
+    })
+  })
+
+  describe("/flag",()=>{
+    let mockMessage = {
+      command: "/flag"
+    }
+
+    let flagSpy = jest.spyOn(flag, "call")
+
+    it("calls flag with controller, bot, and message",()=>{
+      slashCommands.mainHandler(mockController, mockBot, mockMessage)
+      expect(flagSpy).toHaveBeenCalledWith(mockController, mockBot, mockMessage)
+    })
+  })
+
+  describe("/unflag",()=>{
+    let mockMessage = {
+      command: "/unflag"
+    }
+
+    let flagSpy = jest.spyOn(flag, "call")
+
+    it("calls flag with controller, bot, and message",()=>{
+      slashCommands.mainHandler(mockController, mockBot, mockMessage)
+      expect(flagSpy).toHaveBeenCalledWith(mockController, mockBot, mockMessage)
     })
   })
 })
