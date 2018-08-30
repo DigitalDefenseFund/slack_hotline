@@ -1,3 +1,5 @@
+const success = require('./success')
+
 const VERIFY_TOKEN = process.env.verificationToken
 
 function addZero(i) {
@@ -357,22 +359,10 @@ function flag(controller, bot, message) {
     })
 }
 
-function success(controller, bot, message){
-  var label;
-  if(!label){
-    label = 'successful'
-  }
-  bot.replyPublic(message,'You have successfully closed this conversation.')
+let publicMethods = module.exports = {}
 
-  setChannelProperty(controller, message, 'success', label, function(err, chan){
-
-    bot.api.channels.archive({token:bot.config.bot.app_token, channel: chan.id}, function(err, response){
-      // console.log(err, response)
-    })
-  })
-}
-
-module.exports = function(controller, bot, message) {
+publicMethods.mainHandler = function(controller, bot, message) {
+  // Not sure how this isn't tripping up the tests
   // Validate Slack verify token
   if (message.token !== VERIFY_TOKEN) {
     return bot.res.send(401, 'Unauthorized')
@@ -410,7 +400,7 @@ module.exports = function(controller, bot, message) {
       break
     case '/success':
       // mark a channel as success (and closed)
-      success(controller, bot, message)
+      success.call(controller, bot, message)
       break
     case '/logout':
       // logs out and will make your cases available to other volunteers to pick up
