@@ -90,47 +90,6 @@ function attachmentFormat(channelList) {
   }
 }
 
-function get_channel_history(channel, bot, cb) {
-  // https://github.com/howdyai/botkit/issues/840 : overwriting bot_token with app_token
-  bot.api.channels.history({token: bot.config.bot.app_token,
-                            channel: channel.id,
-                            count: 30,
-                            unreads: true},
-                            cb);
-}
-
-function channelSummary(channel, history, flags) {
-  // returns {lastFrom: ('patient'|'volunteer'),
-  //          lastTime: Date(last_message)
-  //          volunteer: <volunteer handle>
-  //         }
-  // assumes history is in reverse chronological order
-  var summary = {'id': channel.id,
-                 'name': channel.name
-                };
-  if (flags && flags.label) {
-    summary.label = flags.label
-  }
-  if (history && history.messages) {
-    for (var i=0,l=history.messages.length; i<l; i++) {
-      var h = history.messages[i];
-      if (h.subtype === 'bot_message') {
-        if (/replied/.test(h.username)) {
-          summary.lastFrom = 'volunteer'
-          summary.volunteer = h.username.replace(' replied', '')
-        } else if (h.attachments && /\/sk/.test((h.attachments[0]||{}).text || '')) {
-          summary.lastFrom = 'patient'
-        }
-        if (summary.lastFrom) {
-          summary.lastTime = new Date(Number(h.ts) * 1000)
-          return summary
-        }
-      }
-    }
-  }
-  return summary
-}
-
 function open_cases(controller, bot, message, formatter) {
   /* Should display something like this!
     CHANNEL              LAST_MESSAGE (sorted) FLAG
@@ -163,25 +122,6 @@ function open_cases(controller, bot, message, formatter) {
     }
     bot.replyPublic(message, finalMessage)
   });
-}
-
-function setChannelProperty(controller, message, property, value, cb, channel_id) {
-  channel_id = channel_id || (message.text.match(/\<\#(\w+)/) || [message.channel_id]).pop()
-  controller.storage.channels.get(channel_id, function(getErr, channel) {
-    if (getErr || !channel) {
-      channel = {'id': channel_id,
-                 'team_id': message.team_id
-                }
-    }
-    if (value === null) {
-      delete channel[property]
-    } else {
-      channel[property] = value
-    }
-    controller.storage.channels.save(channel, function(storeErr, d){
-      cb(storeErr, channel)
-    })
-  })
 }
 
 let publicMethods = module.exports = {}

@@ -1,3 +1,5 @@
+const shared = require('./shared')
+
 const assign = module.exports = {}
 
 assign.call = function(controller, bot, message, channel) {
@@ -10,7 +12,7 @@ assign.call = function(controller, bot, message, channel) {
 }
 
 function setCaseAssignment(controller, message, channel, volunteer, cb) {
-  setChannelProperty(controller, message, 'assignment', volunteer, function(err, chan) {
+  shared.setChannelProperty(controller, message, 'assignment', volunteer, function(err, chan) {
     cb(err, chan)
   }, (channel && channel.id))
 }
