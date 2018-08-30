@@ -1,6 +1,12 @@
 const slashCommands = require('../../commands/slash_handler');
+
+// These have to be outside of the parent describe block or else
+// the mocks don't work ??
 jest.mock('../../commands/success')
 const success = require('../../commands/success')
+
+jest.mock('../../commands/get_flags')
+const getFlags = require('../../commands/get_flags')
 
 describe("slash_commands",()=>{
   let mockController = {}
@@ -43,6 +49,19 @@ describe("slash_commands",()=>{
     it("calls success with controller, bot, and message",()=>{
       slashCommands.mainHandler(mockController, mockBot, mockMessage)
       expect(successSpy).toHaveBeenCalledWith(mockController, mockBot, mockMessage)
+    })
+  })
+
+  describe("/getflags",()=>{
+    let mockMessage = {
+      command: "/getflags"
+    }
+
+    let flagSpy = jest.spyOn(getFlags, "call")
+
+    it("calls success with controller, bot, and message",()=>{
+      slashCommands.mainHandler(mockController, mockBot, mockMessage)
+      expect(flagSpy).toHaveBeenCalledWith(mockController, mockBot, mockMessage, expect.any(Function))
     })
   })
 })
