@@ -2,6 +2,9 @@ const success = require('./success')
 const getFlags = require('./get_flags')
 const logOut = require('./logout')
 const flag = require('./flag')
+const assign = require('./assign')
+const nextCase = require('./next_case')
+const shared = require('./shared')
 
 const VERIFY_TOKEN = process.env.verificationToken
 
@@ -128,38 +131,6 @@ function channelSummary(channel, history, flags) {
   return summary
 }
 
-function getTeamChannelsData(controller, bot, message, cb) {
-  bot.api.channels.list({},function(err,response) {
-    getChannelsWithFlags(controller, bot, message, function(flagErr, knownChannelDict) {
-      var historiesTodo = response.channels.length;
-      var histories = {}
-      response.channels.map(function(ch) {
-        get_channel_history(ch, bot, function(historyErr, chHistory) {
-          if (!historyErr) {
-            histories[ch.id] = chHistory;
-          }
-          --historiesTodo;
-          // Here we have marshalled all the histories, and now we can
-          // show the status for each
-          if (historiesTodo <= 0) {
-            var returnValue = response.channels.map(function(ch){
-              var history = histories[ch.id]
-              var store = knownChannelDict[ch.id]
-              var summary = channelSummary(ch, history, store)
-              summary.api = ch
-              summary.history = history
-              summary.store = store
-              return summary
-            })
-            cb(returnValue)
-          }
-        })
-      })
-    })
-  })
-}
-
-
 function open_cases(controller, bot, message, formatter) {
   /* Should display something like this!
     CHANNEL              LAST_MESSAGE (sorted) FLAG
@@ -171,7 +142,7 @@ function open_cases(controller, bot, message, formatter) {
     /opencases new (just new ones)
     /opencases flag
    */
-  getTeamChannelsData(controller, bot, message, function(channelList) {
+  shared.getTeamChannelsData(controller, bot, message, function(channelList) {
     var openChannelList = [];
     for (var i = 0; i < channelList.length; i++) {
       var channel = channelList[i];
@@ -194,37 +165,6 @@ function open_cases(controller, bot, message, formatter) {
   });
 }
 
-function setCaseAssignment(controller, message, channel, volunteer, cb) {
-  setChannelProperty(controller, message, 'assignment', volunteer, function(err, chan) {
-    cb(err, chan)
-  }, (channel && channel.id))
-}
-
-function assign_case(controller, bot, message, channel) {
-  var volunteer = (message.text.match(/\<\@(\w+)/) || [message.user_id]).pop()
-  setCaseAssignment(controller, message, channel || null, volunteer, function(err, chan) {
-    if (chan) {
-      bot.replyPublic(message, '<@'+volunteer+'> assigned to <#'+chan.id+'>')
-    }
-  });
-}
-
-function next_case(controller, bot, message) {
-  var volunteer = (message.text.match(/\<\@(\w+)/) || [message.user_id]).pop()
-  getTeamChannelsData(controller, bot, message, function(channels) {
-    channels.sort(function(a,b) {return ((b.lastTime || 0) - (a.lastTime || 0)) })
-    var needsAssign = channels.filter(function(ch) {
-      return (!(ch.store && ch.store.assigned) && !ch.api.is_archived && /^sk-/.test(ch.api.name))
-    });
-    if (needsAssign.length) {
-      assign_case(controller, bot, message, needsAssign[0])
-    } else {
-      bot.replyPublic(message, 'No current cases need assignment');
-    }
-  })
-
-}
-
 function setChannelProperty(controller, message, property, value, cb, channel_id) {
   channel_id = channel_id || (message.text.match(/\<\#(\w+)/) || [message.channel_id]).pop()
   controller.storage.channels.get(channel_id, function(getErr, channel) {
@@ -242,38 +182,6 @@ function setChannelProperty(controller, message, property, value, cb, channel_id
       cb(storeErr, channel)
     })
   })
-}
-
-function getChannelsWithFlags(controller, bot, message, cb) {
-  var sendbackTeamChannels = function(err, channels) {
-    // This allows us to set the default count for a given flag to 0
-    var channelDict = {}
-
-    if (!err && channels) {
-      channels.map(function(c) {
-        // This conditional may seem redundant for .find() cases
-        // but see AUDIT note below
-        if (c.team_id == message.team_id && c.label) {
-          channelDict[c.id] = c;
-        }
-      })
-    }
-
-    cb(err, channelDict);
-  }
-  var storageChannels = controller.storage.channels
-
-  if (storageChannels.find) {
-    // not all storage backends have find()
-    // e.g. Mongodb has it, but redis does not
-    storageChannels.find({team_id: message.team_id}, sendbackTeamChannels)
-  } else {
-    // AUDIT NOTE: This channels.all gets all channels across
-    // all instances -- not just the team instance
-    // however you'll see we filter on message.team_id matching above
-    // so nothing leaks (efficiency may be another question).
-    storageChannels.all(sendbackTeamChannels)
-  }
 }
 
 let publicMethods = module.exports = {}
@@ -299,11 +207,11 @@ publicMethods.mainHandler = function(controller, bot, message) {
       break;
     case '/nextcase':
       // assign yourself the next case
-      next_case(controller, bot, message);
+      nextCase.call(controller, bot, message);
       break;
     case '/assign':
       // assign a volunteer to a particular channel
-      assign_case(controller, bot, message);
+      assign.call(controller, bot, message);
       break;
     case '/flag':
     case '/unflag':

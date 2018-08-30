@@ -14,6 +14,12 @@ const logOut = require('../../commands/logout')
 jest.mock('../../commands/flag')
 const flag = require('../../commands/flag')
 
+jest.mock('../../commands/assign')
+const assign = require('../../commands/assign')
+
+jest.mock('../../commands/next_case')
+const nextCase = require('../../commands/next_case')
+
 describe("slash_commands",()=>{
   let mockController = {}
   let mockBot = {
@@ -107,6 +113,32 @@ describe("slash_commands",()=>{
     it("calls flag with controller, bot, and message",()=>{
       slashCommands.mainHandler(mockController, mockBot, mockMessage)
       expect(flagSpy).toHaveBeenCalledWith(mockController, mockBot, mockMessage)
+    })
+  })
+
+  describe("/assign",()=>{
+    let mockMessage = {
+      command: "/assign"
+    }
+
+    let assignSpy = jest.spyOn(assign, "call")
+
+    it("calls assign with controller, bot, and message (though it takes a 4th argument)",()=>{
+      slashCommands.mainHandler(mockController, mockBot, mockMessage)
+      expect(assignSpy).toHaveBeenCalledWith(mockController, mockBot, mockMessage)
+    })
+  })
+
+  describe("/nextcase",()=>{
+    let mockMessage = {
+      command: "/nextcase"
+    }
+
+    let nextCaseSpy = jest.spyOn(nextCase, "call")
+
+    it("calls next_case with controller, bot, and message",()=>{
+      slashCommands.mainHandler(mockController, mockBot, mockMessage)
+      expect(nextCaseSpy).toHaveBeenCalledWith(mockController, mockBot, mockMessage)
     })
   })
 })
