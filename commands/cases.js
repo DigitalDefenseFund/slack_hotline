@@ -14,7 +14,11 @@ cases.call = function(controller, bot, message, format) {
     /opencases flag
    */
   let formatter = (format == 'pretty') ? attachmentFormat : tableFormat
+  // console.log('CONTROLLER', controller)
+  // console.log('BOT', bot)
+  // console.log('MESSAGE', message)
   shared.getTeamChannelsData(controller, bot, message, function(channelList) {
+    // console.log('CHANNEL LIST', channelList)
     var openChannelList = [];
     for (var i = 0; i < channelList.length; i++) {
       var channel = channelList[i];
@@ -33,6 +37,7 @@ cases.call = function(controller, bot, message, format) {
     if (openChannelList.length > 0) {
       finalMessage = formatter(openChannelList)
     }
+    console.log(finalMessage);
     bot.replyPublic(message, finalMessage)
   });
 }
@@ -59,7 +64,13 @@ function staticSpaces(string, targetLength, atBeginning) {
 
 function tableFormat(channelList) {
   var formattedList = channelList.map(function(chan) {
+    if (chan.id === 'CCJRX6SQ7') {
+      console.log('Case with a store in the db')
+      console.log(chan.store)
+    }
+    console.log("CHANNEL STORE", chan.store)
     if (chan.store && chan.store.assignment) {
+      console.log("CHAN STORE ASSIGNMENT", chan.store.assignment)
       var assignee = "<@" + chan.store.assignment+ ">"
     } else {
       var assignee = ""
@@ -86,16 +97,18 @@ function attachmentFormat(channelList) {
     // 4. unassigned & patient last spoke [red] #f50056
     var color = '#00f566' // green
     if (chan.lastFrom === 'patient') {
-      color = '#f5c400' //yellow
+      color = '#f5c400' // yellow
     }
     if (chan.label === 'needs attention') {
-      color = '#f35a00' //orange
+      color = '#f35a00' // orange
     }
     var assignee = ''
+    console.log("CHANNEL STORE", chan.store)
+    console.log("CHAN STORE ASSIGNMENT", chan.store.assignment)
     if (chan.store && chan.store.assignment) {
       assignee = "<@" + chan.store.assignment+ ">"
     } else {
-      color = '#f50056'
+      color = '#f50056' // red
     }
     return {
       fields: [
