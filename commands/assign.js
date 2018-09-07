@@ -12,7 +12,7 @@ assign.call = function(controller, bot, message, channel) {
 }
 
 function setCaseAssignment(controller, message, channel, volunteer, cb) {
-  shared.setChannelProperty(controller, message, 'assignment', volunteer, function(err, chan) {
+  shared.setChannelProperty(controller, message, 'assignment', volunteer, channel, function(err, chan) {
     cb(err, chan)
   }, (channel && channel.id))
 }

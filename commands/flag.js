@@ -13,7 +13,7 @@ flag.call = function(controller, bot, message) {
   }
   shared.setChannelProperty(
     controller, message,
-    'label', label,
+    'label', label, null,
     function(err, chan) {
       bot.replyPublic(message, message.command.slice(1) + 'ged')
     })
