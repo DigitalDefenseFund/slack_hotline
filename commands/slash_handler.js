@@ -18,7 +18,6 @@ publicMethods.mainHandler = function(controller, bot, message) {
     return bot.res.send(401, 'Unauthorized')
   }
 
-  console.log('IN THE SLASH HANDLER')
   switch (message.command) {
     case '/hello':
       bot.replyPublic(message, 'hello there')
@@ -51,7 +50,6 @@ publicMethods.mainHandler = function(controller, bot, message) {
       })
       break
     case '/success':
-      console.log('ABOUT TO CALL THE SUCCESS METHOD')
       // mark a channel as success (and closed)
       success.call(controller, bot, message)
       break

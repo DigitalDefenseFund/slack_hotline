@@ -19,6 +19,7 @@ describe("slash_commands",()=>{
   })
 
   it("handles slash_command when one detected",()=>{
+    // LOL okay this isn't testing anything *facepalm*
     expect(mockController.on('slack_command')).toBe('slash_command triggered');
   })
 })
