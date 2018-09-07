@@ -2,11 +2,23 @@ const Botmock = require('botkit-mock');
 const slashCommands = require('../../skills/slash_commands')
 
 describe('success',()=>{
+  let channelFixture = {
+    "id":"54321",
+    "team_id":"team_id_123",
+    // "assignment":"UCBR5SE87"
+  }
 
   beforeEach(()=>{
     this.controller = Botmock({});
     // type can be ‘slack’, facebook’, or null
     this.bot = this.controller.spawn({type: 'slack'});
+
+    this.controller.storage.channels.get = jest.fn((chan_id, cb)=>{
+      cb(null, channelFixture);
+    });
+
+    console.log('CONTROLLER storage channels get', this.controller.storage.channels.get)
+
     this.bot.config.bot = { app_token: 'some_token' }
     // this.bot.config = { bot: { app_token: 'some_token' } }
     slashCommands(this.controller)
@@ -34,15 +46,19 @@ describe('success',()=>{
   });
 
   it('marks the channel success, archives the channel, and notifies the user', () => {
-    return this.bot.usersInput(this.sequence).then((message) => {
-      console.log('MESSAGE IN TEST', message)
+    console.log('RET VAL OF TEST ACTION', this.bot.usersInput(this.sequence))
+    return this.bot.usersInput(this.sequence).then(() => {
+      const reply = this.bot.api.logByKey['replyPublic'][0].json;
+      console.log('REPLY', reply)
+      expect(reply.text).toBe('You have successfully closed this conversation.')
+      expect(reply.response_type).toBe('in_channel')
       // In message, we receive a full object that includes params:
       // {
       //    user: 'someUserId',
       //    channel: 'someChannel',
       //    text: 'help message',
       // }
-      return expect(message.text).toBe('You have successfully closed this conversation.');
+      //return expect(message.text).toBe('You have successfully closed this conversation.');
     })
   });
 })
