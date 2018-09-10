@@ -164,4 +164,10 @@ describe('assign',()=>{
       })
     })
   })
+
+  describe('when called from #general channel',()=>{
+    it("sets the provided flag for the channel provided",()=>{
+      // TODO -- https://trello.com/c/V6SBmMmZ
+    })
+  })
 })
