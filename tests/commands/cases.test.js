@@ -2,11 +2,6 @@ const Botmock = require('botkit-mock');
 const slashCommands = require('../../skills/slash_commands')
 
 describe("cases",()=>{
-  // flagged case
-  // assigned case
-  // flagged and assigned case
-  // unflagged, unassigned case
-  // archived case
   let flaggedCase = {
     storage: {
       "team_id":"team_id_123",
@@ -59,7 +54,28 @@ describe("cases",()=>{
       is_archived: false,
     },
     history: {
-      messages: []
+      messages: [
+        {
+          username: 'Sassy Bug',
+          // This is what a reply from a patient via smooch looks like in Slack
+          attachments: {
+            fallback: 'Text from the patient',
+            text: 'Use `/sk [text]` to reply',
+            pretext: 'Text from the patient',
+            id: 1,
+            color: 'a24cb5',
+            mrkdwn_in: [ 'text', 'pretext' ]
+          },
+          subtype: 'bot_message',
+          ts: '1535601624.000100'
+        },
+        {
+          text: 'hellloooo',
+          username: 'nicole replied',
+          subtype: 'bot_message',
+          ts: '1535601624.000100'
+        }
+      ]
     }
   }
 
@@ -77,7 +93,28 @@ describe("cases",()=>{
       is_archived: false
     },
     history: {
-      messages: []
+      messages: [
+        {
+          username: 'Menacing Buffalo',
+          // This is what a reply from a patient via smooch looks like in Slack
+          attachments: {
+            fallback: 'Text from the patient',
+            text: 'Use `/sk [text]` to reply',
+            pretext: 'Text from the patient',
+            id: 1,
+            color: 'a24cb5',
+            mrkdwn_in: [ 'text', 'pretext' ]
+          },
+          subtype: 'bot_message',
+          ts: '1535601624.000100'
+        },
+        {
+          text: 'hellloooo',
+          username: 'some_user replied',
+          subtype: 'bot_message',
+          ts: '1535601624.000100'
+        }
+      ]
     }
   }
 
@@ -93,7 +130,28 @@ describe("cases",()=>{
       is_archived: false
     },
     history: {
-      messages: []
+      messages: [
+        {
+          text: 'hellloooo',
+          username: 'nicole replied',
+          subtype: 'bot_message',
+          ts: '1535601624.000100'
+        },
+        {
+          username: 'Wobbly Lizard',
+          // This is what a reply from a patient via smooch looks like in Slack
+          attachments: {
+            fallback: 'Text from the patient',
+            text: 'Use `/sk [text]` to reply',
+            pretext: 'Text from the patient',
+            id: 1,
+            color: 'a24cb5',
+            mrkdwn_in: [ 'text', 'pretext' ]
+          },
+          subtype: 'bot_message',
+          ts: '1535601624.000100'
+        }
+      ]
     }
   }
 
@@ -110,7 +168,28 @@ describe("cases",()=>{
       is_archived: true
     },
     history: {
-      messages: []
+      messages: [
+        {
+          text: 'hellloooo',
+          username: 'nicole replied',
+          subtype: 'bot_message',
+          ts: '1535601624.000100'
+        },
+        {
+          username: 'Hungry Antelope',
+          // This is what a reply from a patient via smooch looks like in Slack
+          attachments: {
+            fallback: 'Text from the patient',
+            text: 'Use `/sk [text]` to reply',
+            pretext: 'Text from the patient',
+            id: 1,
+            color: 'a24cb5',
+            mrkdwn_in: [ 'text', 'pretext' ]
+          },
+          subtype: 'bot_message',
+          ts: '1535601624.000100'
+        }
+      ]
     }
   }
 
@@ -174,19 +253,20 @@ describe("cases",()=>{
   })
 
   describe('When current cases exist',()=>{
-    // final message
-    // let expectedFinalMsg = '```'
-    // expectedFinalMsg += ```Open Cases:
-    // Last Message            Flag               Assignee           Channel
-    // volunteer 8/21 23:33    more urgent                           <#CCCMUN3A7>
-    // volunteer 8/21 13:28                                          <#CCCP5GABX>
-    // volunteer 8/29 16:59    flashy bee                            <#CCJRX6SQ7>```
-    // expectedFinalMsg += '```'
+    let expectedFinalMsg = '```'
+    expectedFinalMsg += `Open Cases:
+    Last Message            Flag               Assignee           Channel
+    volunteer 8/29 23:00    flag here!                            <#flagMcCase123>
+    patient 8/29 23:00                         <@someUsersId>     <#assignedCase666>
+    patient 8/29 23:00      urgent             <@someUsersId>     <#flagsAssignsMcGee>
+    volunteer 8/29 23:00                                          <#plainCase321>
+    `
+    expectedFinalMsg += '```'
 
     it('displays cases in a table format',()=>{
       return this.bot.usersInput(this.sequence).then(() => {
         const reply = this.bot.api.logByKey['replyPublic'][0].json;
-        expect(reply.text).toBe('blah')
+        expect(reply.text).toBe(expectedFinalMsg)
       })
     })
   })
