@@ -1,148 +1,193 @@
 const Botmock = require('botkit-mock');
-const cases = require('../../commands/cases')
+const slashCommands = require('../../skills/slash_commands')
 
 describe("cases",()=>{
-  let mockCtlr = {}
-  let mockBot = {}
-  let mockMsg = {}
-
-  // channel obj from channel list
-  let flaggedChannel = {
-    id: 'CCJRX6SQ7',
-    name: 'sk-flashy-bee',
-    label: 'urgent',
-    lastFrom: 'volunteer',
-    volunteer: 'nicole',
-    lastTime: '2018-08-29T21:59:24.000Z',
-    api: { 
-      id: 'CCJRX6SQ7',
+  // flagged case
+  // assigned case
+  // flagged and assigned case
+  // unflagged, unassigned case
+  // archived case
+  let flaggedCase = {
+    storage: {
+      "team_id":"team_id_123",
+      "id":"flagMcCase123",
+      "label":"flag here!"
+    },
+    api: {
+      id: 'flagMcCase123',
       name: 'sk-flashy-bee',
       is_channel: true,
-      created: 1535579938,
       is_archived: false,
-      is_general: false,
-      unlinked: 0,
-      creator: 'UCBR5SE87',
-      name_normalized: 'sk-flashy-bee',
-      is_shared: false,
-      is_org_shared: false,
-      is_member: false,
-      is_private: false,
-      is_mpim: false,
-      members: [Array],
-      topic: [Object],
-      purpose: [Object],
-      previous_names: [],
-      num_members: 1
     },
-    history: { 
-      ok: true,
-      messages: [Array],
-      has_more: false,
-      unread_count_display: 0
-    },
-    store: {
-      id: 'CCJRX6SQ7', team_id: 'T7H1WH329', label: 'urgent'
+    history: {
+      // Volunteer replied last
+      messages: [
+        {
+          text: 'hellloooo',
+          username: 'nicole replied',
+          subtype: 'bot_message',
+          ts: '1535601624.000100'
+        },
+        {
+          username: 'Flashy Bee',
+          // This is what a reply from a patient via smooch looks like in Slack
+          attachments: {
+            fallback: 'Another pigeon flight',
+            text: 'Use `/sk [text]` to reply',
+            pretext: 'Another pigeon flight',
+            id: 1,
+            color: 'a24cb5',
+            mrkdwn_in: [ 'text', 'pretext' ]
+          },
+          subtype: 'bot_message',
+          ts: '1535601624.000100'
+        }
+      ]
     }
   }
 
-  let archivedChannel = {
-    id: 'DDTYX6PO7',
-    name: 'sk-sassy-bug',
-    label: '',
-    lastFrom: 'volunteer',
-    volunteer: 'nicole',
-    lastTime: '2018-08-29T21:59:24.000Z',
-    api: { 
-      id: 'DDTYX6PO7',
+  let assignedCase = {
+    storage: {
+      "team_id":"team_id_123",
+      "id":"assignedCase666",
+      "assignment":"someUsersId"
+    },
+    api: {
+      id: 'assignedCase666',
       name: 'sk-sassy-bug',
       is_channel: true,
-      created: 1535579938,
-      is_archived: true,
-      is_general: false,
-      unlinked: 0,
-      creator: 'UCBR5SE87',
-      name_normalized: 'sk-sassy-bug',
-      is_shared: false,
-      is_org_shared: false,
-      is_member: false,
-      is_private: false,
-      is_mpim: false,
-      members: [Array],
-      topic: [Object],
-      purpose: [Object],
-      previous_names: [],
-      num_members: 1
-    },
-    history: { 
-      ok: true,
-      messages: [Array],
-      has_more: false,
-      unread_count_display: 0
-    }
-  }
-
-  let assignedChannel = {
-    id: 'NMUPX6VC7',
-    name: 'sk-seabass-cat',
-    label: '',
-    lastFrom: 'patient',
-    volunteer: 'nicole',
-    lastTime: '2018-08-29T21:59:24.000Z',
-    api: { 
-      id: 'NMUPX6VC7',
-      name: 'sk-seabass-cat',
-      is_channel: true,
-      created: 1535579938,
       is_archived: false,
-      is_general: false,
-      unlinked: 0,
-      creator: 'UCBR5SE87',
-      name_normalized: 'sk-seabass-cat',
-      is_shared: false,
-      is_org_shared: false,
-      is_member: false,
-      is_private: false,
-      is_mpim: false,
-      members: [Array],
-      topic: [Object],
-      purpose: [Object],
-      previous_names: [],
-      num_members: 1
     },
-    history: { 
-      ok: true,
-      messages: [Array],
-      has_more: false,
-      unread_count_display: 0
-    },
-    store: {
-      id: 'NMUPX6VC7', team_id: 'T7H1WH329', assignment: 'UCBR5SE87'
+    history: {
+      messages: []
     }
   }
 
-  // final message
-  let finalMsg = '```'
-  finalMsg += ```Open Cases:
-  Last Message            Flag               Assignee           Channel
-  volunteer 8/21 23:33    more urgent                           <#CCCMUN3A7>
-  volunteer 8/21 13:28                                          <#CCCP5GABX>
-  volunteer 8/29 16:59    flashy bee                            <#CCJRX6SQ7>```
-  finalMsg += '```'
+  let flaggedAssignedCase = {
+    storage: {
+      "team_id":"team_id_123",
+      "id":"flagsAssignsMcGee",
+      "assignment":"someUsersId",
+      "label":"urgent"
+    },
+    api: {
+      id: 'flagsAssignsMcGee',
+      name: 'sk-menacing-buffalo',
+      is_channel: true,
+      is_archived: false
+    },
+    history: {
+      messages: []
+    }
+  }
 
-  describe("When format is pretty",()=>{
-    it("uses the attachment format",()=>{
+  let unflaggedUnassignedCase = {
+    storage: {
+      "team_id":"team_id_123",
+      "id":"plainCase321"
+    },
+    api: {
+      id: 'plainCase321',
+      name: 'sk-wobbly-lizard',
+      is_channel: true,
+      is_archived: false
+    },
+    history: {
+      messages: []
+    }
+  }
 
-    })
+  // Note -- in db storage, there"s no way of seeing that a channel was archived
+  let archivedCase = {
+    storage: {
+      "team_id":"team_id_123",
+      "id":"archivedCase888"
+    },
+    api: {
+      id: 'archivedCase888',
+      name: 'sk-hungry-antelope',
+      is_channel: true,
+      is_archived: true
+    },
+    history: {
+      messages: []
+    }
+  }
 
-    // colors:
-    // 1. assigned [green] #00f566
-    // 2. patient last spoke [yellow] #f5c400
-    // 3. needs attention [orange] #f35a00
-    // 4. unassigned & patient last spoke [red] #f50056
+  let allCases = [flaggedCase, assignedCase, flaggedAssignedCase, unflaggedUnassignedCase, archivedCase]
+
+  let channelsFromStorage = []
+  let channelsFromApi = []
+  allCases.map((c)=>{
+    channelsFromStorage.push(c.storage)
+    channelsFromApi.push(c.api)
   })
 
-  describe("When format is NOT pretty",()=>{
-    it("placeholder",()=>{})
+  beforeEach(()=>{
+    this.controller = Botmock({});
+
+    this.controller.storage.channels.all = jest.fn((callback)=>{
+      return callback(null, channelsFromStorage)
+    })
+
+    this.bot = this.controller.spawn({type: 'slack'});
+    this.bot.config.bot = { app_token: 'some_token' }
+
+    this.bot.api.channels.list = jest.fn(({}, callback)=>{
+      return callback(null, {channels: channelsFromApi})
+    })
+
+    this.bot.api.channels.history = jest.fn(({}, callback)=>{
+      return callback(null, null)
+    }).mockImplementationOnce(({}, callback)=>{
+      return callback(null, flaggedCase.history)
+    }).mockImplementationOnce(({}, callback)=>{
+      return callback(null, assignedCase.history)
+    }).mockImplementationOnce(({}, callback)=>{
+      return callback(null, flaggedAssignedCase.history)
+    }).mockImplementationOnce(({}, callback)=>{
+      return callback(null, unflaggedUnassignedCase.history)
+    }).mockImplementationOnce(({}, callback)=>{
+      return callback(null, archivedCase.history)
+    })
+
+    slashCommands(this.controller)
+
+    this.sequence = [
+      {
+        type: 'slash_command',
+        user: '12345',
+        channel: 'general',
+        messages: [
+          {
+            command: '/cases',
+            text: '',
+            actions: [{
+              name: 'action',
+              value: 'test'
+            }],
+            isAssertion: true,
+          }
+        ]
+      }
+    ];
+  })
+
+  describe('When current cases exist',()=>{
+    // final message
+    // let expectedFinalMsg = '```'
+    // expectedFinalMsg += ```Open Cases:
+    // Last Message            Flag               Assignee           Channel
+    // volunteer 8/21 23:33    more urgent                           <#CCCMUN3A7>
+    // volunteer 8/21 13:28                                          <#CCCP5GABX>
+    // volunteer 8/29 16:59    flashy bee                            <#CCJRX6SQ7>```
+    // expectedFinalMsg += '```'
+
+    it('displays cases in a table format',()=>{
+      return this.bot.usersInput(this.sequence).then(() => {
+        const reply = this.bot.api.logByKey['replyPublic'][0].json;
+        expect(reply.text).toBe('blah')
+      })
+    })
   })
 })

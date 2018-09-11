@@ -9,7 +9,7 @@ describe('flag',()=>{
 
   beforeEach(()=>{
     this.controller = Botmock({});
-    this.controller.storage.channels.save(channelFixture, function(err, respponse){
+    this.controller.storage.channels.save(channelFixture, function(err, response){
       if (err) { console.log('Something went wrong with test setup') }
     })
 
