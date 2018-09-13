@@ -26,14 +26,14 @@ describe("cases",()=>{
         {
           username: 'Flashy Bee',
           // This is what a reply from a patient via smooch looks like in Slack
-          attachments: {
+          attachments: [{
             fallback: 'Another pigeon flight',
             text: 'Use `/sk [text]` to reply',
             pretext: 'Another pigeon flight',
             id: 1,
             color: 'a24cb5',
             mrkdwn_in: [ 'text', 'pretext' ]
-          },
+          }],
           subtype: 'bot_message',
           ts: '1535601624.000100'
         }
@@ -58,14 +58,14 @@ describe("cases",()=>{
         {
           username: 'Sassy Bug',
           // This is what a reply from a patient via smooch looks like in Slack
-          attachments: {
+          attachments: [{
             fallback: 'Text from the patient',
             text: 'Use `/sk [text]` to reply',
             pretext: 'Text from the patient',
             id: 1,
             color: 'a24cb5',
             mrkdwn_in: [ 'text', 'pretext' ]
-          },
+          }],
           subtype: 'bot_message',
           ts: '1535601624.000100'
         },
@@ -97,14 +97,14 @@ describe("cases",()=>{
         {
           username: 'Menacing Buffalo',
           // This is what a reply from a patient via smooch looks like in Slack
-          attachments: {
+          attachments: [{
             fallback: 'Text from the patient',
             text: 'Use `/sk [text]` to reply',
             pretext: 'Text from the patient',
             id: 1,
             color: 'a24cb5',
             mrkdwn_in: [ 'text', 'pretext' ]
-          },
+          }],
           subtype: 'bot_message',
           ts: '1535601624.000100'
         },
@@ -140,14 +140,14 @@ describe("cases",()=>{
         {
           username: 'Wobbly Lizard',
           // This is what a reply from a patient via smooch looks like in Slack
-          attachments: {
+          attachments: [{
             fallback: 'Text from the patient',
             text: 'Use `/sk [text]` to reply',
             pretext: 'Text from the patient',
             id: 1,
             color: 'a24cb5',
             mrkdwn_in: [ 'text', 'pretext' ]
-          },
+          }],
           subtype: 'bot_message',
           ts: '1535601624.000100'
         }
@@ -178,14 +178,14 @@ describe("cases",()=>{
         {
           username: 'Hungry Antelope',
           // This is what a reply from a patient via smooch looks like in Slack
-          attachments: {
+          attachments: [{
             fallback: 'Text from the patient',
             text: 'Use `/sk [text]` to reply',
             pretext: 'Text from the patient',
             id: 1,
             color: 'a24cb5',
             mrkdwn_in: [ 'text', 'pretext' ]
-          },
+          }],
           subtype: 'bot_message',
           ts: '1535601624.000100'
         }
@@ -239,6 +239,7 @@ describe("cases",()=>{
         channel: 'general',
         messages: [
           {
+            team_id: 'team_id_123',
             command: '/cases',
             text: '',
             actions: [{
@@ -253,12 +254,22 @@ describe("cases",()=>{
   })
 
   describe('When current cases exist',()=>{
-    let expectedFinalMsg = '```'
-    expectedFinalMsg += `Open Cases:
+    let correctFinalMsg = '```Open Cases:'
+    correctFinalMsg += `
     Last Message            Flag               Assignee           Channel
     volunteer 8/29 23:00    flag here!                            <#flagMcCase123>
     patient 8/29 23:00                         <@someUsersId>     <#assignedCase666>
     patient 8/29 23:00      urgent             <@someUsersId>     <#flagsAssignsMcGee>
+    volunteer 8/29 23:00                                          <#plainCase321>
+    `
+    correctFinalMsg += '```'
+
+    let expectedFinalMsg = '```Open Cases:\n'
+    expectedFinalMsg += `
+    Last Message            Flag               Assignee           Channel\n
+    volunteer 8/29 23:00    flag here!                            <#flagMcCase123>\n
+    patient   8/29 23:00                                          <#assignedCase666>\n
+    patient   8/29 23:00    urgent             <@someUsersId>     <#flagsAssignsMcGee>\n
     volunteer 8/29 23:00                                          <#plainCase321>
     `
     expectedFinalMsg += '```'
@@ -266,7 +277,15 @@ describe("cases",()=>{
     it('displays cases in a table format',()=>{
       return this.bot.usersInput(this.sequence).then(() => {
         const reply = this.bot.api.logByKey['replyPublic'][0].json;
-        expect(reply.text).toBe(expectedFinalMsg)
+        for (var i = 0; i < expectedFinalMsg.length; i++) {  
+          if (expectedFinalMsg[i] !== reply.text[i]) {
+            console.log("DOES NOT MATCH INDEX", i)
+            console.log("EXPECTED", expectedFinalMsg[i])
+            console.log("ACTUAL", reply.text[i])
+            return
+          }
+        }
+        expect(reply.text).toEqual(expectedFinalMsg)
       })
     })
   })

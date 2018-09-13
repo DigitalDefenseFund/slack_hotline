@@ -1,7 +1,7 @@
 let sharedFunctions = module.exports
 
 sharedFunctions.setChannelProperty = function(controller, message, property, value, channel_id, cb) {
-  channel_id = channel_id || (message.text.match(/\<\#(\w+)/) || [message.channel_id]).pop()
+  channel_id = channel_id || (message.text.match(/\<\#(\w+)/) || [message.channel]).pop()
   controller.storage.channels.get(channel_id, function(getErr, channel) {
     if (getErr || !channel) {
       channel = {
@@ -14,7 +14,7 @@ sharedFunctions.setChannelProperty = function(controller, message, property, val
     } else {
       channel[property] = value
     }
-    controller.storage.channels.save(channel, function(storeErr, d){
+    controller.storage.channels.save(channel, function(storeErr, savedChannel){
       cb(storeErr, channel)
     })
   })
@@ -114,12 +114,15 @@ function channelSummary(channel, history, flags) {
       if (h.subtype === 'bot_message') {
         if (/replied/.test(h.username)) {
           summary.lastFrom = 'volunteer'
+          // TODO -- remove the below line... pretty sure we don't use the summary.volunteer
           summary.volunteer = h.username.replace(' replied', '')
         } else if (h.attachments && /\/sk/.test((h.attachments[0]||{}).text || '')) {
           summary.lastFrom = 'patient'
         }
         if (summary.lastFrom) {
           summary.lastTime = new Date(Number(h.ts) * 1000)
+          // Should the below line be outside of this if? It would only return the
+          // summary if there's a lastFrom?
           return summary
         }
       }
