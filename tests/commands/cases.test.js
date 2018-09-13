@@ -254,37 +254,18 @@ describe("cases",()=>{
   })
 
   describe('When current cases exist',()=>{
-    let correctFinalMsg = '```Open Cases:'
-    correctFinalMsg += `
-    Last Message            Flag               Assignee           Channel
-    volunteer 8/29 23:00    flag here!                            <#flagMcCase123>
-    patient 8/29 23:00                         <@someUsersId>     <#assignedCase666>
-    patient 8/29 23:00      urgent             <@someUsersId>     <#flagsAssignsMcGee>
-    volunteer 8/29 23:00                                          <#plainCase321>
-    `
-    correctFinalMsg += '```'
-
-    let expectedFinalMsg = '```Open Cases:\n'
+    let expectedFinalMsg = '```Open Cases:'
     expectedFinalMsg += `
-    Last Message            Flag               Assignee           Channel\n
-    volunteer 8/29 23:00    flag here!                            <#flagMcCase123>\n
-    patient   8/29 23:00                                          <#assignedCase666>\n
-    patient   8/29 23:00    urgent             <@someUsersId>     <#flagsAssignsMcGee>\n
-    volunteer 8/29 23:00                                          <#plainCase321>
-    `
+Last Message            Flag               Assignee           Channel
+volunteer 8/29 23:00    flag here!                            <#flagMcCase123>
+patient   8/29 23:00                                          <#assignedCase666>
+patient   8/29 23:00    urgent             <@someUsersId>     <#flagsAssignsMcGee>
+volunteer 8/29 23:00                                          <#plainCase321>`
     expectedFinalMsg += '```'
 
     it('displays cases in a table format',()=>{
       return this.bot.usersInput(this.sequence).then(() => {
         const reply = this.bot.api.logByKey['replyPublic'][0].json;
-        for (var i = 0; i < expectedFinalMsg.length; i++) {  
-          if (expectedFinalMsg[i] !== reply.text[i]) {
-            console.log("DOES NOT MATCH INDEX", i)
-            console.log("EXPECTED", expectedFinalMsg[i])
-            console.log("ACTUAL", reply.text[i])
-            return
-          }
-        }
         expect(reply.text).toEqual(expectedFinalMsg)
       })
     })
