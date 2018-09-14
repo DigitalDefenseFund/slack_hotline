@@ -21,12 +21,13 @@ sharedFunctions.setChannelProperty = function(controller, message, property, val
 }
 
 sharedFunctions.getTeamChannelsData = function(controller, bot, message, cb) {
+  // could break out this callback into a separate method so can stub out the return value of bot.api.channels.list ?
   bot.api.channels.list({},function(err,response) {
-    getChannelsWithFlags(controller, bot, message, function(flagErr, knownChannelDict) {
+    getKnownChannels(controller, bot, message, function(flagErr, knownChannelDict) {
       var historiesTodo = response.channels.length;
       var histories = {}
       response.channels.map(function(ch) {
-        get_channel_history(ch, bot, function(historyErr, chHistory) {
+        getChannelHistory(ch, bot, function(historyErr, chHistory) {
           if (!historyErr) {
             histories[ch.id] = chHistory;
           }
@@ -53,7 +54,7 @@ sharedFunctions.getTeamChannelsData = function(controller, bot, message, cb) {
 
 // Private Helpers
 
-function getChannelsWithFlags(controller, bot, message, cb) {
+function getKnownChannels(controller, bot, message, cb) {
   var sendbackTeamChannels = function(err, channels) {
     // This allows us to set the default count for a given flag to 0
     var channelDict = {}
@@ -62,12 +63,11 @@ function getChannelsWithFlags(controller, bot, message, cb) {
       channels.map(function(c) {
         // This conditional may seem redundant for .find() cases
         // but see AUDIT note below
-        if (c.team_id == message.team_id && c.label) {
+        if (c.team_id == message.team_id) {
           channelDict[c.id] = c;
         }
       })
     }
-
     cb(err, channelDict);
   }
   var storageChannels = controller.storage.channels
@@ -85,9 +85,7 @@ function getChannelsWithFlags(controller, bot, message, cb) {
   }
 }
 
-// UNUSED
-
-function get_channel_history(channel, bot, cb) {
+function getChannelHistory(channel, bot, cb) {
   // https://github.com/howdyai/botkit/issues/840 : overwriting bot_token with app_token
   bot.api.channels.history({token: bot.config.bot.app_token,
                             channel: channel.id,

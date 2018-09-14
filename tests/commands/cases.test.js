@@ -193,72 +193,118 @@ describe("cases",()=>{
     }
   }
 
-  let allCases = [flaggedCase, assignedCase, flaggedAssignedCase, unflaggedUnassignedCase, archivedCase]
+  describe('When no current cases exist',()=>{
+    beforeEach(()=>{
+      this.controller = Botmock({});
 
-  let channelsFromStorage = []
-  let channelsFromApi = []
-  allCases.map((c)=>{
-    channelsFromStorage.push(c.storage)
-    channelsFromApi.push(c.api)
-  })
+      this.controller.storage.channels.all = jest.fn((callback)=>{
+        return callback(null, [archivedCase.storage])
+      })
 
-  beforeEach(()=>{
-    this.controller = Botmock({});
+      this.bot = this.controller.spawn({type: 'slack'});
+      this.bot.config.bot = { app_token: 'some_token' }
 
-    this.controller.storage.channels.all = jest.fn((callback)=>{
-      return callback(null, channelsFromStorage)
+      this.bot.api.channels.list = jest.fn(({}, callback)=>{
+        return callback(null, {channels: [archivedCase.api]})
+      })
+
+      slashCommands(this.controller)
+
+      this.sequence = [
+        {
+          type: 'slash_command',
+          user: '12345',
+          channel: 'general',
+          messages: [
+            {
+              team_id: 'team_id_123',
+              command: '/cases',
+              text: '',
+              actions: [{
+                name: 'action',
+                value: 'test'
+              }],
+              isAssertion: true,
+            }
+          ]
+        }
+      ];
     })
 
-    this.bot = this.controller.spawn({type: 'slack'});
-    this.bot.config.bot = { app_token: 'some_token' }
-
-    this.bot.api.channels.list = jest.fn(({}, callback)=>{
-      return callback(null, {channels: channelsFromApi})
+    it('returns a message that no cases exist',()=>{
+      return this.bot.usersInput(this.sequence).then(() => {
+        const reply = this.bot.api.logByKey['replyPublic'][0].json;
+        expect(reply.text).toEqual('There are no open cases right now.')
+      })
     })
-
-    this.bot.api.channels.history = jest.fn(({}, callback)=>{
-      return callback(null, null)
-    }).mockImplementationOnce(({}, callback)=>{
-      return callback(null, flaggedCase.history)
-    }).mockImplementationOnce(({}, callback)=>{
-      return callback(null, assignedCase.history)
-    }).mockImplementationOnce(({}, callback)=>{
-      return callback(null, flaggedAssignedCase.history)
-    }).mockImplementationOnce(({}, callback)=>{
-      return callback(null, unflaggedUnassignedCase.history)
-    }).mockImplementationOnce(({}, callback)=>{
-      return callback(null, archivedCase.history)
-    })
-
-    slashCommands(this.controller)
-
-    this.sequence = [
-      {
-        type: 'slash_command',
-        user: '12345',
-        channel: 'general',
-        messages: [
-          {
-            team_id: 'team_id_123',
-            command: '/cases',
-            text: '',
-            actions: [{
-              name: 'action',
-              value: 'test'
-            }],
-            isAssertion: true,
-          }
-        ]
-      }
-    ];
   })
 
   describe('When current cases exist',()=>{
+    let allCases = [flaggedCase, assignedCase, flaggedAssignedCase, unflaggedUnassignedCase, archivedCase]
+
+    let channelsFromStorage = []
+    let channelsFromApi = []
+    allCases.map((c)=>{
+      channelsFromStorage.push(c.storage)
+      channelsFromApi.push(c.api)
+    })
+
+    beforeEach(()=>{
+      this.controller = Botmock({});
+
+      this.controller.storage.channels.all = jest.fn((callback)=>{
+        return callback(null, channelsFromStorage)
+      })
+
+      this.bot = this.controller.spawn({type: 'slack'});
+      this.bot.config.bot = { app_token: 'some_token' }
+
+      this.bot.api.channels.list = jest.fn(({}, callback)=>{
+        return callback(null, {channels: channelsFromApi})
+      })
+
+      this.bot.api.channels.history = jest.fn(({}, callback)=>{
+        return callback(null, null)
+      }).mockImplementationOnce(({}, callback)=>{
+        return callback(null, flaggedCase.history)
+      }).mockImplementationOnce(({}, callback)=>{
+        return callback(null, assignedCase.history)
+      }).mockImplementationOnce(({}, callback)=>{
+        return callback(null, flaggedAssignedCase.history)
+      }).mockImplementationOnce(({}, callback)=>{
+        return callback(null, unflaggedUnassignedCase.history)
+      }).mockImplementationOnce(({}, callback)=>{
+        return callback(null, archivedCase.history)
+      })
+
+      slashCommands(this.controller)
+
+      this.sequence = [
+        {
+          type: 'slash_command',
+          user: '12345',
+          channel: 'general',
+          messages: [
+            {
+              team_id: 'team_id_123',
+              command: '/cases',
+              text: '',
+              actions: [{
+                name: 'action',
+                value: 'test'
+              }],
+              isAssertion: true,
+            }
+          ]
+        }
+      ];
+    })
+
     let expectedFinalMsg = '```Open Cases:'
     expectedFinalMsg += `
 Last Message            Flag               Assignee           Channel
 volunteer 8/29 23:00    flag here!                            <#flagMcCase123>
-patient   8/29 23:00                                          <#assignedCase666>
+patient   8/29 23:00                       <@someUsersId>     <#assignedCase666>
 patient   8/29 23:00    urgent             <@someUsersId>     <#flagsAssignsMcGee>
 volunteer 8/29 23:00                                          <#plainCase321>`
     expectedFinalMsg += '```'
