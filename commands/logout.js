@@ -9,12 +9,12 @@ logOut.call = function (controller, bot, message){
       if(item.members.includes(user)){
         userChannels.push(item.id)
       }
-     })
-     userChannels.forEach((channel)=> {
-       bot.api.channels.leave({token:bot.config.bot.app_token, channel: channel, user: user}, function(err,response){
-         // console.log(err, response)
-       })
-     })
-     bot.replyPublic(message, 'You have logged out! Thank you so much for volunteering your time - you are so appreciated!')
+    })
+    userChannels.forEach((channel)=> {
+      bot.api.channels.leave({token:bot.config.bot.app_token, channel: channel, user: user}, function(err,response){
+        // console.log(err, response)
+      })
+    })
+    bot.replyPublic(message, 'You have logged out! Thank you so much for volunteering your time - you are so appreciated!')
   })
 }
