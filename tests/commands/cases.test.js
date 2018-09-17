@@ -278,7 +278,18 @@ describe("cases",()=>{
       })
 
       slashCommands(this.controller)
+    })
 
+    let expectedFinalMsg = '```Open Cases:'
+    expectedFinalMsg += `
+Last Message            Flag               Assignee           Channel
+volunteer 8/29 23:00    flag here!                            <#flagMcCase123>
+patient   8/29 23:00                       <@someUsersId>     <#assignedCase666>
+patient   8/29 23:00    urgent             <@someUsersId>     <#flagsAssignsMcGee>
+volunteer 8/29 23:00                                          <#plainCase321>`
+    expectedFinalMsg += '```'
+
+    it('displays cases in a table format',()=>{
       this.sequence = [
         {
           type: 'slash_command',
@@ -298,18 +309,7 @@ describe("cases",()=>{
           ]
         }
       ];
-    })
 
-    let expectedFinalMsg = '```Open Cases:'
-    expectedFinalMsg += `
-Last Message            Flag               Assignee           Channel
-volunteer 8/29 23:00    flag here!                            <#flagMcCase123>
-patient   8/29 23:00                       <@someUsersId>     <#assignedCase666>
-patient   8/29 23:00    urgent             <@someUsersId>     <#flagsAssignsMcGee>
-volunteer 8/29 23:00                                          <#plainCase321>`
-    expectedFinalMsg += '```'
-
-    it('displays cases in a table format',()=>{
       return this.bot.usersInput(this.sequence).then(() => {
         const reply = this.bot.api.logByKey['replyPublic'][0].json;
         expect(reply.text).toEqual(expectedFinalMsg)

@@ -80,10 +80,10 @@ function tableFormat(channelList) {
 function attachmentFormat(channelList) {
   var formattedList = channelList.map(function(chan) {
     // colors:
-    // 1. assigned [green] #00f566
+    // 1. assigned, not flagged 'needs attention', volunteer responded [green] #00f566
     // 2. patient last spoke [yellow] #f5c400
     // 3. needs attention [orange] #f35a00
-    // 4. unassigned & patient last spoke [red] #f50056
+    // 4. unassigned [red] #f50056
     var color = '#00f566' // green
     if (chan.lastFrom === 'patient') {
       color = '#f5c400' // yellow
