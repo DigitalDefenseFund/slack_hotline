@@ -2,7 +2,7 @@
 Insert test build badge here. (Will be addressed in this task - https://trello.com/c/yptFCLY3)
 
 ## How it Works
-Pigeon is a case management Slack app that allows volunteers to manage a text/chat hotline. Clients text a hotline number, Pigeon opens up a case and a conversation with the client via a chat channel.
+Pigeon is a case management Slack app that allows volunteers to manage a text/chat hotline. Clients text a hotline number, and Pigeon opens up a case and a conversation with the client via a chat channel. Pigeon also provides some custom commands for case management.
 
 Try it out by joining our [sandbox pigeon slack here](https://join.slack.com/t/ddf-hotline-sandbox/shared_invite/enQtNDM3ODQzNTY5Mzk1LTc5ZDA1MmI5N2E3MDdmMWJkZWQ2NDJiMTVmOWM3ZDBkYmI1OTBlZTJiMjRhYTg1ODg0ZDk2NjAwZjhmMTQxN2I). The hotline number you can text is pinned to the #general channel and is also in subject line of the slack.
 
