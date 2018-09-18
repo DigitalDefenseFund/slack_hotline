@@ -2,7 +2,7 @@ version: 2 # use CircleCI 2.0
 jobs: # a collection of steps
   build: # runs not using Workflows must have a `build` job as entry point
     environment:
-      TZ: "/usr/share/zoneinfo/America/Chicago"
+      TZ: "/usr/share/zoneinfo/America/New_York"
     working_directory: ~/mern-starter # directory where steps will run
     docker: # run the steps with Docker
       - image: circleci/node:10.9.0 # ...with this image as the primary container; this is where all `steps` will run
