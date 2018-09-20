@@ -4,14 +4,16 @@
   "description": "A slack bot for handling channels delegated to volunteer",
   "main": "bot.js",
   "scripts": {
-    "start": "node bot.js"
+    "start": "node bot.js",
+    "test": "jest"
   },
   "dependencies": {
     "body-parser": "^1.15.2",
     "botkit": "^0.6",
+    "botkit-mock": "^0.1.11",
     "botkit-storage-mongo": "^1.0.6",
     "botkit-storage-redis": "^1.0.6",
-    "dashbot": "0.7.4",
+    "dashbot": "^9.9.2",
     "debug": "^2.3.3",
     "express": "^4.14.0",
     "node-env-file": "^0.1.8",
@@ -19,7 +21,9 @@
     "request": "^2.79.0",
     "wordfilter": "^0.2.6"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "jest": "^23.5.0"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/CyberSecurityFund/slack-hotline.git"
