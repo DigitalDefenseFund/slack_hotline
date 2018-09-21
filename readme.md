@@ -1,8 +1,10 @@
-# Pigeon
-Insert test build badge here. (Will be addressed in this task - https://trello.com/c/yptFCLY3)
+# Carrier Pigeon
+[![CircleCI](https://circleci.com/gh/DigitalDefenseFund/slack_hotline/tree/master.svg?style=svg)](https://circleci.com/gh/DigitalDefenseFund/slack_hotline/tree/master)
+
+Originating at an [Abortion Access Hackathon](https://github.com/AbortionAccessHackathon/slack-hotline), Carrier Pigeon is a case management Slack app that allows volunteers to manage a text/chat hotline.
 
 ## How it Works
-Pigeon is a case management Slack app that allows volunteers to manage a text/chat hotline. Clients text a hotline number, and Pigeon opens up a case and a conversation with the client via a chat channel. Pigeon also provides some custom commands for case management.
+Clients text a hotline number, and Pigeon opens up a case and a conversation with the client via a chat channel. Pigeon also provides some custom commands for case management.
 
 Try it out by joining our [sandbox pigeon slack here](https://join.slack.com/t/ddf-hotline-sandbox/shared_invite/enQtNDM3ODQzNTY5Mzk1LTc5ZDA1MmI5N2E3MDdmMWJkZWQ2NDJiMTVmOWM3ZDBkYmI1OTBlZTJiMjRhYTg1ODg0ZDk2NjAwZjhmMTQxN2I). The hotline number you can text is pinned to the #general channel and is also in subject line of the slack.
 
@@ -82,6 +84,17 @@ Now try to call the `/hello` and `/cases` commands to ensure that all is well.
 
 ** Note -- if `/cases` is mysteriously erroring out, try deleting the contents of `/.data`. If you encounter this issue and are able to deterministly reproduce, please let us know (related to https://trello.com/c/ELdp5RGY)
 
+## Deployments
+Deploys are through heroku. There are two npm commands to allow deployment (`npm run staging-deploy`) to staging and production (`npm run prod-deploy`). In order to use these scripts, you will need to add the staging and prod instances as remotes and name them `heroku-staging` and `heroku-prod`.
+
+```
+heroku git:remote -a staging-pigeon
+git remote rename heroku heroku-staging
+
+heroku git:remote -a slack-hotline
+git remote rename heroku heroku-prod
+```
+
 ## Staging App / Sandbox environment
 
 * Pigeon app is deployed to https://staging-pigeon.herokuapp.com/
@@ -108,4 +121,3 @@ If you ever need to configure the Slack app side of things to update what URL th
 
 ## Questions? Comments?
 Contact us by opening an issue! Alternatively, send us an email at pigeon@digitaldefensefund.org
-
