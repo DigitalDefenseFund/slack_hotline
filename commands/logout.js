@@ -9,6 +9,15 @@ logOut.call = function (controller, bot, message){
       if(item.members.includes(user)){
         userChannels.push(item.id)
       }
+
+      controller.storage.channels.get(item.id, function(err,channel){
+        if(channel.assignment && channel.assignment == user) {
+          delete channel['assignment']
+          controller.storage.channels.save(channel, function(storeErr, savedChannel){
+            // console.log(storeErr, savedChannel)
+          })
+        }
+      })
     })
     userChannels.forEach((channel)=> {
       bot.api.channels.leave({token:bot.config.bot.app_token, channel: channel, user: user}, function(err,response){
