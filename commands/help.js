@@ -2,7 +2,7 @@ const help = module.exports = {}
 
 help.call = function(bot, message) {
   let helpText = ""
-  helpText += "Type `/hello` - checks that Pigeon's properly installed\n"
+  helpText += "Type `/hello` to check that Pigeon's properly installed\n"
   helpText += "Type `/cases`to list all current cases\n"
   helpText += "Type `/cases_pretty` to list all current cases color coded. Unassigned cases are red, cases with the 'needs attention' flag are orange, cases where the patient is awaiting a response are yellow, and otherwise cases are green.\n"
   helpText += "Type `/nextcase` to assign yourself an unassigned case. This will select the oldest unassigned active case.\n"
