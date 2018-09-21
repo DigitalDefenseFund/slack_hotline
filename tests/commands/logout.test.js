@@ -56,10 +56,20 @@ describe('logout',()=>{
     ];
   });
 
-  it('takes user out of channels they are a part of and replies with a logout message',()=>{
+  it('takes user out of channels they are a part of, unassigns them, and replies with a logout message',()=>{
+    this.controller.storage.channels.get('abc123channel', (err, chan)=>{
+      expect(chan.assignment).toBe('logoutUserID')
+    })
+
+    this.controller.storage.channels.get('catChannel', (err, chan)=>{
+      expect(chan.assignment).toBe('logoutUserID')
+    })
+
     return this.bot.usersInput(this.sequence).then(() => {
       const reply = this.bot.api.logByKey['replyPublic'][0].json;
+
       expect(reply.text).toEqual('You have logged out! Thank you so much for volunteering your time - you are so appreciated!')
+
       expect(this.bot.api.channels.leave).toHaveBeenNthCalledWith(
         1,
         { token:this.bot.config.bot.app_token,
@@ -67,6 +77,7 @@ describe('logout',()=>{
           user: 'logoutUserID' },
         expect.any(Function)
       )
+
       expect(this.bot.api.channels.leave).toHaveBeenNthCalledWith(
         2,
         { token:this.bot.config.bot.app_token,
@@ -74,11 +85,7 @@ describe('logout',()=>{
           user: 'logoutUserID' },
         expect.any(Function)
       )
-    })
-  })
 
-  it('unassigns the user from the case',()=>{
-    return this.bot.usersInput(this.sequence).then(()=>{
       this.controller.storage.channels.get('abc123channel', (err, chan)=>{
         expect(chan.assignment).toBe(undefined)
       })
