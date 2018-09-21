@@ -5,7 +5,7 @@ const flag = require('../commands/flag')
 const assign = require('../commands/assign')
 const nextCase = require('../commands/next_case')
 const cases = require('../commands/cases')
-const help = require('../commands/help')
+const help = require('../commands/help_me')
 
 const VERIFY_TOKEN = process.env.verificationToken
 

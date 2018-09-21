@@ -23,6 +23,9 @@ const nextCase = require('../../commands/next_case')
 jest.mock('../../commands/cases')
 const cases = require('../../commands/cases')
 
+jest.mock('../../commands/help_me')
+const help = require('../../commands/help_me')
+
 describe("slash_commands",()=>{
   let mockController = {}
   let mockBot = {
@@ -212,6 +215,23 @@ describe("slash_commands",()=>{
       slashCommands(mockController)
 
       expect(casesSpy).toHaveBeenCalledWith(mockController, mockBot, mockMessage, 'pretty')
+    })
+  })
+
+  describe("/helpme",()=>{
+    let mockMessage = {
+      command: "/helpme"
+    }
+
+    let helpMeSpy = jest.spyOn(help, "call")
+
+    it("calls next_case with controller, bot, and message",()=>{
+      mockController.on = jest.fn((event, callback)=>{
+        return callback(mockBot, mockMessage)
+      })
+      slashCommands(mockController)
+
+      expect(helpMeSpy).toHaveBeenCalledWith(mockBot, mockMessage)
     })
   })
 })
