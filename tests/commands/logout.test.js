@@ -5,7 +5,8 @@ describe('logout',()=>{
   let channelsApi = [
     { id: 'abc123channel', members: ['logoutUserID','someOtherUser']},
     { id: 'catChannel',    members: ['logoutUserID']},
-    { id: 'otherChannel',  members: ['someOtherUser']}
+    { id: 'otherChannel',  members: ['someOtherUser']},
+    { id: 'channelNotInStorage', members: ['logoutUserID'] }
   ]
 
   let channelsStorage = [
@@ -82,6 +83,14 @@ describe('logout',()=>{
         2,
         { token:this.bot.config.bot.app_token,
           channel: channelsApi[1].id,
+          user: 'logoutUserID' },
+        expect.any(Function)
+      )
+
+      expect(this.bot.api.channels.leave).toHaveBeenNthCalledWith(
+        3,
+        { token:this.bot.config.bot.app_token,
+          channel: channelsApi[3].id,
           user: 'logoutUserID' },
         expect.any(Function)
       )

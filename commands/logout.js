@@ -11,6 +11,12 @@ logOut.call = function (controller, bot, message){
       }
 
       controller.storage.channels.get(item.id, function(err,channel){
+        // if (getErr || !channel) {
+        //   channel = {
+        //     'id': channel_id,
+        //     'team_id': message.team_id
+        //   }
+        // }
         if(channel.assignment && channel.assignment == user) {
           delete channel['assignment']
           controller.storage.channels.save(channel, function(storeErr, savedChannel){
