@@ -1,6 +1,6 @@
 module.exports= function(controller){
 
-  controller.hears(['^hello$'], 'ambient', function(bot, message) {
+  controller.hears(['^[0-9]{5}'], 'ambient', function(bot, message) {
     bot.reply(message, "Hi there")
   });
 
