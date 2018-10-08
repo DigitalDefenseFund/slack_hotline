@@ -3,6 +3,18 @@ const zipCodeLookup = require('../../skills/zip_code_lookup');
 
 
 describe('zip_code_lookup',()=>{
+	let lookup_response = {
+		"name": "Austin Clinic",
+		"street": "1 A Street",
+		"street2": "",
+		"city": "Austin",
+		"state": "Texas",
+		"zip": "12345",
+		"url": "www.clinic.com",
+		"phone": "123-456-7890",
+		"hours": "M-F 9-4"
+	}
+
 	let channels = [
 		{
 			"id":"some__channel",
@@ -23,7 +35,7 @@ describe('zip_code_lookup',()=>{
 	});
 
 	describe('message suggestions',()=>{
-		it('should detect when a user sends a message with a zip code',()=>{
+		it('should detect when a user sends a zip code',()=>{
 			return this.bot.usersInput(
 				[
 					{
@@ -37,8 +49,29 @@ describe('zip_code_lookup',()=>{
 					}
 				]
 			).then((message) => {
-				expect(message.text).toBe("Hi there")
+				expect(message.text).toBe("00000")
 			})
 		})
 	})
+
+	describe('message suggestions',()=>{
+		it('should detect when a user sends a message containing a zip code',()=>{
+			return this.bot.usersInput(
+				[
+					{
+						user: 'someUserId',
+						channel: 'some_channel',
+						messages: [
+							{
+								text: 'my zip code is 00000.', isAssertion: true, type:"ambient"
+							}
+						]
+					}
+				]
+			).then((message) => {
+				expect(message.text).toBe("00000")
+			})
+		})
+	})
+
 })
