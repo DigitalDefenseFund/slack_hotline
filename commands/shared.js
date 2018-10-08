@@ -3,12 +3,6 @@ let sharedFunctions = module.exports
 sharedFunctions.setChannelProperty = function(controller, message, property, value, channel_id, cb) {
   channel_id = channel_id || (message.text.match(/\<\#(\w+)/) || [message.channel]).pop()
   controller.storage.channels.get(channel_id, function(getErr, channel) {
-    if (getErr || !channel) {
-      channel = {
-        'id': channel_id,
-        'team_id': message.team_id
-      }
-    }
     if (value === null) {
       delete channel[property]
     } else {
