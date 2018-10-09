@@ -1,9 +1,6 @@
 const logOut = module.exports = {}
 
 logOut.call = function (controller, bot, message){
-  console.log('IN LOGOUT CONTROLLER', controller)
-  console.log('IN LOGOUT BOT', bot)
-  console.log('IN LOGOUT MESSAGE', message)
   let user = message.user_id
 
   var userChannels = []
