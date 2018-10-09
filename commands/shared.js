@@ -1,5 +1,19 @@
 let sharedFunctions = module.exports
 
+sharedFunctions.syncChannelsToDB = function(controller, bot) {
+  bot.api.channels.list({}, (err, response)=>{
+    response.channels.map((channel)=>{
+      chanToSave = '';
+      controller.storage.channels.get(channel.id, (err, chan)=>{
+        if (!chan) {
+          chanToSave = channel
+        }
+      })
+      controller.storage.channels.save(channel, (err, chan)=>{})
+    })
+  })
+}
+
 sharedFunctions.setChannelProperty = function(controller, message, property, value, channel_id, cb) {
   channel_id = channel_id || (message.text.match(/\<\#(\w+)/) || [message.channel]).pop()
   controller.storage.channels.get(channel_id, function(getErr, channel) {
