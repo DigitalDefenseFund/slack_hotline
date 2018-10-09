@@ -43,13 +43,13 @@ describe('zip_code_lookup',()=>{
 						channel: 'some_channel',
 						messages: [
 							{
-								text: '00000', isAssertion: true, type:"ambient"
+								text: '78722', isAssertion: true, type:"ambient"
 							}
 						]
 					}
 				]
 			).then((message) => {
-				expect(message.text).toBe("00000")
+				expect(message.text).toBe("clinics")
 			})
 		})
 	})
