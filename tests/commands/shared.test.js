@@ -28,11 +28,12 @@ describe('syncChannelsToDB',()=>{
   })
 
   it('saves channels from the bot API to controller storage',()=>{
-    shared.syncChannelsToDB(this.controller, this.bot)
+    shared.syncChannelsToDB(this.controller, this.bot, '12345')
     channelsInSlack.map((channel)=>{
       this.controller.storage.channels.get(channel.id, (err,chan)=>{
         expect(chan.id).toBe(channel.id)
         expect(chan.name).toBe(channel.name)
+        expect(chan.team_id).toBe('12345')
       })
     })
   })
