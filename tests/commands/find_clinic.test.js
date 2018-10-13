@@ -53,8 +53,8 @@ describe('find_clinic',()=>{
 			];
 
 			return this.bot.usersInput(this.sequence).then(() => {
-				const reply = this.bot.api.logByKey['replyPrivate'][0].json;
-				expect(reply.text).toBe('Please submit a zip code with /find_clinic to get nearby clinics')
+				const reply = this.bot.api.logByKey['replyPublic'][0].json;
+				expect(reply.text).toBe('```Please submit a valid zip code with /find_clinic to get nearby clinics```')
 			})
 		})
 	})
@@ -82,7 +82,7 @@ describe('find_clinic',()=>{
 			];
 
 			return this.bot.usersInput(this.sequence).then(() => {
-				const reply = this.bot.api.logByKey['replyPrivate'][0].json
+				const reply = this.bot.api.logByKey['replyPublic'][0].json
 				for(var i = 0; i < sampleClinics.length; i++){
 					expect(reply.text).toContain(sampleClinics[0].name)
 					expect(reply.text).toContain(sampleClinics[0].address)
