@@ -26,12 +26,15 @@ const cases = require('../../commands/cases')
 jest.mock('../../commands/help_me')
 const help = require('../../commands/help_me')
 
+jest.mock('../../commands/find_clinic')
+const findClinic = require('../../commands/find_clinic')
+
 describe("slash_commands",()=>{
   let mockController = {}
   let mockBot = {
     replyPublic: function(){
       return 'replyPublic called'
-    }
+		}
   }
   let botSpy = jest.spyOn(mockBot, 'replyPublic')
 
@@ -234,4 +237,22 @@ describe("slash_commands",()=>{
       expect(helpMeSpy).toHaveBeenCalledWith(mockBot, mockMessage)
     })
   })
+
+  describe("/find_clinic",()=>{
+    let mockMessage = {
+      command: "/find_clinic"
+    }
+
+    let clinicSpy = jest.spyOn(findClinic, "call")
+
+    it("calls find_clinic with controller, bot, and message",()=>{
+      mockController.on = jest.fn((event, callback)=>{
+        return callback(mockBot, mockMessage)
+      })
+      slashCommands(mockController)
+
+      expect(clinicSpy).toHaveBeenCalledWith(mockController, mockBot, mockMessage)
+    })
+  })
+
 })
