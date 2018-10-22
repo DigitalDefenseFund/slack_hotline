@@ -4,23 +4,26 @@ const findClinic = module.exports = {}
 
 findClinic.call = function(controller, bot, message) {
 	zipCodeMatch = message.text.match('([0-9]{5})')
+	let replyText = '';
 
 	if(zipCodeMatch){
 		zipCode = zipCodeMatch[1]
 		controller.storage.clinics.find({'zip': zipCode}, function(error, clinics){
 			if(clinics.length == 0){
-				bot.replyPublic(message, '```No clinics found at that zip code```')
+				replyText = '```No clinics found at that zip code```';
 			} else {
-				bot.replyPublic(message, messageBuilder(zipCode, clinics))
+				replyText = messageBuilder(zipCode, clinics)
 			}
 		})
 	} else {
-		bot.replyPublic(message, '```Please submit a valid zip code with /find_clinic to get nearby clinics```')
+		replyText = '```Please submit a valid zip code with /find_clinic to get nearby clinics```'
 	}
+
+	bot.replyPublic(message, replyText)
 }
 
 function messageBuilder(zipCode, clinicList){
-	message = '```We found the following clinics at zip code ' + zipCode + '\n\n'
+	let message = '```We found the following clinics at zip code ' + zipCode + '\n\n'
 	for(var i = 0; i < clinicList.length; i++){
 		message += clinicList[i].name + '\n'
 		message += clinicList[i].address + '\n'
