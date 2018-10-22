@@ -34,7 +34,7 @@ describe("slash_commands",()=>{
   let mockBot = {
     replyPublic: function(){
       return 'replyPublic called'
-		}
+    }
   }
   let botSpy = jest.spyOn(mockBot, 'replyPublic')
 
