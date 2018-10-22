@@ -1,5 +1,31 @@
 const shared = require('./shared')
 
+/*
+
+Clinics are stored with the following fields.
+All are strings.
+
+- name
+- address
+- street
+- street2
+- city
+- state
+- zip
+- lat
+- lng
+- distance
+- description
+- url
+- hours
+- phone
+- fax
+- email
+- image
+- tags
+
+*/
+
 const findClinic = module.exports = {}
 
 findClinic.call = function(controller, bot, message) {
