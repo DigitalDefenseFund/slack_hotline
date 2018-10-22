@@ -58,37 +58,76 @@ describe('find_clinic',()=>{
 			})
 		})
 	})
-	describe('When called with a zip code',()=>{
-		it('returns clinic info',()=>{
-			this.sequence = [
-				{
-					type: 'slash_command',
-					user: 'sample_user',
-					channel: 'sample_channel',
-					messages: [
-						{
-							user_id: 'sample_user',
-							channel_id: 'sample_channel',
-							command: '/find_clinic',
-							text: '12345',
-							actions: [{
-								name: 'action',
-								value: 'test'
-							}],
-							isAssertion: true,
-						}
-					]
-				}
-			];
 
-			return this.bot.usersInput(this.sequence).then(() => {
-				const reply = this.bot.api.logByKey['replyPublic'][0].json
-				for(var i = 0; i < sampleClinics.length; i++){
-					expect(reply.text).toContain(sampleClinics[0].name)
-					expect(reply.text).toContain(sampleClinics[0].address)
-					expect(reply.text).toContain(sampleClinics[0].phone)
-					expect(reply.text).toContain(sampleClinics[0].hours)
-				}
+	describe('When called with a zip code',()=>{
+		describe('When clinics exist for that zip code',()=>{
+			it('returns clinic info',()=>{
+				this.sequence = [
+					{
+						type: 'slash_command',
+						user: 'sample_user',
+						channel: 'sample_channel',
+						messages: [
+							{
+								user_id: 'sample_user',
+								channel_id: 'sample_channel',
+								command: '/find_clinic',
+								text: '12345',
+								actions: [{
+									name: 'action',
+									value: 'test'
+								}],
+								isAssertion: true,
+							}
+						]
+					}
+				];
+
+				return this.bot.usersInput(this.sequence).then(() => {
+					const reply = this.bot.api.logByKey['replyPublic'][0].json
+					for(var i = 0; i < sampleClinics.length; i++){
+						expect(reply.text).toContain(sampleClinics[0].name)
+						expect(reply.text).toContain(sampleClinics[0].address)
+						expect(reply.text).toContain(sampleClinics[0].phone)
+						expect(reply.text).toContain(sampleClinics[0].hours)
+					}
+				})
+			})
+		})
+
+		describe('When no clinics exist for that zip code',()=>{
+			beforeEach(()=>{
+				this.controller.storage.clinics.find = jest.fn( (searchArgs, callback)=>{
+					callback(null, [])
+				})
+			})
+
+			it('replies that no clinics were found',()=>{
+				this.sequence = [
+					{
+						type: 'slash_command',
+						user: 'sample_user',
+						channel: 'sample_channel',
+						messages: [
+							{
+								user_id: 'sample_user',
+								channel_id: 'sample_channel',
+								command: '/find_clinic',
+								text: '12345',
+								actions: [{
+									name: 'action',
+									value: 'test'
+								}],
+								isAssertion: true,
+							}
+						]
+					}
+				];
+
+				return this.bot.usersInput(this.sequence).then(() => {
+					const reply = this.bot.api.logByKey['replyPublic'][0].json;
+					expect(reply.text).toBe('```No clinics found at that zip code```')
+				})
 			})
 		})
 	})
