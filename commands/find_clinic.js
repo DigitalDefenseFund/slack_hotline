@@ -9,10 +9,12 @@ findClinic.call = function(controller, bot, message) {
 	if(zipCodeMatch){
 		zipCode = zipCodeMatch[1]
 		controller.storage.clinics.find({'zip': zipCode}, function(error, clinics){
-			if(clinics.length == 0){
-				replyText = '```No clinics found at that zip code```';
-			} else {
-				replyText = messageBuilder(zipCode, clinics)
+			if(!error && clinics) {
+				if(clinics.length == 0){
+					replyText = '```No clinics found at that zip code```';
+				} else {
+					replyText = messageBuilder(zipCode, clinics)
+				}
 			}
 		})
 	} else {
