@@ -6,9 +6,8 @@ module.exports= function(controller){
     }
     controller.storage.channels.save(channel, function(err, savedChannel) {
       if (err) {
-        // Do we want to throw an error here?
-        // Or do we want to log an error here?
-        // Should set up some error logging like Sentry
+        // TODO https://trello.com/c/z8nCUqyZ/63-set-up-error-logging-in-production
+        // should throw and log an error here if there's an error saving the channel
         console.log(`Channel ${message.channel_id} not persisted to data.`)
       }
     })
