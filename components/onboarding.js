@@ -1,5 +1,5 @@
 var debug = require('debug')('botkit:onboarding');
-var shared = require('./../commands/shared')
+var backpop = require('./../commands/backpop')
 
 module.exports = function(controller) {
 
@@ -21,7 +21,7 @@ module.exports = function(controller) {
         if (err) {
           console.log(err);
         } else {
-          shared.syncChannelsToDB(controller, bot, team.id)
+          backpop.call(controller, bot, team.id)
           convo.say('I am a bot that has just joined your team');
           convo.say('You must now /invite me to a channel so that I can be of use!');
         }

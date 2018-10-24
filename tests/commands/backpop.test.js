@@ -1,8 +1,8 @@
 const Botmock = require('botkit-mock');
-const shared = require('../../commands/shared');
+const backpop = require('../../commands/backpop');
 
 
-describe('syncChannelsToDB',()=>{
+describe('backpop',()=>{
   let channelsInSlack = [
     { name: 'sk-happy-elephant', id: 'caseChannel1' },
     { name: 'sk-dancing-pigeon', id: 'caseChannel2' },
@@ -28,7 +28,7 @@ describe('syncChannelsToDB',()=>{
   })
 
   it('saves channels from the bot API to controller storage',()=>{
-    shared.syncChannelsToDB(this.controller, this.bot, '12345')
+    backpop.call(this.controller, this.bot, '12345')
     channelsInSlack.map((channel)=>{
       this.controller.storage.channels.get(channel.id, (err,chan)=>{
         expect(chan.id).toBe(channel.id)

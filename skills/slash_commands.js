@@ -25,19 +25,19 @@ module.exports= function(controller){
         break
       case '/helpme':
         help.call(bot, message);
-        break;
+        break
       case '/cases':
         // list all the cases
         cases.call(controller, bot, message, 'normal');
-        break;
+        break
       case '/cases_pretty':
         // list all the cases
         cases.call(controller, bot, message, 'pretty');
-        break;
+        break
       case '/nextcase':
         // assign yourself the next case
         nextCase.call(controller, bot, message);
-        break;
+        break
       case '/assign':
         // assign a volunteer to a particular channel
         assign.call(controller, bot, message);
@@ -60,6 +60,13 @@ module.exports= function(controller){
       case '/logout':
         // logs out and will make your cases available to other volunteers to pick up
         logOut.call(controller, bot, message)
+        break
+      case '/backpop':
+        if (process.env.MAINTENANCE_MODE) {
+          backpop.call(controller, bot, message)
+        } else {
+          bot.replyPrivate(message, 'MAINTENANCE_MODE must be enabled for this command to work.')
+        }
         break
       default:
         bot.replyPublic(message, 'Sorry, I\'m not sure what that command is')

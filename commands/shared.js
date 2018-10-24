@@ -1,50 +1,5 @@
 let sharedFunctions = module.exports
 
-sharedFunctions.syncChannelsToDB = function(controller, bot, teamID) {
-  bot.api.channels.list({}, (err, response)=>{
-    if (response && response.channels) {
-      response.channels.map((channel)=>{
-        chanToSave = '';
-        controller.storage.channels.get(channel.id, (err, chan)=>{
-          if (!chan) {
-            // This is what the full channel returned from bot.api.channels.list
-            // {
-            //   "id":"C9YPNB9GE",
-            //   "name":"sk-pretty-condor",
-            //   "is_channel":true,
-            //   "created":1522286159,
-            //   "is_archived":true,
-            //   "is_general":false,
-            //   "unlinked":0,
-            //   "creator":"U7GQZJDQT",
-            //   "name_normalized":"sk-pretty-condor",
-            //   "is_shared":false,
-            //   "is_org_shared":false,
-            //   "is_member":false,
-            //   "is_private":false,
-            //   "is_mpim":false,
-            //   "members":[],
-            //   "topic":{"value":"","creator":"","last_set":0},
-            //   "purpose":{"value":"","creator":"","last_set":0},
-            //   "previous_names":[],
-            //   "num_members":0
-            // }
-            chanToSave = {
-              "id":          channel.id,
-              "name":        channel.name,
-              "team_id":     teamID,
-              "is_archived": channel.is_archived
-            }
-          } else {
-            chanToSave = chan
-          }
-        })
-        controller.storage.channels.save(chanToSave, (err, chan)=>{})
-      })
-    }
-  })
-}
-
 sharedFunctions.setChannelProperty = function(controller, message, property, value, channel_id, cb) {
   channel_id = channel_id || (message.text.match(/\<\#(\w+)/) || [message.channel]).pop()
   controller.storage.channels.get(channel_id, function(getErr, channel) {
