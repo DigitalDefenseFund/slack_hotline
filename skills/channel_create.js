@@ -1,5 +1,6 @@
 module.exports= function(controller){
   controller.on('channel_created', function(bot, message) {
+    console.log('MESSAGE', message)
     let channel = {
       'id': message.channel_id,
       'team_id': message.team_id
