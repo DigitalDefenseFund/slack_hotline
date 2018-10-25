@@ -263,6 +263,18 @@ describe("slash_commands",()=>{
   })
   
   describe("/backpop",()=>{
+    const OLD_ENV = process.env;
+
+    beforeEach(() => {
+      jest.resetModules() // this is important
+      process.env = { ...OLD_ENV };
+      delete process.env.MAINTENANCE_MODE;
+    });
+
+    afterEach(() => {
+      process.env = OLD_ENV;
+    });
+
     let mockMessage = {
       command: "/backpop",
       team_id: "best_team_evaaahhhh"
@@ -272,7 +284,6 @@ describe("slash_commands",()=>{
 
     it("calls backpop with controller, bot, and message when MAINTENANCE_MODE is set",()=>{
       process.env.MAINTENANCE_MODE = true
-      console.log('MAINT MODE TRUE CASE')
       mockController.on = jest.fn((event, callback)=>{
         return callback(mockBot, mockMessage)
       })
@@ -282,8 +293,6 @@ describe("slash_commands",()=>{
     })
 
     it("replies that the command is disabled with MAINTENANCE_MODE is NOT set",()=>{
-      process.env.MAINTENANCE_MODE = false
-      console.log('MAINT MODE FALSE CASE')
       mockController.on = jest.fn((event, callback)=>{
         return callback(mockBot, mockMessage)
       })
