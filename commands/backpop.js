@@ -36,7 +36,7 @@ backpop.call = function(controller, bot, teamID) {
             }
 
             controller.storage.channels.save(chanToSave, (err, chan)=>{
-              if (!err) {
+              if (err) {
                 console.log('Something went wrong saving the channel: ', err)
               } else {
                 console.log('Channel from Slack successfully saved to DB')
