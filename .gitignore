@@ -1,3 +1,4 @@
+clinics.csv
 .db
 node_modules
 components/routes/_*
@@ -7,3 +8,4 @@ package-lock.json
 .data
 .\#*
 \#.*
+*.swp

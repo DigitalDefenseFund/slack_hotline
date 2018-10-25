@@ -6,6 +6,8 @@ const assign = require('../commands/assign')
 const nextCase = require('../commands/next_case')
 const cases = require('../commands/cases')
 const help = require('../commands/help_me')
+const findClinic = require('../commands/find_clinic')
+const backpop = require('../commands/backpop')
 
 const VERIFY_TOKEN = process.env.verificationToken
 
@@ -60,6 +62,10 @@ module.exports= function(controller){
       case '/logout':
         // logs out and will make your cases available to other volunteers to pick up
         logOut.call(controller, bot, message)
+        break
+      case '/find_clinic':
+        // lists clinics at the inputted zip code
+        findClinic.call(controller, bot, message)
         break
       case '/backpop':
         if (process.env.MAINTENANCE_MODE) {
