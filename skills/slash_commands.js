@@ -68,8 +68,9 @@ module.exports= function(controller){
         findClinic.call(controller, bot, message)
         break
       case '/backpop':
+        console.log('MAINT MODE?', process.env.MAINTENANCE_MODE)
         if (process.env.MAINTENANCE_MODE) {
-          backpop.call(controller, bot, message)
+          backpop.call(controller, bot, message.team_id)
         } else {
           bot.replyPrivate(message, 'MAINTENANCE_MODE must be enabled for this command to work.')
         }

@@ -29,14 +29,21 @@ const help = require('../../commands/help_me')
 jest.mock('../../commands/find_clinic')
 const findClinic = require('../../commands/find_clinic')
 
+jest.mock('../../commands/backpop')
+const backpop = require('../../commands/backpop')
+
 describe("slash_commands",()=>{
   let mockController = {}
   let mockBot = {
-    replyPublic: function(){
-      return 'replyPublic called'
+    replyPublic: function(msg, text){
+      return text
+    },
+    replyPrivate: function(msg, text){
+      return text
     }
   }
   let botSpy = jest.spyOn(mockBot, 'replyPublic')
+  let botSpyPrivate = jest.spyOn(mockBot, 'replyPrivate')
 
   describe("Some unknown command",()=>{
     let mockMessage = {
@@ -254,5 +261,35 @@ describe("slash_commands",()=>{
       expect(clinicSpy).toHaveBeenCalledWith(mockController, mockBot, mockMessage)
     })
   })
+  
+  describe("/backpop",()=>{
+    let mockMessage = {
+      command: "/backpop",
+      team_id: "best_team_evaaahhhh"
+    }
 
+    let backpopSpy = jest.spyOn(backpop, "call")
+
+    it("calls backpop with controller, bot, and message when MAINTENANCE_MODE is set",()=>{
+      process.env.MAINTENANCE_MODE = true
+      console.log('MAINT MODE TRUE CASE')
+      mockController.on = jest.fn((event, callback)=>{
+        return callback(mockBot, mockMessage)
+      })
+      slashCommands(mockController)
+
+      expect(backpopSpy).toHaveBeenCalledWith(mockController, mockBot, mockMessage.team_id)
+    })
+
+    it("replies that the command is disabled with MAINTENANCE_MODE is NOT set",()=>{
+      process.env.MAINTENANCE_MODE = false
+      console.log('MAINT MODE FALSE CASE')
+      mockController.on = jest.fn((event, callback)=>{
+        return callback(mockBot, mockMessage)
+      })
+      slashCommands(mockController)
+
+      expect(botSpyPrivate).toHaveBeenCalledWith(mockMessage, "MAINTENANCE_MODE must be enabled for this command to work.")
+    })
+  })
 })

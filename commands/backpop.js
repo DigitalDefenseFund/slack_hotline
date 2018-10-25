@@ -4,11 +4,8 @@ backpop.call = function(controller, bot, teamID) {
   console.log('IN BACKPOP')
   bot.api.channels.list({}, (err, response)=>{
     if (response && response.channels) {
-      console.log('CHANNELS RESPONSE', response.channels)
       response.channels.map((channel)=>{
-        chanToSave = '';
         controller.storage.channels.get(channel.id, (err, chan)=>{
-          console.log('CHAN', chan)
           if (!chan && isCase(channel)) {
             // This is what the full channel returned from bot.api.channels.list
             // {
@@ -38,17 +35,15 @@ backpop.call = function(controller, bot, teamID) {
               "name":        channel.name,
               "team_id":     teamID
             }
-          } else {
-            chanToSave = chan
+
+            controller.storage.channels.save(chanToSave, (err, chan)=>{
+              if (!err) {
+                console.log('Something went wrong saving the channel: ', err)
+              } else {
+                console.log('Channel from Slack successfully saved to DB')
+              }
+            })
           }
-        })
-
-        console.log('CHAN TO SAVE', chanToSave)
-
-        controller.storage.channels.save(chanToSave, (err, chan)=>{
-          console.log('IN DB SAVE CALLBACK?')
-          console.log('ERR', err)
-          console.log('CHAN', chan)
         })
       })
     }
@@ -56,5 +51,5 @@ backpop.call = function(controller, bot, teamID) {
 }
 
 function isCase(channel) {
-  channel.name.startsWith('sk-')
+  return channel.name.startsWith('sk-')
 }

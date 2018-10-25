@@ -9,6 +9,11 @@ describe('backpop',()=>{
     { name: 'general',           id: 'nonCaseChannel' },
   ]
 
+  let expectedBackpopped = [
+    { name: 'sk-happy-elephant', id: 'caseChannel1' },
+    { name: 'sk-dancing-pigeon', id: 'caseChannel2' },
+  ]
+
   beforeEach(()=>{
     this.controller = Botmock({});
 
@@ -29,7 +34,7 @@ describe('backpop',()=>{
 
   it('saves channels from the bot API to controller storage',()=>{
     backpop.call(this.controller, this.bot, '12345')
-    channelsInSlack.map((channel)=>{
+    expectedBackpopped.map((channel)=>{
       this.controller.storage.channels.get(channel.id, (err,chan)=>{
         expect(chan.id).toBe(channel.id)
         expect(chan.name).toBe(channel.name)
