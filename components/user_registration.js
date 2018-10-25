@@ -4,8 +4,6 @@ module.exports = function(controller) {
 
   /* Handle event caused by a user logging in with oauth */
   controller.on('oauth:success', function(payload) {
-    console.log('IN USER REGISTRATION')
-
     debug('Got a successful login!', payload);
     if (!payload.identity.team_id) {
       debug('Error: received an oauth response without a team id', payload);
@@ -14,8 +12,6 @@ module.exports = function(controller) {
       if (err) {
         debug('Error: could not load team from storage system:', payload.identity.team_id, err);
       }
-
-      console.log('TEAM IN DB', team)
 
       var new_team = false;
       if (!team) {
@@ -53,7 +49,6 @@ module.exports = function(controller) {
             if (err) {
               debug('Error: could not save team record:', err);
             } else {
-              console.log('NEW TEAM?', new_team)
               if (new_team) {
                 controller.trigger('create_team', [testbot, team]);
               } else {
@@ -85,10 +80,6 @@ module.exports = function(controller) {
     debug('Team updated:', team);
     // Trigger an event that will establish an RTM connection for this bot
     controller.trigger('rtm:start', [bot]);
-
-    // TODO REMOVE THIS CALL -- JUST DID THIS TO GET PAST WEIRD BEHAVIOR IN DEV AFTER REMOVING AND REINSTALLING THE APP
-    // Trigger an event that will cause this team to receive onboarding messages
-    controller.trigger('onboard', [bot, team]);
   });
 
 }
