@@ -69,7 +69,7 @@ module.exports= function(controller){
         break
       case '/backpop':
         if (process.env.MAINTENANCE_MODE) {
-          backpop.call(controller, bot, message.team_id)
+          backpop.call(controller, bot, message, true)
         } else {
           bot.replyPrivate(message, 'MAINTENANCE_MODE must be enabled for this command to work.')
         }

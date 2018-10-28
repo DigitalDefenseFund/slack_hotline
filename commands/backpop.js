@@ -1,11 +1,13 @@
 const backpop = module.exports = {}
 
-backpop.call = function(controller, bot, teamID) {
+backpop.call = function(controller, bot, message, reply) {
+  let teamID = message.team_id;
+
   bot.api.channels.list({}, (err, response)=>{
     if (response && response.channels) {
       response.channels.map((channel)=>{
         controller.storage.channels.get(channel.id, (err, chan)=>{
-          if (!chan && isCase(channel)) {
+          if (!chan) {
             // This is what the full channel returned from bot.api.channels.list
             // {
             //   "id":"C9YPNB9GE",
@@ -29,17 +31,34 @@ backpop.call = function(controller, bot, teamID) {
             //   "num_members":0
             // }
 
-            chanToSave = {
-              "id":          channel.id,
-              "name":        channel.name,
-              "team_id":     teamID
-            }
-
-            controller.storage.channels.save(chanToSave, (err, chan)=>{
+            bot.startPrivateConversation({user: message.user_id},function(err,convo) {
               if (err) {
-                console.log('Something went wrong saving the channel: ', err)
+                console.log(err);
               } else {
-                console.log('Channel from Slack successfully saved to DB')
+                if (isCase(channel)) {
+                  chanToSave = {
+                    "id":      channel.id,
+                    "name":    channel.name,
+                    "team_id": teamID
+                  }
+
+                  controller.storage.channels.save(chanToSave, (err, chan)=>{
+                    var msgText = '';
+                    if (err) {
+                      msgText = `Error saving ${chan.name}.`;
+                    } else {
+                      msgText = `Successfully synced ${chan.name} to the database.`
+                    }
+
+                    if (reply) {
+                      convo.say(msgText)
+                    }
+                  })
+                } else {
+                  if (reply) {
+                    convo.say(`Did not save ${channel.name} because it's not a case channel.`)
+                  }
+                }
               }
             })
           }

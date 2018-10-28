@@ -289,7 +289,7 @@ describe("slash_commands",()=>{
       })
       slashCommands(mockController)
 
-      expect(backpopSpy).toHaveBeenCalledWith(mockController, mockBot, mockMessage.team_id)
+      expect(backpopSpy).toHaveBeenCalledWith(mockController, mockBot, mockMessage, true)
     })
 
     it("replies that the command is disabled with MAINTENANCE_MODE is NOT set",()=>{

@@ -21,7 +21,7 @@ module.exports = function(controller) {
         if (err) {
           console.log(err);
         } else {
-          backpop.call(controller, bot, team.id)
+          backpop.call(controller, bot, {team_id: team.id, user: bot.config.createdBy})
           convo.say('I am a bot that has just joined your team');
           convo.say('You must now /invite me to a channel so that I can be of use!');
         }
