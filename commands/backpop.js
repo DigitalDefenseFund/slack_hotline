@@ -1,7 +1,6 @@
 const backpop = module.exports = {}
 
 backpop.call = function(controller, bot, message, callback) {
-  console.log('INSIDE THE BACKPOP FUNCTION')
   bot.api.channels.list({}, (err, response)=>{
     if (response && response.channels) {
       response.channels.map((channel)=>{
