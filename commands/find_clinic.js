@@ -30,7 +30,6 @@ const findClinic = module.exports = {}
 
 findClinic.call = function(controller, bot, message) {
 	zipCodeMatch = message.text.match('([0-9]{5})')
-	let replyText = '';
 
 	if(zipCodeMatch){
 		zipCode = zipCodeMatch[1]
@@ -41,13 +40,13 @@ findClinic.call = function(controller, bot, message) {
 				} else {
 					replyText = messageBuilder(zipCode, clinics)
 				}
+				bot.replyPublic(message, replyText)
 			}
 		})
 	} else {
 		replyText = '```Please submit a valid zip code with /find_clinic to get nearby clinics```'
+		bot.replyPublic(message, replyText)
 	}
-
-	bot.replyPublic(message, replyText)
 }
 
 function messageBuilder(zipCode, clinicList){
