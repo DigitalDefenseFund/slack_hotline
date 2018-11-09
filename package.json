@@ -9,7 +9,8 @@
     "staging-deploy": "git push heroku-staging master",
     "prod-deploy": "git push heroku-prod master",
     "import-clinics": "source .env && mongoimport -h $MONGODB_URI -d admin -c clinics --type=csv --file=clinics.csv --headerline --columnsHaveTypes",
-    "db-drop": "source .env && mongo $MONGODB_URI/admin scripts/drop_db.js"
+    "db-drop": "source .env && mongo $MONGODB_URI scripts/drop_db.js",
+    "db-console": "source .env && mongo $MONGODB_URI"
   },
   "dependencies": {
     "body-parser": "^1.15.2",
