@@ -8,8 +8,8 @@
     "test": "jest",
     "staging-deploy": "git push heroku-staging master",
     "prod-deploy": "git push heroku-prod master",
-    "import-clinics": "source .env && mongoimport -h $MONGODB_URI -d admin -c clinics --type=csv --file=clinics.csv --headerline --columnsHaveTypes",
-    "db-drop": "source .env && mongo $MONGODB_URI/admin scripts/drop_db.js"
+    "import-clinics": "source .env && mongoimport -h $MONGO_HOST -d $MONGO_DBNAME -c clinics -u $MONGO_USER -p $MONGO_PW --type=csv --file=clinics.csv --headerline --columnsHaveTypes",
+    "db-drop": "source .env && mongo $MONGODB_URI scripts/drop_db.js"
   },
   "dependencies": {
     "body-parser": "^1.15.2",

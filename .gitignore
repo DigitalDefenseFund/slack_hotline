@@ -3,6 +3,7 @@ clinics.csv
 node_modules
 components/routes/_*
 .env
+.env.*
 *~
 package-lock.json
 .data
