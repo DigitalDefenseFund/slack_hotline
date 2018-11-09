@@ -7,6 +7,7 @@ const nextCase = require('../commands/next_case')
 const cases = require('../commands/cases')
 const help = require('../commands/help_me')
 const findClinic = require('../commands/find_clinic')
+const backpop = require('../commands/backpop')
 
 const VERIFY_TOKEN = process.env.verificationToken
 
@@ -26,19 +27,19 @@ module.exports= function(controller){
         break
       case '/helpme':
         help.call(bot, message);
-        break;
+        break
       case '/cases':
         // list all the cases
         cases.call(controller, bot, message, 'normal');
-        break;
+        break
       case '/cases_pretty':
         // list all the cases
         cases.call(controller, bot, message, 'pretty');
-        break;
+        break
       case '/nextcase':
         // assign yourself the next case
         nextCase.call(controller, bot, message);
-        break;
+        break
       case '/assign':
         // assign a volunteer to a particular channel
         assign.call(controller, bot, message);
@@ -65,6 +66,13 @@ module.exports= function(controller){
       case '/find_clinic':
         // lists clinics at the inputted zip code
         findClinic.call(controller, bot, message)
+        break
+      case '/backpop':
+        if (process.env.MAINTENANCE_MODE) {
+          backpop.call(controller, bot, message, backpop.syncVerbose)
+        } else {
+          bot.replyPrivate(message, 'MAINTENANCE_MODE must be enabled for this command to work.')
+        }
         break
       default:
         bot.replyPublic(message, 'Sorry, I\'m not sure what that command is')
