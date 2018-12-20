@@ -52,4 +52,4 @@ workflows:
             - build
           filters:
             branches:
-              only: set_up_autodeploys # master
+              only: master
