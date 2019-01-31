@@ -8,7 +8,7 @@
     "test": "jest",
     "staging-deploy": "git push heroku-staging master",
     "prod-deploy": "git push heroku-prod master",
-    "import-clinics": "source .env && mongoimport -h $MONGO_HOST -d $MONGO_DBNAME -c clinics -u $MONGO_USER -p $MONGO_PW --type=csv --file=clinics.csv --headerline --columnsHaveTypes",
+    "import-clinics": "source .env && node scripts/import_clinics.csv",
     "db-drop": "source .env && mongo $MONGODB_URI scripts/drop_db.js",
     "db-console": "source .env && mongo $MONGODB_URI"
   },

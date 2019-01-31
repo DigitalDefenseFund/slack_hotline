@@ -10,7 +10,7 @@ var clinicsList = [];
 fs.createReadStream('clinics.csv')
 	.pipe(csv())
 	.on('data', (data) => {
-		var newClinic = new Clinic({
+		clinicsList.push({
 			name: data.name,
 			address: data.address,
 			street: data.street,
@@ -28,16 +28,18 @@ fs.createReadStream('clinics.csv')
 			phone: data.phone,
 			email: data.email
 		})
-		newClinic.save()
-			.then( (clinic) => {
-			console.log(`Stored ${clinic.name}`)
+	})
+	.on('end', () => {
+		console.log(`Inserting ${clinicsList.length} clinics`)
+		Clinic.collection.insertMany(clinicsList)
+			.then( (result) => {
+				console.log(`Inserted ${JSON.stringify(result.insertedCount)} clinics`)
+				process.exit()
 			})
 			.catch( (err) => {
 				console.log(err)
+				process.exit(1)
 			})
-	})
-	.on('end', () => {
-		console.log("done");
 	});
 
 
