@@ -97,6 +97,7 @@ if (process.env.MONGO_URI || process.env.MONGODB_URI) {
     throw "MONGO_URI or MONGODB_URI must exist to establish the database connection. Please add one of these to your .env file."
 }
 
+	console.log(`mongo: ${process.env.MONGO_URI}`)
 // Create the Botkit controller, which controls all instances of the bot.
 var controller = Botkit.slackbot(bot_options);
 

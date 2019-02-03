@@ -28,6 +28,8 @@ var clinicSchema = new Schema({
 	email: String
 })
 
+clinicSchema.index({"location": "2dsphere"})
+
 var Clinic = mongoose.model('Clinic', clinicSchema)
 
 module.exports = Clinic

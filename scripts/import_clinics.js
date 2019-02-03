@@ -20,7 +20,7 @@ fs.createReadStream('clinics.csv')
 			zip: data.zip,
 			location: {
 				type: 'Point',
-				coordinates: [data.lng, data.lat]
+				coordinates: [parseFloat(data.lng), parseFloat(data.lat)]
 			},
 			description: data.description,
 			url: data.url,
