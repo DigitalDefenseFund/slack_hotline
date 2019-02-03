@@ -31,15 +31,14 @@ fs.createReadStream('clinics.csv')
 	})
 	.on('end', () => {
 		console.log(`Inserting ${clinicsList.length} clinics`)
-		Clinic.collection.insertMany(clinicsList)
-			.then( (result) => {
-				console.log(`Inserted ${JSON.stringify(result.insertedCount)} clinics`)
-				process.exit()
-			})
-			.catch( (err) => {
+		Clinic.collection.insertMany(clinicsList, function(err, result){
+			if(err){
 				console.log(err)
-				process.exit(1)
-			})
+			} else {
+				console.log(`Inserted ${JSON.stringify(result.insertedCount)} clinics`)
+			}
+			process.exit()
+		})
 	});
 
 

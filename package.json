@@ -10,6 +10,7 @@
     "prod-deploy": "git push heroku-prod master",
     "import-clinics": "source .env && node scripts/import_clinics.csv",
     "db-drop": "source .env && mongo $MONGODB_URI scripts/drop_db.js",
+    "db-drop-clinics": "source .env && mongo $MONGODB_URI scripts/drop_clinics.js",
     "db-console": "source .env && mongo $MONGODB_URI"
   },
   "dependencies": {
