@@ -1,5 +1,6 @@
 const shared = require('./shared')
 const googleMaps = require('@google/maps')
+const turf = require('turf')
 
 googleMapsClient = googleMaps.createClient({
 	key: process.env.google_geolocation_api_key
@@ -35,7 +36,7 @@ findClinic.call = function(controller, bot, message) {
 							if(clinics.length == 0){
 								replyText = '```No clinics found at that zip code```';
 							} else {
-								replyText = messageBuilder(zipCode, clinics)
+								replyText = messageBuilder(zipCode, lng, lat, clinics)
 							}
 							bot.replyPublic(message, replyText)
 						}
@@ -49,14 +50,21 @@ findClinic.call = function(controller, bot, message) {
 	}
 }
 
-function messageBuilder(zipCode, clinicList){
+function messageBuilder(zipCode, zipLng, zipLat, clinicList){
+	//botkit-storage-mongo doesnt seem to allow us to specify limit,
+	// so we're limiting below
 	clinicList = clinicList.length > 5 ? clinicList.slice(0, 5) : clinicList
-	let message = '```We found the following clinics near  zip code ' + zipCode + '\n\n'
+	let message = '```We found the following clinics near zip code ' + zipCode + '\n\n'
 	for(var i = 0; i < clinicList.length; i++){
+		// botkit-storage-mongo doesn't let us run aggregations, 
+		// which are necessary to compute distance from query point, 
+		// so we calculate here. 
+		distanceFromZip = turf.distance(turf.point([zipLng, zipLat]), turf.point(clinicList[i].location.coordinates), 'miles')
+		message += `${distanceFromZip.toFixed(1)} miles from ${zipCode} \n`
 		message += clinicList[i].name + '\n'
 		message += clinicList[i].address + '\n'
 		message += clinicList[i].phone + '\n'
-		message += clinicList[i].hours + '\n'
+		message += clinicList[i].hours + '\n'	
 		message += '\n'
 	}
 	message += '```'
