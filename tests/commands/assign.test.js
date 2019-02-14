@@ -10,7 +10,14 @@ describe('assign',()=>{
     {
       "id":"some_other_channel",
       "team_id":"team_id_123"
-    }
+    },
+    // NOTE -- general channel is not stored locally
+    // because it is not a case related channel; this
+    // applies to ALL non-case channels
+    // {
+    //   "id":"general",
+    //   "team_id":"team_id_123"
+    // }
   ]
 
   beforeEach(()=>{
@@ -166,8 +173,37 @@ describe('assign',()=>{
   })
 
   describe('when called from #general channel',()=>{
-    it("sets the provided flag for the channel provided",()=>{
-      // TODO -- https://trello.com/c/V6SBmMmZ
+    it("prompts the user to provide a channel when called without a channel",()=>{
+      this.sequence = [
+        {
+          type: 'slash_command',
+          user: 'user_typing_z_command',
+          channel: 'general',
+          messages: [
+            {
+              user_id: 'user_typing_z_command',
+              channel_id: 'general',
+              command: '/assign',
+              text: '',
+              actions: [{
+                name: 'action',
+                value: 'test'
+              }],
+              isAssertion: true,
+            }
+          ]
+        }
+      ];
+
+      return this.bot.usersInput(this.sequence).then(() => {
+        const reply = this.bot.api.logByKey['replyPublic'][0].json;
+        expect(reply.text).toBe('No case channel was provided. Please include the case channel that you want to assign to.')
+        expect(reply.response_type).toBe('in_channel')
+
+        // this.controller.storage.channels.get('channel_msg_called_in', (err, chan)=>{
+        //   expect(chan.assignment).toBe('user_typing_z_command')
+        // })
+      })
     })
   })
 })
