@@ -1,0 +1,649 @@
+,name,street,city,state,zip,contact,lat,lng
+0,Conway County Health Unit,100 Hospital DR,Morrilton,AR,72110,(501) 354-4652 ,35.1674683,-92.7201903
+1,Craighead County Health Unit,611 Washington AVE E,Jonesboro,AR,72401,(870) 933-4585 ,35.8379887,-90.6985843
+2,Crawford County Health Unit,2040 Chestnut,Van Buren,AR,72956,(479) 474-6391 ,35.4345835,-94.3401271
+3,"Crittenden County Heatlh Unit West
+Memphis",901 N. 7th St,West Memphis,AR,72301,(870) 735-4334 ,35.1546823,-90.1748866
+4,Cross County Health Unit,701 Julia Avenue East,Wynne,AR,72396,(870) 238-2101 ,35.2182007,-90.7845829
+5,Dallas County Health Unit,209 N Clifton,Fordyce,AR,71742,(870) 352-7197 ,33.8108663,-92.425525
+6,Desha County Health Unit Dumas,751 Hwy. 65 HWY S,Dumas,AR,71639,(870) 382-2377 ,33.8752389,-91.4798947
+7,Drew County Health Unit,940 Scogin DR,Monticello,AR,71655,(870) 367-6234 ,33.6088796,-91.816135
+8,Faulkner County Health Unit,811 N. Creek DR,Conway,AR,72033,(501) 450-4941 ,35.0960877,-92.4238436
+9,Franklin County Health Unit,312 North 13th Street,Ozark,AR,72949,(479) 667-2555 ,35.4902985,-93.8378607
+10,Fulton County Health Unit,510 S. Main St,Salem,AR,72576,(870) 895-3300 ,36.3603265,-91.8324095
+11,Garland County Health Unit,1425 Malvern Avenue,Hot Springs,AR,71901,(501) 624-3394 ,34.4982595,-93.0389022
+12,Grant County Health Unit,700 E. Center,Sheridan,AR,72150,(870) 942-3157 ,34.307227,-92.3946427
+13,Hempstead County Health Unit,808 W. 5th St,Hope,AR,71801,(870) 777-2191 ,33.6632962,-93.5998674
+14,Hot Springs County Health Unit,2204 Sullenberger,Malvern,AR,72104,(501) 332-6974 ,34.3578429,-92.7876229
+15,Howard County Health Unit,201 E. Hempstead,Nashville,AR,71852,(870) 845-2208 ,33.9422228,-93.84588
+16,Independence County Health Unit,120 Weaver Avenue,Batesville,AR,72501,(870) 793-8847 ,35.7674148,-91.5847297
+17,Izard County Health Unit,149 Haley St.,Melbourne,AR,72556,(870) 368-7790 ,36.0556993,-91.8947754
+18,Jackson County Health Unit,1505 N. Pecan,Newport,AR,72112,(870) 523-8968 ,35.620097,-91.264939
+19,Jefferson County Health Unit,2306 Rike Dr,Pine Bluff,AR,71611,(870) 535-2142 ,34.2085674,-92.0258649
+20,Johnson County Health Unit,6 Professional Park Dr,Clarksville,AR,72830,(479) 754-2949 ,35.461985,-93.4458559
+21,Lafayette County Health Unit,1113 Chestnut,Lewisville,AR,71845,(870) 921-5744 ,33.3656158,-93.5784809
+22,Lawrence County Health Unit,1050 W. Free St,Walnut Ridge,AR,72476,(870) 886-3201 ,36.0716883,-90.9660491
+23,Lee County Health Unit,141 North Hicky Rd,Marianna,AR,72360,(870) 295-2400 ,34.7662718,-90.7846277
+24,Lincoln County Health Unit,214 Lincoln St S,Star City,AR,71667,(870) 628-5121 ,33.9419659,-91.8436191
+25,Little River County Health Unit,150 Keller,Ashdown,AR,71822,(870) 898-3831 ,33.6729729,-94.1284672
+26,"Logan County North Health Unit
+Booneville",721 West 1st St,Booneville,AR,72927,(479) 675-2593 ,35.1383272,-93.9334279
+27,Logan County South Health Unit Paris 150 Lowder South,,Paris,AR,72855,(479) 963-6126 ,35.2923686,-93.7288123
+28,Lonoke County Health Unit Lonoke,306 Lincoln St N,Lonoke,AR,72086,(501) 676-2268 ,34.7786728,-91.9093755
+29,Madison County Health Unit,709 College,Huntsville,AR,72740,(479) 738-2612 ,36.0936509,-93.7366211
+30,Marion County Health Unit,707 Hwy 202 West HWY,Yellville,AR,72687,(870) 449-4259 ,36.2432537,-92.7021668
+31,Miller County Health Unit,503 Walnut,Texarkana,AR,71854,(870) 773-2108 ,33.4258311,-94.0419643
+32,Mississippi Co. Health Unit Blytheville 1299 10th St N,,Blytheville,AR,72316,(870) 763-7064 ,35.9323808,-89.9068219
+33,Mississippi Co. Health Unit Osceola,720 W. Lee,Osceola,AR,72370,(870) 563-2521 ,35.7004863,-89.9784924
+34,Monroe County Health Unit,306 King DR W,Brinkley,AR,72021,(870) 734-1461 ,34.9030216,-91.1956205
+35,Montgomery County Health Unit,346 Luzerne St,Mt Ida,AR,71957,(870) 867-2331 ,34.5522205,-93.6396212
+36,Nevada Co. Health Unit,1501 West First North,Prescott,AR,71857,(870) 887-2004 ,33.813094,-93.376524
+37,Newton County Health Unit,506 West Court St,Jasper,AR,72641,(870) 446-2216 ,36.005995,-93.1927812
+38,Ouachita Co. Health Unit,740 California Ave Sw,Camden,AR,71701,(870) 836-5033 ,33.5734309,-92.8361607
+39,Perry Co. Health Unit,1039 N. Fourche,Perryville,AR,72126,(501) 889-5156 ,35.0135642,-92.8003527
+40,Phillips Co. Health Unit,110 Shirley Hicks Dr,West Helena,AR,72390,(870) 572-9028 ,34.5246679,-90.637005
+41,Pike Co. Health Unit,15 Caddo Drive,Murfreesboro,AR,71958,(870) 285-3154 ,34.0640409,-93.6933293
+42,Poinsett Co. Health Unit Harrisburg,119 N. Main St,Harrisburg,AR,72432,(870) 578-4480 ,35.5634444,-90.7179089
+43,Poinsett Co. Health Unit Marked Tree 102 Liberty St,,Marked Tree,AR,72365,(870) 358-3615 ,35.5275998,-90.4209133
+44,Poinsett Co. Health Unit Trumann,1204 Main St W,Trumann,AR,72472,(870) 483-5762 ,35.6717963,-90.5234197
+45,Polk Co. Health Unit,702 Hornbeck,Mena,AR,71953,(479) 394-2707 ,34.5834284,-94.2246453
+46,Pope Co. Health Unit,203 Weir Rd,Russellville,AR,72802,(479) 968-6004 ,35.2799019,-93.1073752
+47,Prairie County Health Unit,204 Main Street,Des Arc,AR,72040,(870) 256-4430 ,34.9765253,-91.5021004
+48,"Pulaski County Health Unit Central-
+Little Rock",3915 8th St W,Little Rock,AR,72204,(501) 280-3100 ,34.7434497,-92.3173479
+49,Pulaski Co. Health Unit Jacksonville,3000 N. 1st,Jacksonville,AR,72076,(501) 982-7477 ,34.8919135,-92.103644
+50,"Pulaski Co. Health Unit North Little
+Rock",2800 Willow St,North Little Rock,AR,72114,(501) 791-8551 ,34.7805107,-92.2711179
+51,Randolph County Health Unit,1304 Pace Road,Pocahontas,AR,72455,(870) 892-5239 ,36.2503172,-90.9530795
+52,"St. Francis County Health Unit Forrest
+City",413 N. Division,Forrest City,AR,72335,(870) 633-1340 ,35.0110125,-90.78982
+53,Saline Co. Health Unit,1612 Edison AVE,Benton,AR,72015,(501) 303-5650 ,34.556488,-92.5677074
+54,Scott Co. Health Unit,10 S. Main Street,Waldron,AR,72958,(479) 637-2165 ,34.9005133,-94.091393
+55,Searcy County Health Unit,742 Airport RD,Marshall,AR,72650,(870) 448-3374 ,35.9000068,-92.6602765
+56,Sebastian Co. Health Unit,3112 S. 70th St,Fort Smith,AR,72903,(479) 452-8600 ,35.3516843,-94.3559844
+57,Sevier County Health Unit,304 N. 4th St,DeQueen,AR,71832,(870) 642-2535 ,34.0390216,-94.3411403
+58,Sharp County Health Unit,724 Ashflat DR,Ash Flat,AR,72513,(870) 994-7364 ,36.2284171,-91.6057428
+59,Stone County Health Unit,204 Whitfield St,Mountain View,AR,72560,(870) 269-3308 ,35.8674753,-92.1308229
+60,Union County Health Unit,301 American Rd,El Dorado,AR,71730,(870) 863-5101 ,33.2093542,-92.6298684
+61,Van Buren County Health Unit,526 Quality Dr,Clinton,AR,72031,(501) 745-2485 ,35.5714193,-92.4563582
+62,Washington County Health Unit,3270 Wimberly DR,Fayetteville,AR,72703,(479) 521-8181 ,36.1102166,-94.1534275
+63,White County Health Unit Beebe,306 Gum St N,Beebe,AR,72012,(501) 882-5128 ,35.0707469,-91.8854248
+64,White County Health Unit Searcy,112 Brantly RD,Searcy,AR,72143,(501) 268-6102 ,35.2069736,-91.7347552
+65,Yell County Health Unit Danville,1309 8th St E,Danville,AR,72833,(479) 229-3509 ,35.0541234,-93.381159
+66,Arkansas County Health Unit Dewitt,1616 S. Madison St,DeWitt,AR,72042,(870) 946-2934 ,34.2792791,-91.3393537
+67,"Arkansas County Health Unit
+Stuttgart",1602 N Buerkle RD,Stuttgart,AR,72160,(870) 673-1609 ,34.516591,-91.557139
+68,Ashley County Health Unit Crossett,1300 W. 5th AVE,Crossett,AR,71635,(870) 364-2115 ,33.1296063,-91.9791228
+69,Ashley County Health Unit Hamburg,401 N. Cherry,Hamburg,AR,71646,(870) 853-5525 ,33.2221665,-91.7946291
+70,Baxter County Health Unit,206 Bucher Dr,Mountain Home,AR,72653,(870) 425-3072 ,36.339444,-92.3961246
+71,Benton County Health Unit Rogers,1200 West Walnut St,Rogers,AR,72756,(479) 986-1300 ,36.3330287,-94.1338798
+72,Boone County Health Unit,1622 Campus DR,Harrison,AR,72601,(870) 743-5244 ,36.2182063,-93.0835677
+73,Bradley County Health Unit,208 Bragg St,Warren,AR,71671,(870) 226-8440 ,33.6126917,-92.078235
+74,Calhoun County Health Unit,1119 Prestress DR,Hampton,AR,71744,(870) 798-2808 ,33.5384389,-92.4526039
+75,Greene County Health Unit,801 Goldsmith Rd.,Paragould,AR,72451,(870) 236-7782 ,36.082332,-90.4748239
+76,"Yell County Health Department
+Dardanelle",719 N. 5th,Dardanelle,AR,72834,(479) 495-2741 ,35.2237649,-93.1622955
+77,Carroll County Health Unit,402 Hailey RD,Berryville,AR,72616,(870) 423-2923 ,36.359503,-93.548777
+78,"Chicot County Health Unit Lake
+Village",1742 Hwy. 65 & 82,Lake Village,AR,71653,(870) 265-2236 ,33.300785,-91.2795241
+79,Clark County Health Unit,605 10th St S,Arkadelphia,AR,71923,(870) 246-4471 ,34.1164213,-93.0586842
+80,Clay County Health Unit Piggott,1009 S. Garfield,Piggott,AR,72454,(870) 598-3390 ,36.3733898,-90.1847388
+81,Cleburne County Health Unit,2319 HWY 110 HWY W,Heber Springs,AR,72543,(501) 362-7581 ,35.4935254,-92.018538
+82,Cleveland County Health Unit,409 E. Magnolia,Rison,AR,71665,(870) 325-6311 ,33.9595978,-92.1862385
+83,Columbia County Health Unit,207 South Jefferson,Magnolia,AR,71753,(870) 235-3798 ,33.265515,-93.241982
+84,Lonoke County (Cabot),118 South First Sts,Cabot,AR,72086,(501) 843-7561 ,34.9730379,-92.0172095
+85,Clay County Health Unit Corning,301 North Missouri St N,Corning,AR,72422,(870) 857-6281 ,36.4141105,-90.5876388
+86,Desha County Health Unit,200 Ash St E,McGehee,AR,71654,(870) 222-3910 ,33.6345766,-91.3969785
+87,Central High School,1500 Park Street,Little Rock,AR,72202,(501) 280-3340 ,34.7367998,-92.2986873
+88,University of Arkansas Pine Bluff,1200 N University Drive,Pine Bluff,AR,71601,(870) 535-2142 ,34.2262213,-92.0195428
+89,Crittenden County Health Clinic,841 Ruth St,Earle,AR,72331,(870) 972-7393 ,35.2720929,-90.4717486
+90,Woodruff County Health Unit,623 N. 9th St N,Augusta,AR,72006,(870) 347-5915 ,35.2880967,-91.358028
+91,Benton County Health Unit,101 West University,Siloam Springs,AR,72761,(479) 549-3794 ,36.1862225,-94.5417134
+92,Washington County Health Unit,614 East Emma,Springdale,AR,72476,(479) 973-8484 ,36.1854151,-94.1230514
+93,"Pulaski County Health Unit-
+Southwest",8901 Dailey Drive,Little Rock,AR,72209,(501) 565-9311 ,34.6676017,-92.3545169
+94,Dollarway High School,4900 Dollarway Rd,Pine Bluff,AR,71602,(870) 535-2142 ,34.2406032,-92.0553782
+95,"Caring Hands Healthcare Centers, Inc.",3101 Elk Drive,McAlester,OK,74501,(918) 426-2442 ,34.8909286,-95.7725321
+96,"Community Health Connection, Inc.",2321 East 3rd Street,Tulsa,OK,74104,(918) 622-0641 http://www.communityhealthconnection.org ,36.1569033,-95.9587655
+97,"Community Health Connection, Inc.",2321 East 3rd Street,Tulsa,OK,74104,(918) 622-0641 http://www.communityhealthconnection.org ,36.1569033,-95.9587655
+98,"Community Health Connection, Inc.",9912 East 21st Street,Tulsa,OK,74129,(918) 710-4411 http://www.communityhealthconnection.org ,36.1328637,-95.8653141
+99,West Baton Rouge Parish Health Unit,685 Louisiana St,Port Allen,LA,70767,(225) 342-7525 http://www.healthychoicesla.org ,30.4605952,-91.2083015
+100,Assumption Parish Health Unit,158 Hwy. 1008,Napoleonville,LA,70390,(985) 369-6031 http://www.healthychoicesla.org ,29.9396998,-91.0299186
+101,"Lafourche Parish Health Unit -
+Galliano",133 W. 112th St,Cut Off,LA,70345,(985) 632-5567 http://www.healthychoicesla.org ,29.4780793,-90.3217779
+102,"Lafourche Parish Health Unit -
+Thibodaux",2535 Veterans Blvd,Thibodaux,LA,70301,(985) 447-0921 ,29.7714361,-90.8460913
+103,St. James Parish Health Unit,29170 Health Unit St,Vacherie,LA,70090,(225) 265-2181 http://www.healthychoicesla.org,29.9660981,-90.7133388
+104,St. John Parish Health Unit,473 Central Ave,Reserve,LA,70084,(985) 536-2172 http://www.healthychoicesla.org,30.0664077,-90.5522646
+105,St. Mary Parish Health Unit,1200 David Dr,Morgan City,LA,70380,(985) 380-2441 http://www.healthychoicesla.org,29.7081606,-91.1979372
+106,Terrebonne Parish Health Unit,600 Polk St,Houma,LA,70360,(985) 857-3601 http://www.healthychoicesla.org,29.5938295,-90.7343477
+107,Acadia Parish Health Unit,1029 Capitol Ave,Crowley,LA,70526,(337) 788-7507 http://www.healthychoicesla.org,30.2076488,-92.3986632
+108,Evangeline Parish Health Unit,1010 W. LaSalle St,Ville Platte,LA,70586,(337) 363-1135 http://www.healthychoicesla.org,30.6940625,-92.2848165
+109,Lafayette Parish Health Unit,220 W. Willow St,Lafayette,LA,70501,(337) 262-5616 http://www.healthychoicesla.org,30.24572,-92.0164
+110,St. Landry Parish Health Unit,308 W. Bloch St,Opelousas,LA,70750,(337) 948-0220 http://www.healthychoicesla.org,30.5384317,-92.0850936
+111,St. Martin Parish Health Unit,303 W. Port St,St Martinville,LA,70582,(337) 394-3097 http://www.healthychoicesla.org,30.1236462,-91.8346645
+112,Vermilion Parish Health Unit,2501 W. Charity St,Abbeville,LA,70510,(337) 893-1443 http://www.healthychoicesla.org,29.9724294,-92.1082923
+113,Beauregard Parish Health Unit,216 Evangeline St,Deridder,LA,70634,(337) 463-4486 http://www.healthychoicesla.org,30.8489712,-93.2733731
+114,"Calcasieu Parish Health Unit- Lake
+Charles",3236 Kirkman St,Lake Charles,LA,70601,(337) 478-6020 http://www.healthychoicesla.org ,30.1986963,-93.2106896
+115,Jefferson Davis Parish Health Unit,403 Baker St,Jennings,LA,70546,(337) 824-2193 http://www.healthychoicesla.org ,30.2148816,-92.6623185
+116,"Avoyelles Parish Health Unit -
+Marksville",657 Government St,Marksville,LA,71351,(318) 253-4528 http://www.healthychoicesla.org ,31.1153365,-92.0676111
+117,Avoyelles Parish Health Unit - Bunkie,406 Walnut Street St,Bunkie,LA,71322,(318) 346-2586 http://www.healthychoicesla.org,30.9513296,-92.1832341
+118,Catahoula Parish Health Unit,200 Third St,Jonesville,LA,71343,(318) 339-8352 http://www.healthychoicesla.org,31.6256736,-91.8143997
+119,Concordia Parish Health Unit,905 Mickey Gilley Ave,Ferriday,LA,71334,(318) 757-8633 http://www.healthychoicesla.org,31.6293727,-91.5611639
+120,Grant Parish Health Unit,340-A Webb Smith Dr,Colfax,LA,71417,(318) 627-3134 http://www.healthychoicesla.org,31.5246739,-92.685613
+121,LaSalle Parish Health Unit,1673 North Second St,Jena,LA,71342,(318) 992-4842 ,31.6853213,-92.1315197
+122,Rapides Parish Health Unit,5604-A Coliseum Blvd,Alexandria,LA,71303,(318) 487-5282 http://www.healthychoicesla.org,31.29661,-92.50514
+123,Vernon Parish Health Unit,406 W. Fertitta Blvd,Leesville,LA,71446,(337) 238-6410 http://www.healthychoicesla.org,31.1379675,-93.2678429
+124,Winn Parish Health Unit,301 West Main St,Winnfield,LA,71483,(318) 628-2148 http://www.healthychoicesla.org,31.9267021,-92.6406983
+125,Bienville Parish Health Unit- Arcadia,1285 Pine St,Arcadia,LA,71001,(318) 263-2125 http://www.healthychoicesla.org ,32.5489002,-92.9160093
+126,Bossier Parish Health Unit,3022 Old Minden Road,Bossier City,LA,71112,(318) 741-7314 http://www.healthychoicesla.org ,32.5216772,-93.6923964
+127,Caddo Parish Health Unit,1035 Creswell Ave,Shreveport,LA,71101,(318) 676-5222 http://www.healthychoicesla.org ,32.5020972,-93.741208
+128,Claiborne Parish Health Unit,624 West Main St,Homer,LA,71040,(318) 927-6127 http://www.healthychoicesla.org,32.793281,-93.055104
+129,Desoto Parish Health Unit,113 Jefferson St,Mansfield,LA,71052,(318) 872-0472 http://www.healthychoicesla.org,32.0373276,-93.7087927
+130,Natchitoches Parish Health Unit,625 Bienville St.,Natchitoches,LA,71457,(318) 357-3132 http://www.healthychoicesla.org,31.7515027,-93.0799964
+131,Red River Parish Health Unit,2015 Red Oak Road,Coushatta,LA,71019,(318) 932-4087 http://www.healthychoicesla.org,32.0139135,-93.3405459
+132,Sabine Parish Health Unit,1230 West Louisiana,Many,LA,71449,(318) 265-4105 http://www.healthychoicesla.org,31.5664731,-93.4770439
+133,Webster Parish Health Unit - Minden,1200 Homer Road,Minden,LA,71055,(318) 371-3030 http://www.healthychoicesla.org ,32.6246188,-93.2535083
+134,"Webster Parish Health Unit -
+Springhill",110 June Anthony,Springhill,LA,71075,(318) 539-4314 http://www.healthychoicesla.org,32.9990628,-93.4623166
+135,Caldwell Parish Health Unit,501 East Collins Rd.,Columbia,LA,71418,(318) 649-2393 http://www.healthychoicesla.org,32.0763599,-92.0940541
+136,Franklin Parish Health Unit,6614 Main St,Winnsboro,LA,71295,(318) 435-2143 http://www.healthychoicesla.org,32.1655099,-91.716327
+137,Jackson Parish Health Unit,228 Bond St,Jonesboro,LA,71251,(318) 259-6601 http://www.healthychoicesla.org,32.2391629,-92.6899784
+138,Madison Parish Health Unit,123 Bailey Road,Tallulah,LA,71282,(318) 574-3311 http://www.healthychoicesla.org,32.4060532,-91.172862
+139,Morehouse Parish Health Unit,650 School Road,Bastrop,LA,71220,(318) 283-0806 http://www.healthychoicesla.org,32.7726632,-91.9131451
+140,Richland Parish Health Unit,21 Lynn Gayle Robertson Rd,Rayville,LA,71269,(318) 728-5365 http://www.healthychoicesla.org,32.4591544,-91.7470917
+141,Union Parish Health Unit,1002 Marion Hwy,Farmerville,LA,71241,(318) 368-3157 http://www.healthychoicesla.org,32.7862759,-92.3910449
+142,West Carroll Parish Health Unit,402 Beale St,Oak Grove,LA,71263,(318) 428-9361 http://www.healthychoicesla.org,32.8591937,-91.3860816
+143,Livingston Parish Health Unit,20399 Government Blvd,Livingston,LA,70754,(225) 686-7017 http://www.healthychoicesla.org,30.4829391,-90.7502352
+144,"Tangipahoa Parish Health Unit -
+Amite",330 W. Oak St,Amite,LA,70422,(985) 748-2020 http://www.healthychoicesla.org ,30.7275618,-90.513951
+145,"Tangipahoa Parish Health Unit -
+Hammond",15481 W. Club Deluxe Road,Hammond,LA,70403,(985) 543-4165 http://www.healthychoicesla.org ,30.4769183,-90.4678817
+146,"Washington Parish Health Unit -
+Franklinton",120 Eleventh Street,Franklinton,LA,70438,(985) 839-5646 http://www.healthychoicesla.org ,30.8557028,-90.158858
+147,"Washington Parish Health Unit -
+Bogalusa",626 Carolina Ave,Bogalusa,LA,70427,(985) 732-6615 http://www.healthychoicesla.org ,30.7892798,-89.8544139
+148,"Jefferson Parish Health Unit -
+Marrero",1855 Ames Blvd,Marrero,LA,70072,(504) 349-8802 http://www.healthychoicesla.org ,29.882087,-90.1120582
+149,"Jefferson Parish Health Unit -
+Metairie",111 N. Causeway Blvd,Metairie,LA,70001,(504) 838-5100 http://www.healthychoicesla.org ,29.9753174,-90.1552773
+150,East Feliciana Parish Health Unit,12080 Marston St,Clinton,LA,70722,(225) 683-8551 http://www.healthychoicesla.org ,30.8630963,-91.023267
+151,Iberville Parish Health Unit,24705 Plaza DR,Plaquemine,LA,70764,(225) 687-9021 http://www.healthychoicesla.org ,30.2632577,-91.2470299
+152,Pointe Coupee Parish Health Unit,282-B Hospital Road,New Roads,LA,70760,(225) 638-7320 http://www.healthychoicesla.org,30.684164,-91.4632238
+153,Ouachita Parish Health Unit,1650 Desiard St,Monroe,LA,71201,(318) 361-7370 http://www.healthychoicesla.org,32.5094375,-92.1027651
+154,Iberia Parish Health Unit,715 B Weldon St,New Iberia,LA,70560,(337) 373-0021 http://www.healthychoicesla.org,29.990064,-91.811152
+155,Delgado Personal Health Center,571 N. Rampart St,New Orleans,LA,70112,(504) 658-2540 http://www.healthychoicesla.org,29.9595285,-90.0693862
+156,"Bienville Parish Health Unit -
+Ringgold",2145 Mill Street,Ringgold,LA,71068,(318) 263-2125 http://www.healthychoicesla.org ,32.3279834,-93.2866996
+157,Lincoln Parish Health Unit,405 East Georgia Ave,Ruston,LA,71270,(318) 251-4120 http://www.healthychoicesla.org ,32.531433,-92.633234
+158,East Carroll Parish Health Unit,403 Second Street,Lake Providence,LA,71254,(318) 559-2012 http://www.healthychoicesla.org ,32.8030415,-91.1734735
+159,Allen Parish Health Unit,145 Hospital Drive,Oakdale,LA,71463,(318) 335-1147 ,30.817091,-92.6449087
+160,Cameron Parish Health Unit,107 Recreation Center Lane,Cameron,LA,70631,(337) 775-5368 http://www.healthychoicesla.org ,29.7998927,-93.3242126
+161,AHL- St. Bernard,8050 W. Judge Perez Drive,Chalmette,LA,70043,(504) 281-2800 https://accesshealthla.org/location/st-bernard-chalmette/ ,29.9546224,-89.9891606
+162,AHL- St. Charles,843 Milling Avenue,Luling,LA,70070,(985) 785-5800 https://accesshealthla.org/location/st-charles-luling/ ,29.9231571,-90.3694244
+163,AHL- St. Tammany,501 Robert Boulevard,Slidell,LA,70458,(985) 607-0400 https://accesshealthla.org/location/st-tammany-slidell/ ,30.3003246,-89.7571947
+164,RKM- Springfield,27124 Louisiana 42,Springfield,LA,70462,(225) 395-8022 https://www.rkmcare.org/rkm-springfield/ ,30.4327501,-90.5563663
+165,Southeast Women's Healthcare,8595 Picardy Avenue,Baton Rouge,LA,70809,"http://southeastcommunityhealthsystems.org/main/womens_health 
+(225) 763-4990 ",30.3933796,-91.0944012
+166,"Southeast Community Health
+Systems- Greensburg",490 Sitman,Greensburg,LA,70441,"http://southeastcommunityhealthsystems.org/main/home 
+(225) 306-2070 ",30.8302898,-90.6660021
+167,Drop-In Clinic at Covenant House,611 North Rampart Street,New Orleans,LA,70112,(504) 584-1112 ,29.9602247,-90.0690156
+168,"Tulane Doctors: Adolescent and Young
+Adult Clinic",711 N. Broad Street,New Orleans,LA,70119,(504) 584-1112 ,29.9707771,-90.0832738
+169,Grants Public Health Office,"700 E. Roosevelt, Suite 100",Grants,NM,87020,(505) 285-4601 ,35.14726,-107.8514466
+170,Los Lunas Public Health Office,445 Camino Del Rey,Los Lunas,NM,87031,(505) 841-5315 ,34.8111405,-106.7613377
+171,Moriarty Public Health Office,1110 Rte. 66,Moriarty,NM,87732,(505) 832-6782 ,34.9900503,-106.0491893
+172,Northwest Valley Public Health Office 7704 2nd St. NW,,Albuquerque,NM,87107,(505) 897-5700 ,35.093229,-106.553612
+173,"Southeast Heights Public Health
+Office",7525 Zuni SE,Albuquerque,NM,87108,(505) 841-8928 ,35.0730659,-106.5640091
+174,Southwest Valley Public Health Office,2001 N. Centro Familiar SW,Albuquerque,NM,87105,(505) 873-7477 ,35.0460145,-106.6822454
+175,"Northeast Heights Public Health
+Office",8120 La Mirada Pl. NE,Albuquerque,NM,87109,(505) 332-4850 ,35.1274612,-106.5534052
+176,Santa Fe Public Health Office,605 Letrado Street,Santa Fe,NM,87505,(505) 476-2607 ,35.6712954,-105.9503715
+177,Clayton Public Health Office,100 Court Street,Clayton,NM,88415,(575) 374-8393 ,36.4499323,-103.1872877
+178,Espanola Public Health Office,2010 Industrial Park Rd,Espanola,NM,87532,(505) 753-2794 ,36.0072485,-106.1067479
+179,Las Vegas Public Health Office,18 Gallegos Rd,Las Vegas,NM,87701,(505) 454-1474 ,35.6040402,-105.2416712
+180,Los Alamos Public Health Office,1183 Diamond Dr,Los Alamos,NM,87544,(505) 662-4038 ,35.8861719,-106.3184653
+181,Mora Public Health Office,"Highway 518, North Ranger
+Drive",Mora,NM,87732,(575) 387-2748 ,35.9742227,-105.3300057
+182,Raton Public Health Office,226 E. 4th Avenue,Raton,NM,87740,(575) 445-3601 ,36.8974351,-104.429536
+183,Taos Public Health Office,1400 Weimer Rd,Taos,NM,87571,(575) 758-4719 ,36.3668464,-105.5774156
+184,Las Cruces Public Health Office,1170 N. Solano,Las Cruces,NM,88001,(575) 528-5023 ,32.3207648,-106.7703693
+185,Alamogordo Public Health Office,1207 8th St,Alamogordo,NM,88310,(575) 437-9340 ,32.8980839,-105.9469923
+186,Anthony Public Health Office,865 N. Main St,Anthony,NM,88021,(575) 882-5858 ,32.00068,-106.606026
+187,Deming Public Health Office,215 S. Silver St,Deming,NM,88030,(575) 546-2771 ,32.2671366,-107.7568202
+188,Chaparral Public Health Office,317 McCombs Dr,Chaparral,NM,88081,(575) 824-3454 ,32.021556,-106.4086123
+189,Lordsburg Public Health Office,530 DeMoss St,Lordsburg,NM,88045,(575) 542-9391 ,32.3395187,-108.7094074
+190,Silver City Public Health Office,2610 N. Silver St,Silver City,NM,88061,(575) 538-5318 ,32.7930021,-108.2662878
+191,Sunland Park Public Health Office,3807 McNutt Rd,Sunland Park,NM,88063,(575) 589-0805 ,31.8138501,-106.596022
+192,T or C Public Health Office,201 E. 4th,"Truth or
+Consequences",NM,87901,(575) 894-2716 ,33.133868,-107.248945
+193,Artesia Public Health Office,1001 Memorial DR,Artesia,NM,88210,(575) 746-9819 ,32.8476226,-104.4087001
+194,Carlsbad Public Health Office,1306 W. Stevens,Carlsbad,NM,88220,(575) 885-4191 ,32.4220423,-104.243137
+195,Clovis Public Health Office,1216 Cameo,Clovis,NM,88101,(575) 763-5583 ,34.4103904,-103.2237048
+196,Fort Sumner Public Health Office,643 North 5th Street,Fort Sumner,NM,88119,(575) 355-2362 ,34.4721344,-104.2441129
+197,Hobbs Public Health Office,1923 N. Dal Paso St.,Hobbs,NM,88240,(575) 397-2463 ,32.7213323,-103.1281742
+198,Lovington Public Health Office,302 N. Fifth St,Lovington,NM,88260,(575) 396-2853 ,32.9502401,-103.3546334
+199,Portales Public Health Office,1513 W. Fir,Portales,NM,88130,(575) 356-4453 ,34.1859449,-103.3530903
+200,Ruidoso Public Health Office,111 Kansas City Rd,Ruidoso,NM,88345,(575) 258-3252 ,33.3502422,-105.6611977
+201,Santa Rosa Public Health Office,"117 Camino de Vida, Suite
+400",Santa Rosa,NM,88435,(575) 472-3211 ,34.9299667,-104.6932607
+202,Tucumcari Public Health Office,310 S. Second street,Tucumcari,NM,88401,(575) 461-2610 ,35.1768927,-103.7261185
+203,Roswell Public Health Office,200 E. Chisum,Roswell,NM,88203,(575) 624-6050 ,33.3758085,-104.5192399
+204,"Midtown Public Health Office
+(MTPHO)",2400 Wellesley Dr. NE,Albuquerque,NM,87107,(505) 841-4100 ,35.1078225,-106.6067506
+205,Socorro Public Health Office,214 Neal Ave. NW,Socorro,NM,87801,(575) 835-0971 ,34.0625292,-106.8911535
+206,Belen Public Health Office,617 Becker Ave,Belen,NM,87002,(505) 864-7743 ,34.6603695,-106.7753692
+207,Bloomfield Public Health Office,903 W. Broadway,Bloomfield,NM,87413,(505) 634-0229 ,36.710922,-107.9901986
+208,Cuba Public Health Office,6362 Highway 550,Cuba,NM,87013,(575) 289-3718 ,36.014362,-106.9636
+209,Farmington Public Health Office,355 S. Miller,Farmington,NM,87401,(505) 327-4461 ,36.7259435,-108.2032324
+210,Gallup Public Health Office,1919 College Dr,Gallup,NM,87301,(505) 722-4391 ,35.5070532,-108.7288821
+211,"Bernalillo Co. Metropolitan 100 Deputy Dean Miera Drive
+Detention Center Public Health Office SW",,Albuquerque,NM,87151,(505) 634-0229 ,34.9596541,-106.888644
+212,Sandoval Public Health Office,1500 Idalia Rd.,Bernalillo,NM,87004,(505) 867-2291 ,35.3090474,-106.5848714
+213,"Southwest Valley Public Health Office-
+Robert F Kennedy School Based
+Health Center",4300 Blake Rd SW,Albuquerque,NM,87121,(505) 243-1118 ,35.0363872,-106.7231611
+214,"Southwest Valley Public Health Office-
+School on Wheels",129 Hartline Rd SW,Albuquerque,NM,87105,(505) 243-2395 ,35.0688114,-106.6688803
+215,"Sandoval Public Health Office-
+Bernalillo SBHC",148 Spartan Alley,Bernalillo,NM,87004,(505) 404-5236 ,35.3182202,-106.5408443
+216,"Southwest Valley Public Health Office-
+ACE Leadership SBHC",1240 Bellamah Avenue NW,Albuquerque,NM,87104,(505) 770-4520 ,35.1012857,-106.6610984
+217,"Las Clinicas del Norte- Mesa Vista
+High School","Hwy 285, State Road 11",Ojo Caliente,NM,87549,(505) 583-2401 ,39.6525818,-104.9893608
+218,Las Clinicas del Norte- Abiquiu Clinic,Highway 84 #21124,Abiquiu,NM,87510,(505) 685-4479 ,36.2079131,-106.3109188
+219,"Las Clinicas del Norte- Pojoaque
+School Based Health Clinic",1574 State Rd. 502,Santa Fe,NM,87506,(505) 455-4026 ,35.8773856,-106.0660458
+220,"Presbyterian Medical Services- Teen
+Health Centers Santa Fe High School",2100 Yucca St,Santa Fe,NM,87505,(505) 467-2439 ,35.6501516,-105.9719669
+221,"Presbyterian Medical Services- Teen
+Health Centers Capital High School",4851 Paseo Del Sol,Santa Fe,NM,87507,(505) 467-1081 ,35.6222058,-106.0422782
+222,"La Familia Medical Center - Southside
+Clinic",2145 Caja Del Oro Grant Rd,Santa Fe,NM,87507,(505) 438-3195 ,35.6584007,-106.0264272
+223,"La Familia Medical Center-
+Healthcare for the Homeless",1532 B Cerrillos Rd,Santa Fe,NM,87505,(505) 988-1742 ,35.6680411,-105.9678074
+224,"La Familia Medical Center - Alto
+Street Clinic",1035 Alto Street,Santa Fe,NM,87501,(505) 982-4425 ,35.6863132,-105.9597104
+225,"UNM-Health Science Center
+Maternal & Family Planning- New
+Futures",5400 Cutler NE,Albuquerque,NM,87110,(505) 272-2220 ,35.1046586,-106.5844917
+226,"UNM-Health Science Center
+Maternal & Family Planning-
+Northwest Valley",1231 Candelaria NW,Albuquerque,NM,87107,(505) 272-2158 ,35.1232318,-106.6564756
+227,"UNM-Health Science Center
+Maternity & Family Planning- South
+Broadway","1500 Walter St SE, Ste 142",Albuquerque,NM,87102,(505) 272-2156 ,35.0682971,-106.6414193
+228,"UNM-Health Science Center
+Maternal & Family Planning- West
+Mesa",6900 Gonzales Rd,Albuquerque,NM,87121,(505) 272-2154 ,35.0712788,-106.7108442
+229,"Western NM University-Student
+Health",1001 W. College Ave,Silver City,NM,88061,(575) 538-6015 ,32.774994,-108.2834062
+230,"First Nations Community Health
+Source-Truman Health Center",625 Truman Street NE,Albuquerque,NM,87110,(505) 248-2990 ,35.0886131,-106.5878262
+231,First Nations Zuni Clinic,5608 Zuni Road SE,Albuquerque,NM,87108,(505) 262-2482 ,35.0725906,-106.5834062
+232,"First Nations Community Health
+Source - Native American
+Community Academy",1000 Indian School Road NW,Albuquerque,NM,87104,(505) 266-0992 ,35.108065,-106.6549064
+233,"UNM School Based Health Center-
+Albuquerque High School Teen
+Health Center",800 Odelia Rd. NE,Albuquerque,NM,87102,(505) 244-1330 ,35.096572,-106.6356697
+234,"UNM School Based Health Center-
+Highland High School Health Center",4700 Coal SE,Albuquerque,NM,87108,(505) 256-3363 ,35.0745148,-106.5911943
+235,"UNM School Based Health Center-
+Manzano High School","12200 Lomas Blvd, NE",Albuquerque,NM,87112,(505) 292-0090 ,35.0846995,-106.5109341
+236,Garfield Co. Health Dept.,2501 Mercer Dr.,Enid,OK,73701,(580) 233-0650 http://garfield.health.ok.gov ,36.3703209,-97.8885058
+237,Atoka Co. Health Dept.,1006 W. 13th Street,Atoka,OK,74525,"https://www.ok.gov/health/County_Health_Departments/Atoka_County_Health_Department/ 
+(580) 889-2116 ",34.374264,-96.1447945
+238,Beckham Co. Health Dept.,400 E. 3rd,Elk City,OK,73644,(580) 225-1173 http://beckham.health.ok.gov ,35.4112531,-99.4013954
+239,Caddo Co. Health Dept.,216 West Broadway,Anadarko,OK,73005,"https://www.ok.gov/health/County_Health_Departments/Caddo_County_Health_Department/ 
+(405) 247-2507 ",35.0746639,-98.2463695
+240,Carter Co. Health Dept.,173 Franklin,Healdton,OK,73438,"https://www.ok.gov/health/County_Health_Departments/Carter_County_Health_Department/ 
+(580) 229-1291 ",34.2337854,-97.4875536
+241,Choctaw Co. Health Dept.,103 South 4th St,Hugo,OK,74743,(580) 326-8821 http://choctaw.health.ok.gov ,34.0089246,-95.5080486
+242,Cleveland Co. Health Dept.-Moore,424 South Eastern,Moore,OK,73160,(405) 794-1591 http://cleveland.health.ok.gov ,35.3349475,-97.4744871
+243,Cotton Co. Health Dept.,1501-A South 7th St,Walters,OK,73572,"https://www.ok.gov/health/County_Health_Departments/Cotton_County_Health_Department/ 
+(580) 875-6121 ",34.3476643,-98.3132729
+244,Custer Co. Health Dept.-Weatherford 220 North Bradley St,,Weatherford,OK,73096,"https://www.ok.gov/health/County_Health_Departments/Custer_County_Health_Department/ 
+(580) 772-6417 ",35.5261633,-98.7075744
+245,Garvin Co. Health Dept.,1809 South Chickasaw,Pauls Valley,OK,73075,"https://www.ok.gov/health/County_Health_Departments/Garvin_County_Health_Department/ 
+(405) 238-7346 ",34.7183981,-97.2137053
+246,Beaver Co. Health Dept.,Highway 270 South,Beaver,OK,73932,"https://www.ok.gov/health/County_Health_Departments/Atoka_County_Health_Department/ 
+(580) 625-3693 ",36.8003764,-100.5193018
+247,Blaine Co. Health Dept.,521 West 4th St,Watonga,OK,73772,(580) 623-7977 http://blaine.health.ok.gov ,35.8485033,-98.4184437
+248,Canadian Co. Health Dept.,100 South Rock Island AVE,El Reno,OK,73036,(405) 262-0042 http://canadian.health.ok.gov ,35.5330088,-97.9530291
+249,Carter Co. Health Dept. Ardmore,405 S. Washington St,Ardmore,OK,73401,"https://www.ok.gov/health/County_Health_Departments/Carter_County_Health_Department/ 
+(580) 223-9705 ",34.1672418,-97.1316472
+250,Coal Co. Health Dept.,1404 South Broadway,Coalgate,OK,74538,(580) 927-2367 ,34.5263774,-96.2196991
+251,Creek Co. Health Dept.-Sapulpa,1808 South Hickory St,Sapulpa,OK,74066,(918) 224-5531 http://creek.health.ok.gov ,35.9778841,-96.1208098
+252,Delaware Co. Health Dept.,432 S. 9th Street,Jay,OK,74346,(918) 253-4511 http://delaware.health.ok.gov ,36.419174,-94.8018696
+253,Grady Co. Health Dept.,2116 Iowa St,Chickasha,OK,73018,"https://www.ok.gov/health/County_Health_Departments/Grady_County_Health_Department/ 
+(405) 224-2022 ",35.0490753,-97.9610438
+254,Greer Co. Health Dept.,2100 North Louis Tittle,Mangum,OK,73554,(580) 782-5531 http://greer.health.ok.gov ,34.8906149,-99.5024342
+255,Jackson Co. Health Dept.,401 West Tamarack RD,Altus,OK,73521,(580) 482-7308 http://jackson.health.ok.gov ,34.666802,-99.3384827
+256,Kay Co. Health Dept.,433 Fairview,Ponca City,OK,74601,"https://www.ok.gov/health/County_Health_Departments/Kay_County_Health_Department/ 
+(580) 762-1641 ",36.729653,-97.0687517
+257,Kiowa Co. Health Dept.,431 West Elm St,Hobart,OK,73651,"https://www.ok.gov/health/County_Health_Departments/Kiowa_County_Health_Department/ 
+(580) 726-3316 ",35.0368069,-99.0977379
+258,Leflore Co. Health Dept.,1204 Dewey Avenue,Poteau,OK,74953,"https://www.ok.gov/health/County_Health_Departments/LeFlore_County_Health_Department/ 
+(918) 647-8601 ",35.0454218,-94.614437
+259,Lincoln Co. Health Dept.,101 Meadow LN,Chandler,OK,74834,(405) 258-2640 http://lincoln.health.ok.gov ,35.710237,-96.8544189
+260,Love Co. Health Dept.,200 C. E. Colston DR,Marietta,OK,73448,(580) 276-2531 ,33.9421636,-97.1312476
+261,Mayes Co. Health Dept.,111 N.E. 1st St,Pryor,OK,74361,(918) 825-4224 http://mayes.health.ok.gov ,36.3102442,-95.3165813
+262,Harmon Co. Health Dept.,1104 North 7th St,Hollis,OK,73550,(580) 688-3348 http://harmon.health.ok.gov ,34.6925665,-99.9136968
+263,Haskell Co. Health Dept.,1407 Northeast D St,Stigler,OK,74462,"https://www.ok.gov/health/County_Health_Departments/Haskell_County_Health_Department/ 
+(918) 967-3304 ",35.2584589,-95.1097835
+264,Jefferson Co. Health Dept.,107 East Anderson AVE,Waurika,OK,73573,"https://www.ok.gov/health/County_Health_Departments/Jefferson_County_Health_Department/ 
+(580) 228-2313 ",34.162574,-98.0006957
+265,Kay Co. Health Dept.-Blackwell,1706 South Main St,Blackwell,OK,74631,"https://www.ok.gov/health/County_Health_Departments/Kay_County_Health_Department/ 
+(580) 363-5520 ",36.7852821,-97.282863
+266,Latimer Co. Health Dept.,201 West Main St,Wilburton,OK,74578,"https://www.ok.gov/health/County_Health_Departments/Latimer_County_Health_Department/ 
+(918) 465-5673 ",34.9190799,-95.3118433
+267,Major Co. Health Dept.,501 East Broadway,Fairview,OK,73737,(580) 227-3362 http://major.health.ok.gov ,36.2695161,-98.4746007
+268,McClain Co. Health Dept.-Blanchard,600 North Main,Blanchard,OK,73010,(405) 485-3319 http://mcclain.health.ok.gov ,35.1419246,-97.6583212
+269,Grant Co. Health Dept.,115 North Main St,Medford,OK,73759,(580) 395-2906 http://grant.health.ok.gov ,36.8076709,-97.735366
+270,Harper Co. Health Dept.,"7th & Oklahoma, Ste. 9",Laverne,OK,73848,"https://www.ok.gov/health/County_Health_Departments/Harper_County_Health_Department/ 
+(580) 921-2029 ",36.7097549,-99.8934612
+271,Hughes Co. Health Dept.,200 McDougal DR,Holdenville,OK,74848,(405) 379-3313 http://hughes.health.ok.gov ,35.0889128,-96.3800813
+272,Johnston Co. Health Dept.,1080 South Byrd,Tishomingo,OK,73460,(580) 371-2470 http://johnston.health.ok.gov ,34.2233144,-96.6752819
+273,Kingfisher Co. Health Dept.,124 East Sheridan AVE,Kingfisher,OK,73750,(405) 375-3008 http://kingfisher.health.ok.gov ,35.8601226,-97.9322137
+274,Logan Co. Health Dept.,215 Fairgrounds RD,Guthrie,OK,73044,(405) 282-3485 http://logan.health.ok.gov ,35.8658263,-97.4271083
+275,Marshall Co. Health Dept.,310 West Lillie Blvd.,Madill,OK,73446,(580) 795-3705 http://marshall.health.ok.gov ,34.0911695,-96.773784
+276,McClain Co. Health Dept.,919 North 9th AVE,Purcell,OK,73080,(405) 527-6541 ,35.0229564,-97.3716141
+277,McIntosh Co. Health Dept.-Checotah,211 West Gentry AVE,Checotah,OK,74426,"https://www.ok.gov/health/County_Health_Departments/McIntosh_County_Health_Department/ 
+(918) 473-5416 ",35.4700842,-95.5223578
+278,Noble Co. Health Dept.,300 East Fir St,Perry,OK,73077,"https://www.ok.gov/health/County_Health_Departments/Noble_County_Health_Department/ 
+(580) 336-2257 ",36.2892498,-97.2690369
+279,Pawnee Co. Health Dept.,1390 West Cherokee St,Cleveland,OK,74020,"https://www.ok.gov/health/County_Health_Departments/Pawnee_County_Health_Department/ 
+(918) 358-2546 ",36.3075843,-96.4788598
+280,Payne Co. Health Dept.,1026 N. Linwood AVE,Cushing,OK,74023,"https://www.ok.gov/health/County_Health_Departments/Payne_County_Health_Department/ 
+(918) 225-3377 ",35.9906999,-96.748666
+281,Pontotoc Co. Health Dept.,2330 Arlington Street,Ada,OK,74820,(580) 332-2011 ,34.7826878,-96.6427422
+282,Pushmataha Co. Health Dept.-Antlers 318 W. Main St,,Antlers,OK,74523,(580) 298-6624 http://pushmataha.health.ok.gov ,34.231212,-95.6202476
+283,McCurtain Co. Health Dept.,1400 S. Lynn LN,Idabel,OK,74745,"https://www.ok.gov/health/County_Health_Departments/McCurtain_County_Health_Department/ 
+(580) 286-6628 ",33.8837914,-94.8085715
+284,Murray Co. Health Dept.,730 Cambridge Dr.,Sulphur,OK,73086,"(580) 622-3716 https://www.ok.gov/health/County_Health_Departments
+/Murray_County_Health_Department/",34.5049448,-96.995127
+285,Okfuskee Co. Health Dept.,125 North 2nd St,Okemah,OK,74859,(918) 623-1800 http://okfuskee.health.ok.gov,35.4323729,-96.3025729
+286,Okmulgee Co. Health Dept.,1304 R. D. Miller DR,Okmulgee,OK,74447,"(918) 756-1883 https://www.ok.gov/health/County_Health_Departments
+/Okmulgee_County_Health_Department/",35.6123683,-95.9537695
+287,Pawnee Co. Health Dept.-Pawnee,639 7th St,Pawnee,OK,74058,"(918) 762-3643 https://www.ok.gov/health/County_Health_Departments
+/Pawnee_County_Health_Department/",36.3369904,-96.8058578
+288,Pottawatomie Co. Health Dept.,1904 Gordon Cooper DR,Shawnee,OK,74801,(405) 273-2157 http://pottawatomie.health.ok.gov,35.2974556,-96.9262386
+289,Rogers Co. Health Dept.,2664 N. Hwy. 88,Claremore,OK,74017,(918) 341-3166 http://rogers.health.ok.gov,36.3332538,-95.6310568
+290,McIntosh Co. Health Dept.,29 Hospital RD,Eufaula,OK,74432,"(918) 689-7774 https://www.ok.gov/health/County_Health_Departments
+/McIntosh_County_Health_Department/",35.3089312,-95.5931159
+291,Muskogee Co. Health Dept.,530 South 34th St,Muskogee,OK,74401,(918) 683-0321 http://muskogee.health.ok.gov,35.7480206,-95.4045086
+292,Ottawa Co. Health Dept.,1930 North Elm St,Miami,OK,74354,(918) 540-2481 http://ottawa.health.ok.gov,36.8966057,-94.8590276
+293,Payne Co. Health Dept.-Stillwater,1321 West 7th AVE,Stillwater,OK,74074,"(405) 372-8200 https://www.ok.gov/health/County_Health_Departments
+/Payne_County_Health_Department/",36.1142128,-97.0745464
+294,Pittsburg Co. Health Dept.,1400 East College AVE,McAlester,OK,74501,"(918) 423-1267 https://www.ok.gov/health/County_Health_Departments
+/Pittsburg_County_Health_Department/",34.9331114,-95.7486608
+295,Pushmataha Co. Health Dept.,Hwy. 2 and Cherokee St.,Clayton,OK,74536,(918) 569-7973 ,34.585337,-95.354994
+296,Seminole Co. Health Dept.,1900 Boren BLVD,Seminole,OK,74868,(405) 382-4369 http://seminole.health.ok.gov ,35.2407697,-96.6952672
+297,Seminole Co. Health Dept.-Wewoka,200 South Brown,Wewoka,OK,74884,(405) 257-5401 http://seminole.health.ok.gov ,35.1576489,-96.4890195
+298,Texas Co. Health Dept.,1410 North East St,Guymon,OK,73942,"https://www.ok.gov/health/County_Health_Departments/Texas_County_Health_Department/ 
+(580) 338-8544 ",36.6920279,-101.4746528
+299,Wagoner Co. Health Dept.,212 North Pierce,Wagoner,OK,74467,"https://www.ok.gov/health/County_Health_Departments/Wagoner_County_Health_Department/ 
+(918) 485-3022 ",35.9619056,-95.3866589
+300,Sequoyah Co. Health Dept.,612 North Oak St,Sallisaw,OK,74955,(918) 775-6201 http://sequoyah.health.ok.gov ,35.4630409,-94.7887199
+301,Tillman Co. Health Dept.,1500 North Main St,Frederick,OK,73542,(580) 335-2163 http://tillman.health.ok.gov ,34.4054473,-99.0155882
+302,Wagoner Co. Heath Dept.-Coweta,"28596 E 141 St., South",Coweta,OK,74429,"https://www.ok.gov/health/County_Health_Departments/Wagoner_County_Health_Department/ 
+(918) 486-2845 ",35.9587243,-95.6575445
+303,Stephens Co. Health Dept.,1401 Bois D'arc,Duncan,OK,73533,"https://www.ok.gov/health/County_Health_Departments/Stephens_County_Health_Department/ 
+(580) 252-0270 ",34.4928466,-97.9297132
+304,Woodward Co. Health Dept.,1631 Texas St,Woodward,OK,73801,"https://www.ok.gov/health/County_Health_Departments/Woodward_County_Health_Department/ 
+(580) 256-6416 ",36.4345278,-99.4003855
+305,Woods Co. Health Dept.,511 Barnes Street,Alva,OK,73717,(580) 327-3192 http://woods.health.ok.gov ,36.8035936,-98.6658377
+306,Adair Co. Health Dept.,600 West Hickory,Stilwell,OK,74960,(918) 696-7292 http://adair.health.ok.gov ,35.8117461,-94.6345397
+307,Beckham Co. Health Dept. Sayre,115 South 4th,Sayre,OK,73662,(580) 928-5551 ,35.2905138,-99.6404612
+308,Bryan Co. Health Dept.,1524 W. Chuckwa,Durant,OK,74702,(580) 924-4285 http://bryan.health.ok.gov ,34.0088368,-96.3925664
+309,Canadian Co. Health Dept. Yukon,1023 East Vandament AVE,Yukon,OK,73099,"https://www.ok.gov/health/County_Health_Departments/Canadian_County_Health_Department/ 
+(405) 354-4872 ",35.4939033,-97.7310191
+310,Cherokee Co. Health Dept.,912 South College AVE,Tahlequah,OK,74464,(918) 456-8826 http://cherokee.health.ok.gov ,35.90321,-94.976858
+311,Cleveland Co. Health Dept.,250 12th Ave. N.E.,Norman,OK,73071,(405) 321-4048 http://cleveland.health.ok.gov ,35.2217009,-97.4252072
+312,Comanche Co. Health Dept.,1010 South Sheridan Rd.,Lawton,OK,73501,(580) 248-5890 http://comanche.health.ok.gov ,34.597848,-98.4212496
+313,Creek Co. Health Dept.,408 West 4th AVE,Bristow,OK,74010,(918) 367-3341 http://creek.health.ok.gov ,35.8305411,-96.3977873
+314,Custer Co. Health Dept.,3030 Custer AVE,Clinton,OK,73601,(580) 323-2100 http://custer.health.ok.gov ,35.5154235,-98.999037
+315,Osage County Health Dept.,1115 S.E. 15th Street,Pawhuska,OK,74056,"https://www.ok.gov/health/County_Health_Departments/Osage_County_Health_Department/ 
+(918) 287-3740 ",36.672821,-96.3251836
+316,"Washington County Health
+Department",5121 SE Jacquelyn Lane,Bartlesville,OK,74006,"https://www.ok.gov/health/County_Health_Departments/Washington_County_Health_Department/ 
+(918) 335-3005 ",36.7413414,-95.9202514
+317,Craig County Health Department,115 East Delaware,Vinita,OK,74301,"https://www.ok.gov/health/County_Health_Departments/Craig_County_Health_Department/ 
+(918) 256-7531 ",36.6347796,-95.1565548
+318,Central Regional Health Center,315 S. Utica AVE,Tulsa,OK,74104,(918) 582-9355 http://www.tulsa-health.org ,36.1558978,-95.9662399
+319,Collinsville Community Health Center,1201 West Center,Collinsville,OK,74021,(918) 596-8650 http://www.tulsa-health.org ,36.3632779,-95.8395254
+320,"North Regional Health and Wellness
+Center","5635 N. Martin Luther King Jr.
+Blvd.",Tulsa,OK,74126,(918) 582-9355 http://www.tulsa-health.org ,36.2360583,-95.9919988
+321,"Sand Springs Community Health
+Center",306 E. Broadway,Sand Springs,OK,74063,(918) 591-6100 ,36.1393608,-96.1056167
+322,"Project Vida Health Center - Canutillo
+Health Center",7000 5th St.,Canutillo,TX,79835,(915) 533-7057 ,31.9134026,-106.5945946
+323,"Project Vida Health Center - Sierra
+Blanca Family Health Center",500 E. Walling,Sierra Blanca,TX,79851,(915) 533-7057 ,31.1829043,-105.3540332
+324,"Project Vida Health Center - Dell City
+Health Outreach Center",104 S. Dodson St.,Dell City,TX,79837,(915) 533-7057 ,31.9386176,-105.2038305
+325,"Access Esperanza Clinics Inc-South
+Texas College Mid-Valley Campus",400 North Border Avenue,McAllen,TX,78501,(956) 973-1013 http://www.accessclinics.org/ ,26.207313,-98.2286813
+326,"University of Texas Health Austin -
+Women's Health Institute","Health Transformation
+Building",Austin,TX,78712,(833) 882-2737 ,30.2772353,-97.7350502
+327,"Women's Health Care Center, Inc -
+South Buckner Clinic",2914 S. Buckner Blvd. Ste. B,Dallas,TX,75227,(214) 703-6527 ,32.7614744,-96.6820803
+328,"Women's Health Care Center -
+Moore Clinic","617 West Moore Avenue Ste.
+B",Terrell,TX,75160,(214) 703-6527 ,32.7368983,-96.2844866
+329,"Women's Health Care Center, Inc. -
+Broadway-Garland Clinic",5505 Broadway Boulevard,Garland,TX,75043,(214) 703-6527 ,32.8478885,-96.5972139
+330,"Abilene-Taylor Public Health District -
+MERCY Health Care Center",1902 Shelton St,Abilene,TX,79603,(325) 676-6634 ,32.47079,-99.7539718
+331,"Special Health Resources for Texas -
+Woman and Child Health Center",402 North Seventh Street,Longview,TX,75601,(903) 212-7158 ,32.4969404,-94.7274698
+332,"Special Health Resources - Jim Meyer
+Comprehensive Health Clinic",410 N. Fourth Street,Longview,TX,75601,(903) 212-7833 http://www.specialhealth.org/locations/ ,32.4968953,-94.7310269
+333,"Special Health Resources for Texas -
+True North Health Center",1013 College Avenue,Jacksonville,TX,75766,(903) 541-2571 ,31.9518049,-95.2770391
+334,"Special Health Resources for Texas -
+Paris Care Clinic",3150 Clarksville Street,Paris,TX,75460,(903) 609-3114 ,33.647611,-95.517608
+335,"Special Health Resources for Texas -
+Tyler Care Clinic",1300 Clinic Drive,Tyler,TX,75701,(903) 289-9259 ,32.3389853,-95.286333
+336,"Special Health Resources for Texas -
+Texarkana Care Clinic",1102 Main Street,Texarkana,TX,75501,(430) 200-4071 ,33.4295409,-94.0489081
+337,"Avenue 360 Health and Wellness -
+Humble Clinic","9816 Memorial Blvd #120,
+Humble",Humble,TX,77338,(281) 570-2525 ,29.993579,-95.2750149
+338,"Avenue 360 Health and Wellness -
+South Central Clinic",4405 Griggs Road,Houston,TX,77021,(832) 962-4111 ,29.7028009,-95.3501667
+339,"Special Health Resources for Texas -
+Zeid Women's Health Center",825 Medical Drive,Tyler,TX,75701,(903) 533-0733 ,32.3393918,-95.2879122
+340,"Special Health Resources for Texas -
+Zeid Women's Health Center
+Longview",705 East Marshall Avenue,Longview,TX,75601,(903) 315-2700 ,32.5026082,-94.7304206
+341,Family Health Center - Main Site,1600 Providence Drive,Waco,TX,76707,(254) 313-4200 ,31.5591331,-97.1530183
+342,"Family Health Center - West Waco
+Community Clinic",600 Highway 6,Woodway,TX,76712,(254) 313-6700 ,31.5168722,-97.2028236
+343,"Family Health Center - Women's
+Health Center","120 Hillcrest Medical
+Boulevard",Waco,TX,76712,(254) 313-6500 ,31.487599,-97.1577729
+344,"Family Health Center - Austin Avenue
+Community Clinic",110 South 12th Street,Waco,TX,76701,(254) 313-6350 ,31.5511095,-97.1377733
+345,"Family Health Center - Community
+Clinic at Santa Fe",600 South 25th Street,Temple,TX,76504,(254) 899-8650 ,31.0931672,-97.3582297
+346,"Family Health Center - Bellmead
+Community Clinic",3400 Bellmead Drive,Waco,TX,76705,(254) 313-5400 ,31.5926208,-97.0981561
+347,"Family Health Center - Elm Avenue
+Community Clinic",609 Elm Avenue,Waco,TX,76704,(254) 313-6900 ,31.5659534,-97.1229409
+348,"Family Health Center - Tom Oliver
+South 18th St. Community Clinic",1800 Gurley Lane,Waco,TX,76706,(254) 313-6000 ,31.5250342,-97.118927
+349,"Family Health Center - McGregor
+Community Clinic",500 Johnson Drive,McGregor,TX,76657,(254) 313-5200 ,31.4313548,-97.4174768
+350,"Family Health Center - Bell's Hill
+Community Clinic",911 South 20th Street,Waco,TX,76706,(254) 313-5700 ,31.5377088,-97.1379036
+351,"Family Health Center - Martin Luther
+King Community Clinic","1911 North Martin Luther
+King Junior Boulevard",Waco,TX,76704,(254) 313-6350 ,31.5772836,-97.1424581
+352,"Family Health Center - Meyer Center
+Community Clinic",1226 Washington Avenue,Waco,TX,76701,(254) 313-6300 ,31.5510947,-97.1395974
+353,"Family Health Center - Community
+Clinic at MCC",4601 North 19th Street,Waco,TX,76708,(254) 313-5800 ,31.5892222,-97.1722446
+354,"University Health System - Robert B.
+Green Campus",903 West Martin Street,San Antonio,TX,78207,(210) 358-3400 ,29.4309066,-98.5015692
+355,"University Health System - Kenwood
+Clinic",302 Dora Street,San Antonio,TX,78212,(210) 358-8255 ,29.4740383,-98.4962091
+356,"University Health System - Naco
+Perrin Clinic",4020 Naco Perrin Boulevard,San Antonio,TX,78217,(210) 358-8255 ,29.5427889,-98.4160836
+357,"University Health System - Salinas
+Clinic",630 South General McMullen,San Antonio,TX,78237,(210) 358-8255 ,29.4229252,-98.5546685
+358,"University Health System - South
+Flores Clinic",7902 South Flores Street,San Antonio,TX,78221,(210) 358-8255 ,29.3472987,-98.4863473
+359,"University Health System - Dr. Robert
+L.M. Hilliard Center",919 Locke Street,San Antonio,TX,78208,(210) 644-8700 ,29.4377902,-98.4486703
+360,"University Health System -
+Zarzamora",4503 South Zarzamora Street,San Antonio,TX,78211,(210) 358-8255 ,29.3812385,-98.534296
+361,"Bell County Public Health District
+Temple Clinic",509 S. 9th Street,Temple,TX,76504,(254) 778-4766 http://www.bellcountyhealth.org/ ,31.092511,-97.3477313
+362,"Bell County Public Health District
+Killeen Clinic",309 N. 2nd Street,Killeen,TX,76541,(254) 526-8371 http://www.bellcountyhealth.org/ ,31.1209358,-97.7303402
+363,Mary P. Lucio Health Center,"1204 Jose Colunga, Jr.",Brownsville,TX,78521,(956) 574-8745 http://www.co.cameron.tx.us/health/contact_info.html ,25.9051749,-97.438558
+364,"Cameron County - Harlingen Public
+Health Center","711 N ""L"" Street",Harlingen,TX,78550,(956) 423-3516 http://www.co.cameron.tx.us/health/contact_info.html ,26.1988945,-97.7098367
+365,San Benito Public Health Clinic,1390 W. Expressway 83,San Benito,TX,78586,(956) 361-8244 http://www.co.cameron.tx.us/health/contact_info.html ,26.1404541,-97.6540673
+366,"Cameron County - Father Joseph
+O'Brien Health Clinic",142 Champion Rd.,Port Isabel,TX,78578,(956) 943-1300 http://www.co.cameron.tx.us/health/contact_info.html ,26.0715152,-97.2143505
+367,UMC - Lower Valley (Ysleta),300 S. Zaragoza,El Paso,TX,79907,(915) 532-5454 http://www.umcelpaso.org/ ,31.6873673,-106.3303375
+368,UMC - Central (Annex),"4824 Alberta St., Suite 403",El Paso,TX,79905,(915) 532-5454 http://www.umcelpaso.org/ ,31.7723761,-106.4336857
+369,UMC - Fabens,101 Potasio,Fabens,TX,79838,(915) 532-5454 http://www.umcelpaso.org/,31.5132308,-106.1668985
+370,UMC El Paso - East,1521 Joe Battle Boulevard,El Paso,TX,79936,(915) 521-7839 ,31.7376463,-106.2690431
+371,Northside Health Center,8504 Schuller Rd.,Houston,TX,77093,(832) 395-9100 http://www.houstontx.gov/health/index.html,29.8371786,-95.3406005
+372,"La Nueva Casa de Amigos Health
+Center",1809 Noth Main,Houston,TX,77009,(832) 395-0570 http://www.houstontx.gov/health/index.html ,29.7755451,-95.3617097
+373,Sunnyside Health Center,4605 Wilmington St.,Houston,TX,77051,(832) 395-0206 http://www.houstontx.gov/health/index.html ,29.6564666,-95.3565836
+374,Sharpstown Health Services,6201 Bonhomme Suite 300,Houston,TX,77036,(832) 395-9800 http://www.houstontx.gov/health/index.html ,29.71169,-95.5130587
+375,Texas Tech Health Center,701 West 5th Street,Odessa,TX,79763,(432) 335-2222 http://ttuhsc.edu/ ,31.8441573,-102.3762595
+376,"City of Laredo Health Department
+Family Planning Clinic",2600 Cedar Avenue,Laredo,TX,78040,(956) 795-4910 http://www.ci.laredo.tx.us/Health/Healthindex.htm ,27.5197662,-99.4904525
+377,"Texarkana Bowie County Family
+Health Center",902 West 12th Street,Texarkana,TX,75501,(903) 798-3250 http://txkusa.org/ ,33.4294187,-94.0526597
+378,Collins Family Planning Clinic,2900 South East Loop 820,Fort Worth,TX,76140,(817) 922-8182 http://www.collinsfamilyplanningclinic.org/ ,32.6612021,-97.2854389
+379,"Collins Family Planning Cinic -
+Arlington",1115 E. Pioneer PKWY #130,Arlington,TX,76010,(817) 922-8182 http://collinsfamilyplanningclinic.org/ ,32.7088026,-97.0920783
+380,Family Planning Clinic,301 East 12th Street,Sweetwater,TX,79556,(325) 235-2869 http://nolancountyhealth.com/ ,32.4787289,-100.4095882
+381,"Family Planning Clinic and Men's
+Health Center - Corpus Christi","4455 South Padre Island
+Drive, Suite 30",Corpus Christi,TX,78411,(361) 833-0619 http://stfphc.org/ ,27.7161723,-97.3909443
+382,"Family Planning Clinic and Men's
+Health Center - Beeville","1400 W. Corpus Christi St.,
+Ste. 4",Beeville,TX,78102,(361) 358-2974 http://stfphc.org/ ,28.3962192,-97.7620859
+383,"Family Planning Clinic and Men's
+Health Center - Rockport",2871 Hwy 35 N,Rockport,TX,78382,(361) 729-7512 http://stfphc.org/ ,28.0394504,-97.0786118
+384,"Family Planning Clinic and Men's
+Health Center - Kingsville",1218 N. Armstong,Kingsville,TX,78363,(361) 595-1929 http://stfphc.org/ ,27.5282996,-97.8775811
+385,"Family Planning Clinic and Men's
+Health Center - Sinton","301 S. San Patricio St., Ste C",Sinton,TX,78387,(361) 364-3306 http://stfphc.org/ ,28.0343282,-97.5161804
+386,"Family Planning Clinic and Men's
+Health Center - Robstown","515 Pat Shutter, Unit 121",Robstown,TX,78380,(361) 387-6996 http://stfphc.org/ ,27.7869537,-97.6817521
+387,"Natural Family Planning & Fertility
+Center - Corpus Christi S. Padre Site","4455 South Padre Island
+Drive, Suite 28",Corpus Christi,TX,78411,(361) 883-0619 http://stfphc.org/ ,27.7161723,-97.3909443
+388,"Natural Family Planning & Fertility
+Center - Laredo",1407 Calle Del Norte #108,Laredo,TX,78041,(956) 722-7017 http://stfphc.org/ ,27.5559277,-99.4818117
+389,"Natural Family Planning & Fertility
+Center - Weslaco",511 W. 6th St.,Weslaco,TX,78596,(956) 969-3079 http://stfphc.org/ ,26.1553201,-97.9948555
+390,"Natural Family Planning & Fertility
+Center - Corpus Christi",1919 Leopard Street,Corpus Christi,TX,78408,(361) 887-0151 http://stfphc.org/ ,27.7962102,-97.4116543
+391,"San Marcos Community Health
+Services",611 W. MLK,San Marcos,TX,78666,(512) 392-5816 http://communityaction.com/ ,29.878521,-97.9450913
+392,Health Services of North Texas,"3537 South I-35 E, Suite 210",Denton,TX,76210,(940) 381-1501 http://www.healthntx.org/#!contact-us/c21dk ,33.1769412,-97.0910647
+393,Haven Health Clinics,1 Medical Drive,Amarillo,TX,79106,(806) 322-3599 http://www.havenhealthamarillo.com ,35.2068242,-101.8969473
+394,Naftzger Clinic,3612 Pera,El Paso,TX,79905,"http://www.projectvidaelpaso.org/community_program_main.html 
+(915) 533-7057 ",31.7720428,-106.4502956
+395,North East Family Practice,4875 Maxwell,El Paso,TX,79904,(915) 533-7057 http://www.pvida.net/clinics ,31.867292,-106.4287628
+396,Montana Vista Clinic,14900 Greg Drive,El Paso,TX,79938,(915) 533-7057 http://www.pvida.net/clinics ,31.7975525,-106.1608524
+397,Ft. Hancock Clinic,561 S. Knox Avenue,Ft. Hancock,TX,79839,"http://www.projectvidaelpaso.org/community_program_main.html 
+(915) 769-1079 ",31.2914375,-105.8529981
+398,Project Vida - La Clinica Guadalupana,901 Asension,El Paso,TX,79928,(915) 533-7057 ,31.7202937,-106.1649335
+399,"Jasper Newton County Public Health
+District - Jasper Site",139 West Lamar Street,Jasper,TX,75951,(409) 384-6829 http://www.jaspernewton.org/ ,30.9216065,-94.0013578
+400,"Jasper Newton County Public Health
+District - Newton Site",210 High Street,Newton,TX,75966,(409) 379-5291 http://www.jaspernewton.org/ ,30.8493828,-93.7595847
+401,"Jasper Newton County Public Health
+District - Kirbyville Site",1503 West Margaret Avenue,Kirbyville,TX,75956,(409) 423-6133 http://www.jaspernewton.org/ ,30.6476181,-93.8974211
+402,"Access Esperanza Clinics Inc. -
+Mission Health Clinic",1201 Conway,Mission,TX,78572,(956) 585-4575 http://www.accessclinics.org ,26.2180998,-98.3257625
+403,"Access Esperanza Clinics, Inc. -
+Edinburg Health Center",302 S. Veterans Blvd.,Edinburg,TX,78539,(956) 383-5084 http://www.accessclinics.org ,26.2979834,-98.1547248
+404,"Access Esperanza Clinics, Inc. - San
+Juan Health Center",509 E. Earling Rd.,San Juan,TX,78589,(956) 283-1711 http://www.accessclinics.org ,26.2272675,-98.1413805
+405,"Access Esperanza Clinics Inc. -
+Weslaco Health Center",901 S. James St.,Weslaco,TX,78596,(956) 968-5039 http://www.accessclinics.org ,26.1512144,-97.9760175
+406,"Access Esperanza Clinics, Inc. -
+McAllen Health Center",916 E. Hackberry Ave. STE B,McAllen,TX,78501,(956) 688-3700 http://www.accessclinics.org/ ,26.2074632,-98.2085679
+407,People's Center for Women's Health,2909 N. IH 35,Austin,TX,78722,(512) 478-4939 http://www.austinpcc.org ,30.2874814,-97.7232111
+408,"People's Community Clinic - Offsite
+Clinic at Austin Children's Shelter",4800 Manor Rd.,Austin,TX,78722,(512) 478-4939 http://www.austinpcc.org ,30.2959793,-97.6905935
+409,"People's Community Clinic North -
+Camino",1101 Camino la Costa,Austin,TX,78752,"https://www.austinpcc.org/contact-us/main-clinic-hours-and-locations-1/ 
+(512) 478-4939 ",30.32414,-97.6993963
+410,"People's Community Clinic at Manor
+Mustang Health Center","10323 U.S. Hwy. 290 East
+Bldg. 35",Manor,TX,78653,(512) 478-4939 ,30.3446775,-97.5734103
+411,Midway Family Planning Clinic,"1500 Terrace, Suite 35",Brownwood,TX,76801,(325) 646-8429 ,31.726562,-99.0002669
+412,"Deharo Saldivar Women's Health
+Center",1400 N. Westmoreland Road,Dallas,TX,75211,(214) 266-0580 http://phhs.org/ ,32.7648003,-96.8712509
+413,"Hatcher Station Women's Health
+Center",4600 Scyene Road,Dallas,TX,75210,(214) 266-1200 http://phhs.org/ ,32.7671188,-96.7413337
+414,Garland Women's Health Center,802 Hopkins,Garland,TX,75040,(214) 266-0780 http://phhs.org/ ,32.9059157,-96.6281147
+415,Lakewest Women's Health Center,3737 Goldman Ave,Dallas,TX,75212,(214) 266-0900 http://phhs.org/ ,32.7866096,-96.858713
+416,Maple Women's Health Center,"6300 Harry Hines Blvd Suite
+600",Dallas,TX,75235,(214) 266-0130 http://phhs.org/ ,32.8223808,-96.8474971
+417,Oak West Women's Health Center,4201 Brook Spring Drive,Dallas,TX,75224,(214) 266-1400 http://phhs.org/ ,32.6924844,-96.8436846
+418,"Southeast Dallas Women's Health
+Center",9202 Elam Road,Dallas,TX,75217,(214) 266-1500 http://phhs.org/ ,32.7180079,-96.6625496
+419,"E. Carlyle Smith Jr. Womenâ€TMs
+Health Center at Grand Prairie",801 Conover Dr.,Grand Prairie,TX,75051,(214) 266-3500 http://phhs.org/ ,32.7374505,-97.016005
+420,Irving Women's Health Center,1800 N. Britain Rd.,Irving,TX,75061,(214) 266-3200 http://phhs.org/ ,32.8336307,-96.9431388
+421,WISH Tubal Clinic,5200 Harry Hines Blvd.,Dallas,TX,75235,(469) 419-1341 http://phhs.org/ ,32.8128222,-96.8356763
+422,Wilson Family Planning Clinic,"1301 Third Street, Suite 100",Wichita Falls,TX,76301,(940) 723-0755 http://www.wfplanning.org/ ,33.9130005,-98.5021267
+423,Houston Area Community Services,"2150 W. 18th St., Suite 300",Houston,TX,77008,(713) 426-0027 http://www.hacstxs.org ,29.8013326,-95.4370809
+424,HACS - Spring Cypress,17010 Sugar Pine Drive,Houston,TX,77090,(281) 537-8627 http://hacstxs.org/locations/hacs-spring-cypress/ ,30.0107649,-95.4595772
+425,HACS Bautista Pediatric Clinic,"902 Frostwood Dr., Suite 142",Houston,TX,77024,(713) 827-8266 http://hacstxs.org/locations/hacs-bautista ,29.7801513,-95.5468601
+426,"Longview Wellness Pointe Clinic -
+Bldg. 1","1107 E. Marshall Ave. - Bldg.
+1",Longview,TX,75601,(903) 758-2610 http://www.wellnesspointe.org/ ,32.5038849,-94.7246001
+427,Kilgore Wellness Pointe Clinic,"1711 S. Henderson Blvd.,
+Suite 400",Kilgore,TX,75662,(903) 758-2610 http://www.wellnesspointe.org/ ,32.3727541,-94.8697042
+428,Gilmer Wellness Pointe Clinic,602 Titus Street,Gilmer,TX,75644,(903) 758-2610 http://www.wellnesspointe.org/ ,32.7342045,-94.9447498
+429,Wellness Pointe South Longview,2430 S. High Street,Longview,TX,75602,(903) 758-2610 http://www.wellnesspointe.org/ ,32.4618045,-94.7321816
+430,Longview North Clinic,805 Medical Circle Suite A,Longview,TX,75605,(903) 758-2610 ,32.5351139,-94.7297536
+431,"Longview Wellness Pointe Clinic -
+Bldg. 3","1107 E. Marshall Ave. - Bldg.
+3",Longview,TX,75601,(903) 758-2610 http://www.wellnesspointe.org ,32.5038849,-94.7246001
+432,"South Plains Public Health District -
+Denver City",415 Mustang Ave.,Denver City,TX,79323,(806) 592-2706 ,32.9688362,-102.8368349
+433,"South Plains Public Health District -
+Terry County",919 E. Main,Brownfield,TX,79316,(806) 637-2164 ,33.1795746,-102.265204
+434,"South Plains Public Health District -
+Dawson County",503 South 1st,Lamesa,TX,79331,(806) 872-5863 ,32.7315492,-101.9529058
+435,"South Plains Public Health District -
+Gaines County",704 Hobbs Highway,Seminole,TX,79360,(432) 758-4022 ,32.7203429,-102.6532158
+436,"El Buen Samaritano - Wallace
+Mallory Clinic",7000 Woodhue Dr.,Austin,TX,78745,(512) 439-0701 http://www.elbuen.org/health/clinic/ ,30.1992941,-97.8021703
+437,Harris County Antoine Health Clinic,"5818 Antoine Dr., Suite A",Houston,TX,77091,"http://publichealth.harriscountytx.gov/Services-Programs/Services/HWC 
+(713) 212-6800 ",29.849295,-95.4732379
+438,Harris County Baytown Health Clinic,1000 Lee Drive,Baytown,TX,77520,"http://publichealth.harriscountytx.gov/Services-Programs/Services/HWC 
+(713) 212-6800 ",29.7266265,-94.9778721
+439,Harris County Humble Health Clinic,1730 Humble Place Dr.,Humble,TX,77338,"http://publichealth.harriscountytx.gov/Services-Programs/Services/HWC 
+(713) 212-6800 ",29.9950967,-95.2482454
+440,Harris County Southeast Health Clinic 3737 Red Bluff,,Pasadena,TX,77503,"http://publichealth.harriscountytx.gov/Services-Programs/Services/HWC 
+(713) 212-6800 ",29.7514932,-95.4516544
+441,Harris County Public Health,2223 West Loop South,Houston,TX,77027,(713) 439-6184 ,29.7440065,-95.4565881
+442,Tyler Family Circle of Care,928 N Glenwood,Tyler,TX,75702,(903) 535-9041 http://tfcc.tmfhs.info/ ,32.3605173,-95.3201715
+443,Jacksonville Family Circle of Care,510 East Commerce St.,Jacksonville,TX,75766,(903) 241-2700 http://tfcc.tmfhs.info/ ,31.9653713,-95.2697089
+444,Family Circle of Care - Athens,1001 N Palestine St,Austin,TX,75751,(903) 904-5084 http://tfcc.tmfhs.info/index.html ,32.2179788,-95.8533495
+445,"Family Circle of Care â€“ Broadway
+Ave.",2990 North Broadway Avenue Tyler,,TX,75702,(903) 535-9041 ,32.3790515,-95.3030549
