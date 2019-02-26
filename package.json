@@ -8,7 +8,7 @@
     "test": "jest",
     "staging-deploy": "git push heroku-staging master",
     "prod-deploy": "git push heroku-prod master",
-    "import-clinics": "source .env && node scripts/import_clinics.csv",
+    "import-clinics": "source .env && node scripts/import_clinics.js",
     "db-drop": "source .env && mongo $MONGODB_URI scripts/drop_db.js",
     "db-drop-clinics": "source .env && mongo $MONGODB_URI scripts/drop_clinics.js",
     "db-console": "source .env && mongo $MONGODB_URI"
@@ -24,7 +24,6 @@
     "dashbot": "^9.9.2",
     "debug": "^2.3.3",
     "express": "^4.14.0",
-    "mongoose": "^5.4.8",
     "node-env-file": "^0.1.8",
     "querystring": "^0.2.0",
     "request": "^2.79.0",

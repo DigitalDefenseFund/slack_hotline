@@ -1,10 +1,9 @@
-var Clinic = require('../components/models/clinic')
-var csv = require('csv-parser')
-var fs = require('fs')
-var mongoose = require('mongoose')
+const csv = require('csv-parser')
+const fs = require('fs')
+const db = require('monk')(process.env.MONGO_URI || process.env.MONGODB_URI)
 
-mongoose.connect(process.env.MONGO_URI)
-var clinicsList = [];
+
+let clinicsList = [];
 
 fs.createReadStream('clinics_title_x.csv')
 	.pipe(csv())
@@ -24,14 +23,12 @@ fs.createReadStream('clinics_title_x.csv')
 	})
 	.on('end', () => {
 		console.log(`Inserting ${clinicsList.length} clinics`)
-		Clinic.collection.insertMany(clinicsList, function(err, result){
-			if(err){
-				console.log(err)
-			} else {
-				console.log(`Inserted ${JSON.stringify(result.insertedCount)} clinics`)
-			}
-			process.exit()
-		})
+		let clinics = db.get('clinic')
+		clinics.insert(clinicsList).then((insertedClinics)=>{
+			console.log(`Inserted ${JSON.stringify(insertedClinics.length)} clinics`)
+		}).catch((err)=>{
+			console.log(err)
+		}).then(() => db.close())
 	});
 
 
