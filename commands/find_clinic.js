@@ -1,6 +1,22 @@
 const shared = require('./shared')
 const googleMaps = require('@google/maps')
 const turf = require('turf')
+const db = require('monk')(process.env.MONGO_URI || process.env.MONGODB_URI)
+ 
+// const users = db.get('users')
+ 
+// users.index('name last')
+// users.insert({ name: 'Tobi', bigdata: {} })
+// users.find({ name: 'Loki' }, '-bigdata').then(function () {
+//   // exclude bigdata field
+// })
+// users.find({}, {sort: {name: 1}}).then(function () {
+//   // sorted by name field
+// })
+// users.remove({ name: 'Loki' })
+ 
+// db.close()
+
 
 googleMapsClient = googleMaps.createClient({
   key: process.env.google_geolocation_api_key
@@ -19,7 +35,10 @@ findClinic.call = function(controller, bot, message) {
       if (!error) {
         lat = response.json.results[0].geometry.location.lat;
         lng = response.json.results[0].geometry.location.lng;
-        controller.storage.clinics.find(
+
+        const clinics = db.get('clinics')
+        clinics.index({point:"2dsphere"})
+        clinics.find(
           {
             'location': {
               '$near': {
@@ -31,7 +50,8 @@ findClinic.call = function(controller, bot, message) {
                 '$minDistance': 0
               }
             }
-          }, function(error, clinics){
+          }).then(function(clinics){
+            console.log('CLINICS?', clinics)
             if(!error && clinics) {
               if(clinics.length == 0){
                 replyText = '```No clinics found at that zip code```';
@@ -40,6 +60,10 @@ findClinic.call = function(controller, bot, message) {
               }
               bot.replyPublic(message, replyText)
             }
+            db.close();
+          }).catch(function(err){
+            console.log('ERR', err)
+            db.close();
           })
       } else {
         console.log("Geocode failed: " + error);

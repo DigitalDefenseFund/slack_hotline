@@ -23,12 +23,14 @@ fs.createReadStream('clinics_title_x.csv')
 	})
 	.on('end', () => {
 		console.log(`Inserting ${clinicsList.length} clinics`)
-		let clinics = db.get('clinic')
+		let clinics = db.get('clinics')
 		clinics.insert(clinicsList).then((insertedClinics)=>{
 			console.log(`Inserted ${JSON.stringify(insertedClinics.length)} clinics`)
 		}).catch((err)=>{
 			console.log(err)
-		}).then(() => db.close())
+		}).then(() => {
+			db.close()
+		})
 	});
 
 
