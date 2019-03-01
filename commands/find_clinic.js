@@ -2,21 +2,6 @@ const shared = require('./shared')
 const googleMaps = require('@google/maps')
 const turf = require('turf')
 const db = require('monk')(process.env.MONGO_URI || process.env.MONGODB_URI)
- 
-// const users = db.get('users')
- 
-// users.index('name last')
-// users.insert({ name: 'Tobi', bigdata: {} })
-// users.find({ name: 'Loki' }, '-bigdata').then(function () {
-//   // exclude bigdata field
-// })
-// users.find({}, {sort: {name: 1}}).then(function () {
-//   // sorted by name field
-// })
-// users.remove({ name: 'Loki' })
- 
-// db.close()
-
 
 googleMapsClient = googleMaps.createClient({
   key: process.env.google_geolocation_api_key
