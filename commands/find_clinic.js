@@ -22,7 +22,7 @@ findClinic.call = function(controller, bot, message) {
         lng = response.json.results[0].geometry.location.lng;
 
         const clinics = db.get('clinics')
-        clinics.index({point:"2dsphere"})
+        clinics.index({geometry:"2dsphere"})
         clinics.find(
           {
             'location': {
@@ -71,7 +71,9 @@ function messageBuilder(zipCode, zipLng, zipLat, clinicList){
     distanceFromZip = turf.distance(turf.point([zipLng, zipLat]), turf.point(clinicList[i].location.coordinates), 'miles')
     message += `${distanceFromZip.toFixed(1)} miles from ${zipCode} \n`
     message += clinicList[i].name + '\n'
-    message += clinicList[i].address + '\n'
+
+    address = `${clinicList[i].street}\n${clinicList[i].city}, ${clinicList[i].state} ${clinicList[i].zip}`
+    message += address + '\n'
     message += clinicList[i].contactInfo + '\n'
     message += '\n'
     console.log(`street ${clinicList[i].street}`)
