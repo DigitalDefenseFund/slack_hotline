@@ -1,6 +1,8 @@
 const Botmock = require('botkit-mock')
 const slashCommands = require('../../skills/slash_commands')
 
+jest.mock('@google/maps')
+
 describe('find_clinic',()=>{
 
   let channels = [
@@ -31,31 +33,31 @@ describe('find_clinic',()=>{
     slashCommands(this.controller)
   });
 
-  describe('When called without an argument',()=>{
+  describe('When called with an non-geocodeable argument',()=>{
     it('returns usage text',()=>{
-    this.sequence = [
-      {
-        type: 'slash_command',
-        user: 'sample_user',
-        channel: 'sample_channel',
-        messages: [
-          {
-            command: '/find_clinic',
-            text: '',
-            actions: [{
-              name: 'action',
-              value: 'test'
-            }],
-            isAssertion: true,
-          }
-        ]
-      }
-    ];
+      this.sequence = [
+        {
+          type: 'slash_command',
+          user: 'sample_user',
+          channel: 'sample_channel',
+          messages: [
+            {
+              command: '/find_clinic',
+              text: '',
+              actions: [{
+                name: 'action',
+                value: 'test'
+              }],
+              isAssertion: true,
+            }
+          ]
+        }
+      ];
 
-    return this.bot.usersInput(this.sequence).then(() => {
-    const reply = this.bot.api.logByKey['replyPublic'][0].json;
-    expect(reply.text).toBe('```Please submit a valid zip code with /find_clinic to get nearby clinics```')
-    })
+      return this.bot.usersInput(this.sequence).then(() => {
+        const reply = this.bot.api.logByKey['replyPublic'][0].json;
+        expect(reply.text).toBe('```Please submit a valid zip code with /find_clinic to get nearby clinics```')
+      })
     })
   })
 
@@ -132,4 +134,3 @@ describe('find_clinic',()=>{
     })
   })
 })
-
