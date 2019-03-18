@@ -24,6 +24,8 @@ fs.createReadStream('clinics_title_x.csv')
 	.on('end', () => {
 		console.log(`Inserting ${clinicsList.length} clinics`)
 		let clinics = db.get('clinics')
+		clinics.createIndex({"location":"2dsphere"})
+
 		clinics.insert(clinicsList).then((insertedClinics)=>{
 			console.log(`Inserted ${JSON.stringify(insertedClinics.length)} clinics`)
 		}).catch((err)=>{

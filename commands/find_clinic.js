@@ -22,7 +22,6 @@ findClinic.call = function(controller, bot, message) {
         lng = response.json.results[0].geometry.location.lng;
 
         const clinics = db.get('clinics')
-        clinics.index({geometry:"2dsphere"})
         clinics.find(
           {
             'location': {
@@ -36,7 +35,6 @@ findClinic.call = function(controller, bot, message) {
               }
             }
           }).then(function(clinics){
-            console.log('CLINICS?', clinics)
             if(!error && clinics) {
               if(clinics.length == 0){
                 replyText = '```No clinics found at that zip code```';
