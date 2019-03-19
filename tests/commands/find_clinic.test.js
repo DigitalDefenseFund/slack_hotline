@@ -1,7 +1,48 @@
 const Botmock = require('botkit-mock')
 const slashCommands = require('../../skills/slash_commands')
 
+const db = require('monk')(process.env.MONGO_URI || process.env.MONGODB_URI)
+
+LOCATIONS = {
+  72110: [-92.7201903, 35.1674683],
+  33322: [-35.1674683, 92.7201903]
+}
+
 jest.mock('@google/maps')
+
+beforeAll(()=>{
+  let sampleClinics = [
+    {
+      name: "Test Clinic",
+      street: "1234 Main St",
+      city: "Meowtown",
+      state: "AR",
+      zip: "72110",
+      location: {
+        type: 'Point',
+        coordinates: [-92.7201903, 35.1674683]
+      },
+      contactInfo: "1800-YUMYUM M-F 9-5"
+    }
+  ]
+
+  let clinics = db.get('clinics')
+  clinics.createIndex({"location":"2dsphere"})
+
+  clinics.insert(sampleClinics).then((insertedClinics)=>{
+    console.log(`Inserted ${JSON.stringify(insertedClinics.length)} clinics`)
+  }).catch((err)=>{
+    console.log(err)
+  }).then(() => {
+    //db.close()
+  })
+})
+
+afterAll(()=>{
+  let clinics = db.get('clinics')
+  clinics.remove({})
+  db.close()
+})
 
 describe('find_clinic',()=>{
 
@@ -21,10 +62,6 @@ describe('find_clinic',()=>{
   ]
   beforeEach(()=>{
     this.controller = Botmock({});
-    this.controller.storage.clinics = {}
-    this.controller.storage.clinics.find = jest.fn( (searchArgs, callback)=>{
-      callback(null, sampleClinics)
-    })
     channels.map((channel)=>{
       this.controller.storage.channels.save(channel, function(){})
     })
@@ -98,12 +135,6 @@ describe('find_clinic',()=>{
     })
 
     describe('When no clinics exist for that zip code',()=>{
-      beforeEach(()=>{
-        this.controller.storage.clinics.find = jest.fn( (searchArgs, callback)=>{
-          callback(null, [])
-        })
-      })
-
       it('replies that no clinics were found',()=>{
         this.sequence = [
           {

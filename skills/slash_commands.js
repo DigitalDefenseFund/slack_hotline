@@ -16,8 +16,7 @@ module.exports= function(controller){
   controller.on('slash_command', function(bot, message) {
     // Validate Slack verify token
     if (message.token !== VERIFY_TOKEN) {
-      // Not sure how this isn't tripping up the tests
-      // Lol maybe this works because they're both undefined?
+      // We get past this in test because both message.token and VERIFY_TOKEN are undefined
       return bot.res.send(401, 'Unauthorized')
     }
 
