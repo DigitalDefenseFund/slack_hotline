@@ -1,30 +1,31 @@
 const Botmock = require('botkit-mock')
 const slashCommands = require('../../skills/slash_commands')
+const LOCATIONS = require('../fixtures/locations.json')
 
 const db = require('monk')(process.env.MONGO_URI || process.env.MONGODB_URI)
 
-LOCATIONS = {
-  72110: [-92.7201903, 35.1674683],
-  33322: [-35.1674683, 92.7201903]
-}
+console.log(JSON.stringify(LOCATIONS))
 
 jest.mock('@google/maps')
-
+console.log(Object.keys(LOCATIONS))
+let sampleClinicZip =  Object.keys(LOCATIONS)[0]
+let clinicNotInDBZip = Object.keys(LOCATIONS)[1]
+let sampleClinics = [
+  {
+    name: "Test Clinic",
+    street: "1234 Main St",
+    city: "Meowtown",
+    state: "AR",
+    zip: sampleClinicZip,
+    location: {
+      type: 'Point',
+      coordinates: [LOCATIONS[sampleClinicZip]['lng'], LOCATIONS[sampleClinicZip]['lat']]
+    },
+    contactInfo: "1800-YUMYUM M-F 9-5"
+  }
+]
 beforeAll(()=>{
-  let sampleClinics = [
-    {
-      name: "Test Clinic",
-      street: "1234 Main St",
-      city: "Meowtown",
-      state: "AR",
-      zip: "72110",
-      location: {
-        type: 'Point',
-        coordinates: [-92.7201903, 35.1674683]
-      },
-      contactInfo: "1800-YUMYUM M-F 9-5"
-    }
-  ]
+  console.log(sampleClinicZip, "is the zip!!!!")
 
   let clinics = db.get('clinics')
   clinics.createIndex({"location":"2dsphere"})
@@ -40,24 +41,20 @@ beforeAll(()=>{
 
 afterAll(()=>{
   let clinics = db.get('clinics')
-  clinics.remove({})
-  db.close()
+  console.log("hey look ma I made it!!!!!!!!!!!!!!")
+  clinics.drop().then(()=>{
+    console.log("callback!!!!")
+    db.close()
+  })
 })
 
 describe('find_clinic',()=>{
 
+  console.log(sampleClinicZip, "is the zip!!!!")
   let channels = [
     {
       "id":"sample_channel",
       "team_id":"team_id_123"
-    }
-  ]
-  let sampleClinics = [
-    {
-      "name":"Test Clinic",
-      "address":"1234 Main St",
-      "phone": "1800-YUMYUM",
-      "hours": "M-F 9-5"
     }
   ]
   beforeEach(()=>{
@@ -111,7 +108,7 @@ describe('find_clinic',()=>{
                 user_id: 'sample_user',
                 channel_id: 'sample_channel',
                 command: '/find_clinic',
-                text: '12345',
+                text: sampleClinicZip,
                 actions: [{
                   name: 'action',
                   value: 'test'
@@ -126,9 +123,11 @@ describe('find_clinic',()=>{
           const reply = this.bot.api.logByKey['replyPublic'][0].json
           for(var i = 0; i < sampleClinics.length; i++){
             expect(reply.text).toContain(sampleClinics[0].name)
-            expect(reply.text).toContain(sampleClinics[0].address)
-            expect(reply.text).toContain(sampleClinics[0].phone)
-            expect(reply.text).toContain(sampleClinics[0].hours)
+            expect(reply.text).toContain(sampleClinics[0].street)
+            expect(reply.text).toContain(sampleClinics[0].city)
+            expect(reply.text).toContain(sampleClinics[0].state)
+            expect(reply.text).toContain(sampleClinics[0].zip)
+            expect(reply.text).toContain(sampleClinics[0].contactInfo)
           }
         })
       })
@@ -146,7 +145,7 @@ describe('find_clinic',()=>{
                 user_id: 'sample_user',
                 channel_id: 'sample_channel',
                 command: '/find_clinic',
-                text: '12345',
+                text: clinicNotInDBZip,
                 actions: [{
                   name: 'action',
                   value: 'test'

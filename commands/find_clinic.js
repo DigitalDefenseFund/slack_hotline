@@ -20,7 +20,10 @@ findClinic.call = function(controller, bot, message) {
       if (!error) {
         lat = response.json.results[0].geometry.location.lat;
         lng = response.json.results[0].geometry.location.lng;
-
+        console.log("response.json", response.json)
+        console.log("lat", lat, "lng", lng)
+        let coordinates = [lng, lat]
+        console.log(coordinates, "coordinates!!!!!!!!!!!")
         const clinics = db.get('clinics')
         clinics.find(
           {
@@ -28,7 +31,7 @@ findClinic.call = function(controller, bot, message) {
               '$near': {
                 '$geometry': {
                   'type': "Point" ,
-                  'coordinates': [ lng, lat]
+                  'coordinates': coordinates
                 },
                 '$maxDistance': 100000,
                 '$minDistance': 0
@@ -61,11 +64,14 @@ function messageBuilder(zipCode, zipLng, zipLat, clinicList){
   //botkit-storage-mongo doesnt seem to allow us to specify limit,
   // so we're limiting below
   clinicList = clinicList.length > 5 ? clinicList.slice(0, 5) : clinicList
+  console.log("clinic list!!!!", clinicList)
   let message = '```We found the following clinics near zip code ' + zipCode + '\n\n'
   for(var i = 0; i < clinicList.length; i++){
     // botkit-storage-mongo doesn't let us run aggregations, 
     // which are necessary to compute distance from query point, 
     // so we calculate here. 
+    //
+    console.log("coordinoonoo", clinicList[i].location.coordinates)
     distanceFromZip = turf.distance(turf.point([zipLng, zipLat]), turf.point(clinicList[i].location.coordinates), 'miles')
     message += `${distanceFromZip.toFixed(1)} miles from ${zipCode} \n`
     message += clinicList[i].name + '\n'
