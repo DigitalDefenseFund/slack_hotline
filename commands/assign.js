@@ -10,7 +10,7 @@ assign.call = function(controller, bot, message, channel, volunteer) {
     if (chan) {
       bot.replyPublic(message, '<@'+volunteer+'> assigned to <#'+chan.id+'>')
 		} else {
-			bot.replyPublic(message, 'No case channel was provided. Please include the case channel that you want to assign to.') 
+			bot.replyPublic(message, 'No case channel was provided. Please include the case channel that you want to assign to.')
 		}
   });
 }
@@ -20,3 +20,4 @@ function setCaseAssignment(controller, message, channel, volunteer, cb) {
     cb(err, chan)
   })
 }
+

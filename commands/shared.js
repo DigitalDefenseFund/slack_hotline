@@ -7,7 +7,7 @@ sharedFunctions.setChannelProperty = function(controller, message, property, val
 			// if db returned null channel, it means something went wrong
 			// so we let calling function deal with it
 			cb(getErr, channel)
-		} else { 
+		} else {
 			// if we want to update with a null value, we want to delete the property
 			// instead of null setting
 			if (value === null) {

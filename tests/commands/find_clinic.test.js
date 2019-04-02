@@ -1,13 +1,9 @@
 const Botmock = require('botkit-mock')
 const slashCommands = require('../../skills/slash_commands')
 const LOCATIONS = require('../fixtures/locations.json')
-
 const db = require('monk')(process.env.MONGO_URI || process.env.MONGODB_URI)
-
-console.log(JSON.stringify(LOCATIONS))
-
 jest.mock('@google/maps')
-console.log(Object.keys(LOCATIONS))
+
 let sampleClinicZip =  Object.keys(LOCATIONS)[0]
 let clinicNotInDBZip = Object.keys(LOCATIONS)[1]
 let sampleClinics = [
@@ -24,12 +20,10 @@ let sampleClinics = [
     contactInfo: "1800-YUMYUM M-F 9-5"
   }
 ]
-beforeAll(()=>{
-  console.log(sampleClinicZip, "is the zip!!!!")
 
+beforeAll(()=>{
   let clinics = db.get('clinics')
   clinics.createIndex({"location":"2dsphere"})
-
   clinics.insert(sampleClinics).then((insertedClinics)=>{
     console.log(`Inserted ${JSON.stringify(insertedClinics.length)} clinics`)
   }).catch((err)=>{
@@ -41,16 +35,12 @@ beforeAll(()=>{
 
 afterAll(()=>{
   let clinics = db.get('clinics')
-  console.log("hey look ma I made it!!!!!!!!!!!!!!")
   clinics.drop().then(()=>{
-    console.log("callback!!!!")
     db.close()
   })
 })
 
 describe('find_clinic',()=>{
-
-  console.log(sampleClinicZip, "is the zip!!!!")
   let channels = [
     {
       "id":"sample_channel",

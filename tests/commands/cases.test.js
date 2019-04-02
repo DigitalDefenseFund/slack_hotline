@@ -289,7 +289,7 @@ patient   8/29 23:00    urgent             <@someUsersId>     <#flagsAssignsMcGe
 volunteer 8/29 23:00                                          <#plainCase321>`
     expectedFinalMsg += '```'
 
-    it.only('displays cases in a table format',()=>{
+    it('displays cases in a table format',()=>{
       this.sequence = [
         {
           type: 'slash_command',
