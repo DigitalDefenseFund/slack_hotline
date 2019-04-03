@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node bot.js",
     "test": "source .env.test && jest",
+    "test-ci": "jest",
     "staging-deploy": "git push heroku-staging master",
     "prod-deploy": "git push heroku-prod master",
     "import-clinics": "source .env && node scripts/import_clinics.js",
