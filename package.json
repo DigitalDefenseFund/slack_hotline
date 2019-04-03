@@ -9,10 +9,10 @@
     "test-ci": "jest",
     "staging-deploy": "git push heroku-staging master",
     "prod-deploy": "git push heroku-prod master",
-    "import-clinics": "source .env && node scripts/import_clinics.js",
-    "db-drop": "source .env && mongo $MONGODB_URI scripts/drop_db.js",
-    "db-drop-clinics": "source .env && mongo $MONGODB_URI scripts/drop_clinics.js",
-    "db-console": "source .env && mongo $MONGODB_URI"
+    "import-clinics": "node scripts/import_clinics.js",
+    "db-drop": "mongo $MONGODB_URI scripts/drop_db.js",
+    "db-drop-clinics": "mongo $MONGODB_URI scripts/drop_clinics.js",
+    "db-console": "mongo $MONGODB_URI"
   },
   "dependencies": {
     "@google/maps": "^0.5.5",
@@ -22,7 +22,7 @@
     "botkit-storage-mongo": "^1.0.6",
     "botkit-storage-redis": "^1.0.6",
     "csv-parser": "^2.1.0",
-    "dashbot": "^9.9.2",
+    "dashbot": "^10.3.4",
     "debug": "^2.3.3",
     "express": "^4.14.0",
     "node-env-file": "^0.1.8",
@@ -32,7 +32,7 @@
     "wordfilter": "^0.2.6"
   },
   "devDependencies": {
-    "jest": "^23.5.0"
+    "jest": "^24.7.0"
   },
   "repository": {
     "type": "git",
