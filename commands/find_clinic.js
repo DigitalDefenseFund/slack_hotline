@@ -18,8 +18,8 @@ findClinic.call = function(controller, bot, message) {
     zipCode = zipCodeMatch[1]
     googleMapsClient.geocode({'address': zipCode}, function(error, response) {
       if (!error) {
-        lat = response.json.results[0].geometry.location.lat;
-        lng = response.json.results[0].geometry.location.lng;
+        let lat = response.json.results[0].geometry.location.lat;
+        let lng = response.json.results[0].geometry.location.lng;
         let coordinates = [lng, lat]
         const clinics = db.get('clinics')
         clinics.find(
