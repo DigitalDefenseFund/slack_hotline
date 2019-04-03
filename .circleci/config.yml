@@ -3,6 +3,7 @@ jobs: # a collection of steps
   build: # runs not using Workflows must have a `build` job as entry point
     environment:
       TZ: "/usr/share/zoneinfo/America/New_York"
+      MONGO_URI: 'localhost'
     working_directory: ~/mern-starter # directory where steps will run
     docker: # run the steps with Docker
       - image: circleci/node:10.9.0 # ...with this image as the primary container; this is where all `steps` will run
@@ -23,7 +24,7 @@ jobs: # a collection of steps
             - ./node_modules
       - run: # run tests
           name: test
-          command: npm test
+          command: npm run test-ci
       - store_artifacts: # special step to save test results as as artifact
           path: test-results.xml
           prefix: tests
