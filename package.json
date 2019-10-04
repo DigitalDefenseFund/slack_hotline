@@ -12,7 +12,9 @@
     "import-clinics": "source .env && node scripts/import_clinics.js",
     "db-drop": "source .env && mongo $MONGODB_URI scripts/drop_db.js",
     "db-drop-clinics": "source .env && mongo $MONGODB_URI scripts/drop_clinics.js",
-    "db-console": "source .env && mongo $MONGODB_URI"
+    "db-console": "source .env && mongo $MONGODB_URI",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "dependencies": {
     "@google/maps": "^0.5.5",
@@ -29,7 +31,8 @@
     "querystring": "^0.2.0",
     "request": "^2.79.0",
     "turf": "^3.0.14",
-    "wordfilter": "^0.2.6"
+    "wordfilter": "^0.2.6",
+    "snyk": "^1.230.5"
   },
   "devDependencies": {
     "jest": "^24.7.0"
@@ -48,5 +51,6 @@
     "slack"
   ],
   "author": "ben@howdy.ai",
-  "license": "ISC"
+  "license": "ISC",
+  "snyk": true
 }
