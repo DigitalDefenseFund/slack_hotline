@@ -4,10 +4,14 @@ const db = require('monk')(process.env.MONGO_URI || process.env.MONGODB_URI)
 
 
 let clinicsList = [];
-
+lastRow = null
 fs.createReadStream('clinics_title_x.csv')
-	.pipe(csv())
+	.pipe(csv({quote: '"', escape:'"'}))
 	.on('data', (data) => {
+		if(data.name == null && counter == 0) {
+			console.log("Row failed: " + lastRow)
+		}
+		lastRow = data
 		clinicsList.push({
 			name: data.name,
 			street: data.street,
@@ -18,7 +22,7 @@ fs.createReadStream('clinics_title_x.csv')
 				type: 'Point',
 				coordinates: [parseFloat(data.lng), parseFloat(data.lat)]
 			},
-			contactInfo: data.contact
+			contactInfo: data.phone
 		})
 	})
 	.on('end', () => {
@@ -29,7 +33,7 @@ fs.createReadStream('clinics_title_x.csv')
 		clinics.insert(clinicsList).then((insertedClinics)=>{
 			console.log(`Inserted ${JSON.stringify(insertedClinics.length)} clinics`)
 		}).catch((err)=>{
-			console.log(err)
+			console.log(err.toString())
 		}).then(() => {
 			db.close()
 		})
